@@ -1,24 +1,27 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import auth from "../authSlice";
 import app from "../appSlice";
-import appointment from "../appointmentSlice";
-import patient from "../patientSlice";
-import payment from "../paymentSlice";
-// import chat from "../chatSlice";
-import subscription from "../subscriptionSlice";
+import bookings from '../bookingSlice'
+import clients from '../clientSlice'
+import serviceCategory from '../serviceCategorySlice'
+import serviceProviders from "../serviceProviderSlice";
+import paymentMethods from "../paymentMethodSlice";
+import transactions from "../transactionSlice";
 import profile from "../profileSlice";
-import physician from "../physicianSlice";
+
+
+
 
 const rootReducer = combineReducers({
   auth,
   app,
-  appointment,
-  patient,
-  payment,
-  // chat,
-  subscription,
+  bookings,
+  clients,
+  serviceCategory,
+  serviceProviders,
+  paymentMethods,
+  transactions,
   profile,
-  physician,
 });
 
 export default rootReducer;

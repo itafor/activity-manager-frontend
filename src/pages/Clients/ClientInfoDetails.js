@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { RowDetails } from '../../components/RowDetails'
 
-const PatientInfoDetails = ({ singleData }) => {
+const ClientInfoDetails = ({ singleData }) => {
   return (
     <StyledContainer>
       <div className='flex flex-col gap-4'>
@@ -51,7 +51,7 @@ const PatientInfoDetails = ({ singleData }) => {
   )
 }
 
-export default PatientInfoDetails
+export default ClientInfoDetails
 
 const StyledContainer = styled.div`
   .content {

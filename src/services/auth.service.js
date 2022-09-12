@@ -11,7 +11,7 @@ const signup = async (data) => {
 }
 
 const login = async (data) => {
-  const response = await ApiInstance.post('/admin/login', data)
+  const response = await ApiInstance.post('/admin/auth/login', data)
   if (response?.data) {
     ExpirySession.set('user', response.data)
   }
@@ -19,12 +19,12 @@ const login = async (data) => {
 }
 
 const resetPassword = async (data) => {
-  const response = await ApiInstance.post('admin/reset-password', data)
+  const response = await ApiInstance.post('admin/auth/reset-password', data)
   return response.data
 }
 
 const sendOTP = async (data) => {
-  const response = await ApiInstance.post('/admin/send/password/reset-token', data)
+  const response = await ApiInstance.post('/admin/auth/send-password-resetotp', data)
   return response.data
 }
 

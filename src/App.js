@@ -13,13 +13,10 @@ import ForgotPassword from "./pages/Auth/ForgotPassword";
 import ResetPassword from "./pages/Auth/ResetPassword";
 
 import Dashboard from "./pages/Dashboard";
-import Bookings from "./pages/Bookings";
-import Patients, { PatientInfo } from "./pages/Patients";
-import Physicians, { PhysicianInfo } from "./pages/Physicians";
-import Subscriptions from "./pages/Subscriptions";
-// import Chats from "./pages/Chats";
-import Payments from "./pages/Payments";
-import Settings from "./pages/Settings";
+import Bookings, {BookingInfo} from './pages/Bookings'
+import Clients, {ClientInfo} from './pages/Clients'
+
+// import Settings from "./pages/Settings";
 
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Signup = lazy(() => import("./pages/Auth/Signup"));
@@ -56,6 +53,7 @@ function App() {
               path="/dashboard"
               element={<Dashboard />}
             />
+
             <Route
               //
               path="/bookings"
@@ -63,49 +61,24 @@ function App() {
             />
             <Route
               //
-              path="/patients"
-              element={<Patients />}
+              path="/bookings/:id"
+              element={<BookingInfo />}
+            />
+
+            <Route
+              //
+              path="/clients"
+              element={<Clients />}
             />
             <Route
               //
-              path="/patients/:id"
-              element={<PatientInfo />}
+              path="/clients/:id"
+              element={<ClientInfo />}
             />
-            <Route
-              //
-              path="/physicians"
-              element={<Physicians />}
-            />
-            <Route
-              //
-              path="/physicians/:id"
-              element={<PhysicianInfo />}
-            />
-            <Route
-              //
-              path="/subscriptions"
-              element={<Subscriptions />}
-            />
-            {/* <Route
-              //
-              path="/chats"
-              element={<Chats />}
-            /> */}
-            <Route
-              //
-              path="/payments/appointment"
-              element={<Payments />}
-            />
-            <Route
-              //
-              path="/payments/subscription"
-              element={<Payments />}
-            />
-            <Route
-              //
-              path="/settings"
-              element={<Settings />}
-            />
+
+
+        
+        
             {/* <Route path="*" element={<NotFoundPage />} /> */}
           </Route>
 

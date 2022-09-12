@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import { getColumnSearchProps } from "../../utils/tableColSearch";
 
-const PatientsTable = ({ data, loading }) => {
+const ClientsTable = ({ data, loading }) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -140,4 +140,4 @@ const PatientsTable = ({ data, loading }) => {
   );
 };
 
-export default PatientsTable;
+export default ClientsTable;

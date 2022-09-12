@@ -1,24 +1,24 @@
 import { PageHeader } from 'antd'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllAppointment } from '../../redux/appointmentSlice'
-import AppointmentTable from './BookingTable'
+import { getAllBookings } from '../../redux/bookingSlice'
+import BookingTable from './BookingTable'
 
 const Bookings = () => {
-  const { appointment } = useSelector((state) => state)
+  const { bookings } = useSelector((state) => state)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllAppointment())
+    dispatch(getAllBookings())
   }, [])
 
   return (
     <div>
       <PageHeader title='Bookings' />
-      <AppointmentTable
-        parent={'appointment'}
-        data={appointment.data}
-        loading={appointment.loading}
+      <BookingTable
+        parent={'bookings'}
+        data={bookings.data}
+        loading={bookings.loading}
       />
     </div>
   )
