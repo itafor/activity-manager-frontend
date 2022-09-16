@@ -6,28 +6,27 @@ import { Link } from 'react-router-dom'
 const BookingTable = ({ data, loading, parent }) => {
   const columns = [
     {
-      title: 'Patient Name',
-      key: 'patient_name',
-      hidden: parent === 'patient' && true,
-      render: (appointment) => (
-        <Link to={`/patients/${appointment?.patient?.id}`}>
-          {appointment?.patient_type === 'Me'
-            ? appointment?.patient?.full_name
-            : appointment?.patient_name}
-        </Link>
-      ),
+      title: 'Booking ID',
+      key: 'order_id',
+      dataIndex: 'order_id',
+      // render: (orderID) => (
+      //   <Link to={`${orderID}`}>
+      //    {orderID}
+      //   </Link>
+      // ),
     },
     {
-      title: 'Appointed Physician',
-      dataIndex: 'physician_id',
-      key: 'physician_id',
-      render: (physician_id) => <Link to={`/physicians/${physician_id}`}>{physician_id}</Link>,
-      hidden: parent === 'physician' && true,
+      title: 'Client',
+      dataIndex: 'client',
+      key: 'client',
+      hidden: parent === 'client' && true,
+      render: (client) => <Link to={`/clients/${client?.id}`}>{`${client?.first_name } ${client?.last_name }`}</Link>,
     },
     {
-      title: 'Patient Type',
-      dataIndex: 'patient_type',
-      key: 'patient_type',
+      title: 'Provider',
+      dataIndex: 'provider',
+      key: 'provider',
+      render: (provider) => <Link to={`/clients/${provider?.id}`}>{`${provider?.first_name } ${provider?.last_name }`}</Link>,
     },
     {
       title: 'Appointment Date',
@@ -36,32 +35,33 @@ const BookingTable = ({ data, loading, parent }) => {
       render: (appointment_date) => moment(appointment_date, 'YYYY-MM-DD').format('MMM Do YYYY'),
     },
     {
-      title: 'Start Time',
-      dataIndex: 'start_time',
-      key: 'start_time',
+      title: 'Appointment Time',
+      dataIndex: 'appointment_time',
+      key: 'appointment_time',
     },
     {
-      title: 'End Time',
-      dataIndex: 'end_time',
-      key: 'end_time',
-    },
-    {
-      title: 'Appointment Fee',
-      dataIndex: 'appointment_fee',
-      key: 'appointment_fee',
-      render: (appointment_fee) => <span>₦ {Number(appointment_fee).toLocaleString()} </span>,
-    },
-    {
-      title: 'Status',
-      dataIndex: 'appointment_status',
-      key: 'appointment_status',
-      sorter: (a, b) => String(a?.appointment_status).localeCompare(String(b?.appointment_status)),
+      title: 'Agreed Fee',
+      dataIndex: 'agreed_fee',
+      key: 'agreed_fee',
+      render: agreed_fee => `₦${Number(agreed_fee).toLocaleString()}`
     },
     {
       title: 'Payment Status',
       dataIndex: 'payment_status',
       key: 'payment_status',
-      sorter: (a, b) => String(a?.payment_status).localeCompare(String(b?.payment_status)),
+    },
+    {
+      title: 'Payment Method',
+      dataIndex: 'payment_method',
+      key: 'payment_method',
+      hidden: parent === 'client' && true,
+      render: (payment_method) => payment_method?.name,
+    },
+    {
+      title: 'Appointment Status',
+      dataIndex: 'appointment_status',
+      key: 'appointment_status',
+      sorter: (a, b) => String(a?.appointment_status).localeCompare(String(b?.appointment_status)),
     },
     {
       title: 'Date Created',
@@ -72,6 +72,8 @@ const BookingTable = ({ data, loading, parent }) => {
       ),
     },
   ].filter((item) => !item.hidden)
+
+  
 
   return (
     <div>
@@ -88,3 +90,4 @@ const BookingTable = ({ data, loading, parent }) => {
 }
 
 export default BookingTable
+

@@ -5,7 +5,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // navigate("/appointments");
+    navigate("/bookings");
   }, []);
 
   return <div onClick={() => navigate("/patients")}>Dashboard</div>;

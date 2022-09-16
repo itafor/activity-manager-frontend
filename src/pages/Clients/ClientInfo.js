@@ -13,7 +13,7 @@ const ClientInfo = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
-  const { singleData, loading } = useSelector((state) => state.patient)
+  const { singleData, loading } = useSelector((state) => state.clients)
 
   useEffect(() => {
     dispatch(getOneClient(id))
@@ -44,7 +44,7 @@ const ClientInfo = () => {
               }
               title={
                 <Typography.Title level={2} className='text-3xl m-0 w-full'>{`${
-                  singleData?.first_name || ''
+                 `${ singleData?.first_name} ${ singleData?.last_name}` || ''
                 } ${singleData?.full_name || ''}`}</Typography.Title>
               }
               description={

@@ -7,40 +7,20 @@ const ClientInfoDetails = ({ singleData }) => {
   return (
     <StyledContainer>
       <div className='flex flex-col gap-4'>
-        <RowDetails label='Address' value={singleData?.retained_eduf_balance || 'Null'} />
-        <RowDetails label='Date of Birth' value={singleData?.date_of_birth || 'Null'} />
-        <RowDetails label='Subscription Status' value={singleData?.country || 'Null'} />
+        <RowDetails label='Username' value={singleData?.username || 'Null'} />
+        <RowDetails label='User Type' value={singleData?.user_type || 'Null'} />
+        <RowDetails label='Earnings' value={singleData?.earnings || 'Null'} />
+        <RowDetails label='Rating' value={singleData?.star_rating_count || 'Null'} />
+        <RowDetails label='Location' value={singleData?.location || 'Null'} />
+        <RowDetails label='Social Provider' value={singleData?.social_provider || 'Null'} />
+        <RowDetails label='Is Social' value={singleData?.is_social === 0 ? 'True' : 'False' } />
         <RowDetails
-          label='Subscription Start Date'
-          value={
-            singleData?.subscription_start_date
-              ? moment(singleData?.subscription_start_date).format('DD MMM YYYY')
-              : 'Null'
-          }
+          label='Email verified on'
+          value={moment(singleData?.email_verified_at).format('DD MMM YYYY')}
         />
         <RowDetails
-          label='Subscription End Date'
-          value={
-            singleData?.subscription_end_date
-              ? moment(singleData?.subscription_end_date).format('DD MMM YYYY')
-              : 'Null'
-          }
-        />
-        <RowDetails
-          label='Email Verified'
-          value={
-            singleData?.email_verified_at
-              ? moment(singleData?.email_verified_at).format('DD MMM YYYY')
-              : 'Null'
-          }
-        />
-        <RowDetails
-          label='Phone Verified'
-          value={
-            singleData?.phone_number_verified_at
-              ? moment(singleData?.phone_number_verified_at).format('DD MMM YYYY')
-              : 'Null'
-          }
+          label='Account verified on'
+          value={moment(singleData?.account_verified_at).format('DD MMM YYYY')}
         />
         <RowDetails
           label='Date Created'

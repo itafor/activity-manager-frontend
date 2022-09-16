@@ -15,6 +15,11 @@ import ResetPassword from "./pages/Auth/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import Bookings, {BookingInfo} from './pages/Bookings'
 import Clients, {ClientInfo} from './pages/Clients'
+import ServiceCategory from './pages/ServiceCategory';
+import ServiceProviders from './pages/ServiceProviders';
+import PaymentMethods from './pages/PaymentMethods';
+import Transactions from './pages/Transactions';
+import Settings from './pages/Settings';
 
 // import Settings from "./pages/Settings";
 
@@ -74,6 +79,31 @@ function App() {
               //
               path="/clients/:id"
               element={<ClientInfo />}
+            />
+            <Route
+              //
+              path="/service-category"
+              element={<ServiceCategory />}
+            />
+            <Route
+              //
+              path="/service-provider"
+              element={<ServiceProviders />}
+            />
+            <Route
+              //
+              path="/payment-method"
+              element={<PaymentMethods />}
+            />
+            <Route
+              //
+              path="/transactions"
+              element={<Transactions />}
+            />
+            <Route
+              //
+              path="/settings"
+              element={<Settings />}
             />
 
 

@@ -51,11 +51,26 @@ const ClientsTable = ({ data, loading }) => {
       ),
     },
     {
-      title: "Name",
-      dataIndex: "full_name",
-      key: "full_name",
+      title: "First Name",
+      dataIndex: "first_name",
+      key: "first_name",
       ...getColumnSearchProps({
-        dataIndex: "full_name",
+        dataIndex: "first_name",
+        handleReset,
+        searchInput,
+        handleSearch,
+        setSearchedColumn,
+        searchText,
+        setSearchText,
+        searchedColumn,
+      }),
+    },
+    {
+      title: "Last Name",
+      dataIndex: "last_name",
+      key: "last_name",
+      ...getColumnSearchProps({
+        dataIndex: "last_name",
         handleReset,
         searchInput,
         handleSearch,
@@ -84,35 +99,46 @@ const ClientsTable = ({ data, loading }) => {
       dataIndex: "phone_number",
       key: "phone_number",
       render: (phone_number) => (
-        <a
-          style={{ color: "blue", textDecoration: "none" }}
-          href={`tel:${phone_number}`}
-        >
-          {phone_number}
-        </a>
+       phone_number ? 
+       <a
+       style={{ color: "blue", textDecoration: "none" }}
+       href={`tel:${phone_number}`}
+     >
+       {phone_number}
+     </a>
+     : 
+     "Null"
       ),
     },
     {
       title: "Address",
       dataIndex: "address",
       key: "address",
-      width: 300,
       render: (address) => address || "Null",
     },
     {
-      title: "Gender",
-      dataIndex: "gender",
-      key: "gender",
-      render: (gender) => gender || "Null",
+      title: "Earnings",
+      dataIndex: "earnings",
+      key: "earnings",
+      render: (earnings) => earnings || "Null",
     },
-
     {
-      title: "Appointments",
-      dataIndex: "patient_appointments",
-      key: "patient_appointments",
-      render: (patient_appointments) => patient_appointments?.length,
+      title: "Client Type",
+      dataIndex: "user_type",
+      key: "user_type",
     },
+    {
+      title: "Stars",
+      dataIndex: "star_rating_count",
+      key: "star_rating_count",
+      render: (star_rating_count) => star_rating_count || "Null",
 
+    },
+    {
+      title: "Bookings",
+      dataIndex: "client_orders_count",
+      key: "client_orders_count",
+    },
     {
       title: "Date Created",
       dataIndex: "created_at",

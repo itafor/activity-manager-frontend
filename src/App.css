@@ -44,3 +44,7 @@
 .ant-layout-header{
   background-color: #ffffffe0  !important;
 }
+
+.ant-table-content{
+  min-height: 70vh;
+}

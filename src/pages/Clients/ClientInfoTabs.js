@@ -12,7 +12,7 @@ import BookingTable from '../Bookings/BookingTable';
 const { TabPane } = Tabs
 
 const ClientInfoTab = (props) => {
-  const { singleData } = useSelector((state) => state.patient)
+  const { singleData } = useSelector((state) => state.clients)
 
   return (
     <div {...props}>
@@ -20,11 +20,11 @@ const ClientInfoTab = (props) => {
         <TabPane tab='Patient Info' key='1'>
           <ClientInfoDetails singleData={singleData} />
         </TabPane>
-        <TabPane tab='Appointments' key='2'>
+        <TabPane tab='Bookings' key='2'>
           <BookingTable
-            parent={'patient'}
+            parent={'client'}
             loading={false}
-            data={singleData?.patient_appointments}
+            data={singleData?.client_orders}
           />
         </TabPane>
       </Tabs>
