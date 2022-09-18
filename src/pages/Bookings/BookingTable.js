@@ -5,27 +5,27 @@ import { Link } from 'react-router-dom'
 import { getColumnSearchProps } from '../../utils/tableColSearch'
 
 const BookingTable = ({ data, loading, parent }) => {
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
-  const searchInput = useRef(null);
+  const [searchText, setSearchText] = useState('')
+  const [searchedColumn, setSearchedColumn] = useState('')
+  const searchInput = useRef(null)
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
+    confirm()
+    setSearchText(selectedKeys[0])
+    setSearchedColumn(dataIndex)
+  }
 
   const handleReset = (clearFilters) => {
-    clearFilters();
-    setSearchText("");
-  };
+    clearFilters()
+    setSearchText('')
+  }
   const columns = [
     {
       title: 'Booking ID',
       key: 'order_id',
       dataIndex: 'order_id',
       ...getColumnSearchProps({
-        dataIndex: "order_id",
+        dataIndex: 'order_id',
         handleReset,
         searchInput,
         handleSearch,
@@ -40,13 +40,19 @@ const BookingTable = ({ data, loading, parent }) => {
       dataIndex: 'client',
       key: 'client',
       hidden: parent === 'client' && true,
-      render: (client) => <Link to={`/clients/${client?.id}`}>{`${client?.first_name } ${client?.last_name }`}</Link>,
+      render: (client) => (
+        <Link to={`/clients/${client?.id}`}>{`${client?.first_name} ${client?.last_name}`}</Link>
+      ),
     },
     {
       title: 'Provider',
       dataIndex: 'provider',
       key: 'provider',
-      render: (provider) => <Link to={`/clients/${provider?.id}`}>{`${provider?.first_name } ${provider?.last_name }`}</Link>,
+      render: (provider) => (
+        <Link
+          to={`/service-provider/${provider?.id}`}
+        >{`${provider?.first_name} ${provider?.last_name}`}</Link>
+      ),
     },
     {
       title: 'Appointment Date',
@@ -63,7 +69,7 @@ const BookingTable = ({ data, loading, parent }) => {
       title: 'Agreed Fee',
       dataIndex: 'agreed_fee',
       key: 'agreed_fee',
-      render: agreed_fee => `₦${Number(agreed_fee).toLocaleString()}`
+      render: (agreed_fee) => `₦${Number(agreed_fee).toLocaleString()}`,
     },
     {
       title: 'Payment Status',
@@ -93,8 +99,6 @@ const BookingTable = ({ data, loading, parent }) => {
     },
   ].filter((item) => !item.hidden)
 
-  
-
   return (
     <div>
       <Table
@@ -110,4 +114,3 @@ const BookingTable = ({ data, loading, parent }) => {
 }
 
 export default BookingTable
-

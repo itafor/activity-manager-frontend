@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { transactionService } from '../services/transaction.service';
-
+import { transactionService } from '../services/transaction.service'
 
 export const getAllTransaction = createAsyncThunk(
   'transactions/getAll',
@@ -27,7 +26,7 @@ export const getOneTransaction = createAsyncThunk(
 )
 
 export const approveTransaction = createAsyncThunk(
-  'transactions/getOne',
+  'transactions/approve',
   async (data, { rejectWithValue }) => {
     try {
       const response = await transactionService.approve(data)
@@ -39,7 +38,7 @@ export const approveTransaction = createAsyncThunk(
 )
 
 export const declineTransaction = createAsyncThunk(
-  'transactions/getOne',
+  'transactions/decline',
   async (data, { rejectWithValue }) => {
     try {
       const response = await transactionService.decline(data)
@@ -49,9 +48,6 @@ export const declineTransaction = createAsyncThunk(
     }
   },
 )
-
-
-
 
 const initialState = {
   data: [],
@@ -89,7 +85,6 @@ const slice = createSlice({
       state.loading = false
     },
 
-
     [getOneTransaction.pending]: (state) => {
       state.loading = true
     },
@@ -116,7 +111,6 @@ const slice = createSlice({
       state.message = payload
       state.loading = false
     },
-
 
     [declineTransaction.pending]: (state) => {
       state.loading = true
