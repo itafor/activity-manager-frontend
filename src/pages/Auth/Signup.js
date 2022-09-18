@@ -1,164 +1,162 @@
-import { Form, Input, Button, Typography, Row, Col, Space, Avatar } from "antd";
+import { Form, Input, Button, Typography, Row, Col, Space, Avatar } from 'antd'
 
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Logo512 from "../../assets/images/logo512.png";
-import Logo192 from "../../assets/images/logo192.png";
-import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../../redux/authSlice";
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import Logo512 from '../../assets/images/logo512.png'
+import Logo192 from '../../assets/images/logo192.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { signup } from '../../redux/authSlice'
 
 const Signup = () => {
-  const [form] = Form.useForm();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { loading } = useSelector((state) => state?.auth);
+  const [form] = Form.useForm()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { loading } = useSelector((state) => state?.auth)
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null)
 
   const onFinish = (value) => {
-    dispatch(signup(value)).then((response) => {
+    const first_name = value?.full_name.split(' ')[0]
+    const last_name = value?.full_name.split(' ')[1]
+    dispatch(signup({ ...value, first_name, last_name })).then((response) => {
       if (response?.payload?.error) {
-        setError({ error: true, message: response.payload.message });
+        setError({ error: true, message: response.payload.message })
       } else if (response?.payload?.error === false) {
-        navigate("/dashboard");
+        navigate('/dashboard')
       }
-    });
-  };
+    })
+  }
 
   return (
     <LoginContainer>
-      <div className="logo">
+      <div className='logo'>
         <picture>
-          <source sizes="24" srcSet={Logo512} media="(min-width: 600px)" />
-          <source sizes="24" srcSet={Logo192} media="(min-width: 300px)" />
-          <img alt="Docs and Nurs" />
+          <source sizes='24' srcSet={Logo512} media='(min-width: 600px)' />
+          <source sizes='24' srcSet={Logo192} media='(min-width: 300px)' />
+          <img alt='Docs and Nurs' />
         </picture>
-        <Typography.Title style={{ textAlign: "center" }} level={4}>
+        <Typography.Title style={{ textAlign: 'center' }} level={4}>
           Docs & Nurs
         </Typography.Title>
         <Typography.Title level={2}>Register</Typography.Title>
         <br />
       </div>
       <Form
-        requiredMark="optional"
+        requiredMark='optional'
         form={form}
         onFinish={onFinish}
-        name="multi-form"
-        layout="vertical"
-        autoComplete="false"
+        name='multi-form'
+        layout='vertical'
+        autoComplete='false'
       >
         <Form.Item
           rules={[
             {
               required: true,
-              message: "Please enter your full name",
+              message: 'Please enter your full name',
             },
           ]}
-          label="Full Name "
-          name="full_name"
+          label='Full Name '
+          name='full_name'
         >
-          <Input size="large" placeholder="Full name" autoComplete={"off"} />
+          <Input size='large' placeholder='Full name' autoComplete={'off'} />
         </Form.Item>
         <Form.Item
           rules={[
             {
               required: true,
-              message: "Please enter your email address",
+              message: 'Please enter your email address',
             },
             {
-              type: "email",
-              message: "Please enter a valid email",
+              type: 'email',
+              message: 'Please enter a valid email',
             },
           ]}
-          label="Email "
-          name="email"
+          label='Email '
+          name='email'
         >
-          <Input size="large" placeholder="Email" autoComplete={"off"} />
+          <Input size='large' placeholder='Email' autoComplete={'off'} />
         </Form.Item>
         <Form.Item
           rules={[
             {
               required: true,
-              message: "Please enter your phone number",
+              message: 'Please enter your phone number',
             },
             {
-              message: "Please enter a valid phone number",
+              message: 'Please enter a valid phone number',
               min: 5,
               max: 15,
             },
           ]}
-          label="Phone number "
-          name="phone_number"
+          label='Phone number '
+          name='phone_number'
         >
-          <Input size="large" placeholder="Phone number" autoComplete={"off"} />
+          <Input size='large' placeholder='Phone number' autoComplete={'off'} />
         </Form.Item>
         <Form.Item
           rules={[
             {
               required: true,
-              message: "Please enter your password",
+              message: 'Please enter your password',
             },
           ]}
-          label="Password "
-          name="password"
+          label='Password '
+          name='password'
         >
-          <Input autoComplete="off" size="large" type="password" />
+          <Input autoComplete='off' size='large' type='password' />
         </Form.Item>
         <Form.Item
           rules={[
             {
               required: true,
-              message: "Please enter your password again",
+              message: 'Please enter your password again',
             },
             ({ getFieldValue }) => ({
               validator(_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve()
                 }
-                return Promise.reject(
-                  new Error("The two passwords that you entered do not match!")
-                );
+                return Promise.reject(new Error('The two passwords that you entered do not match!'))
               },
             }),
           ]}
-          label="Confirm Password "
-          name="password_confirmation"
+          label='Confirm Password '
+          name='password_confirmation'
         >
-          <Input autoComplete="off" size="large" type="password" />
+          <Input autoComplete='off' size='large' type='password' />
         </Form.Item>
         <Form.Item>
           <Button
-            size="large"
-            htmlType="submit"
+            size='large'
+            htmlType='submit'
             // onClick={() => setError(null)}
-            type="primary"
+            type='primary'
             block
             loading={loading}
           >
-            Register{" "}
+            Register{' '}
           </Button>
         </Form.Item>
       </Form>
-      {error?.error && (
-        <Typography.Text type="danger">{error?.message}</Typography.Text>
-      )}
+      {error?.error && <Typography.Text type='danger'>{error?.message}</Typography.Text>}
 
-      <div className="no-account">
-        <Typography.Text className="forgot-password" type="secondary">
-          Already have an account?{" "}
-          <Typography.Text strong type="link">
-            <Link className="create-account" to="/login">
+      <div className='no-account'>
+        <Typography.Text className='forgot-password' type='secondary'>
+          Already have an account?{' '}
+          <Typography.Text strong type='link'>
+            <Link className='create-account' to='/login'>
               Login
             </Link>
           </Typography.Text>
         </Typography.Text>
       </div>
     </LoginContainer>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup
 
 const LoginContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
@@ -199,4 +197,4 @@ const LoginContainer = styled.div`
       white-space: nowrap;
     }
   }
-`;
+`

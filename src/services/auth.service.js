@@ -3,7 +3,7 @@ import ApiInstance from './apiInstance'
 import AutInstance from './authInstance'
 
 const signup = async (data) => {
-  const response = await ApiInstance.post('/admin/signup', data)
+  const response = await ApiInstance.post('/admin/auth/signup', data)
   if (response.data) {
     ExpirySession.set('user', response.data)
   }
