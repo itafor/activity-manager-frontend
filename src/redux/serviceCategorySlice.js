@@ -3,7 +3,7 @@ import { serviceCategoryService } from '../services/serviceCategory.service'
 
 
 
-export const getAllServieCategory = createAsyncThunk(
+export const getAllServiceCategory = createAsyncThunk(
   'serviceCategory/getAll',
   async (_, { rejectWithValue }) => {
     try {
@@ -83,17 +83,17 @@ const slice = createSlice({
     },
   },
   extraReducers: {
-    [getAllServieCategory.pending]: (state) => {
+    [getAllServiceCategory.pending]: (state) => {
       if (state.data.length <= 0) {
         state.loading = true
       }
     },
-    [getAllServieCategory.fulfilled]: (state, action) => {
+    [getAllServiceCategory.fulfilled]: (state, action) => {
       state.error = false
       state.data = action.payload
       state.loading = false
     },
-    [getAllServieCategory.rejected]: (state, action) => {
+    [getAllServiceCategory.rejected]: (state, action) => {
       state.error = true
       state.message = action.payload
       state.loading = false

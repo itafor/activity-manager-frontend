@@ -18,7 +18,8 @@ const Login = () => {
 
   const onFinish = (value) => {
     dispatch(login(value)).then((response) => {
-      if (response?.payload?.error) {
+      console.log(response)
+      if (response?.type === "auth/login/rejected") {
         setError({ error: true, message: response?.payload?.message });
       } else if (response?.payload?.error === false) {
         navigate("/dashboard");

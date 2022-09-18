@@ -1,7 +1,7 @@
 import AuthAPI from "./authInstance";
 
 const getAll = async (data) => {
-  const response = await AuthAPI.get(`/admin/service-category/list`);
+  const response = await AuthAPI.get(`/service-category/lists`);
   return response.data;
 };
 
@@ -11,12 +11,12 @@ const getOne = async (data) => {
 };
 
 const create = async (data) => {
-  const response = await AuthAPI.post(`/admin/service-category/create`);
+  const response = await AuthAPI.post(`/admin/service-category/create`, data);
   return response.data;
 };
 
 const edit = async (data) => {
-  const response = await AuthAPI.post(`/admin/service-category/update`);
+  const response = await AuthAPI.post(`/admin/service-category/update`, data);
   return response.data;
 };
 

@@ -1,19 +1,39 @@
 import { Table } from 'antd'
 import moment from 'moment'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { getColumnSearchProps } from '../../utils/tableColSearch'
 
 const BookingTable = ({ data, loading, parent }) => {
+  const [searchText, setSearchText] = useState("");
+  const [searchedColumn, setSearchedColumn] = useState("");
+  const searchInput = useRef(null);
+
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+
+  const handleReset = (clearFilters) => {
+    clearFilters();
+    setSearchText("");
+  };
   const columns = [
     {
       title: 'Booking ID',
       key: 'order_id',
       dataIndex: 'order_id',
-      // render: (orderID) => (
-      //   <Link to={`${orderID}`}>
-      //    {orderID}
-      //   </Link>
-      // ),
+      ...getColumnSearchProps({
+        dataIndex: "order_id",
+        handleReset,
+        searchInput,
+        handleSearch,
+        setSearchedColumn,
+        searchText,
+        setSearchText,
+        searchedColumn,
+      }),
     },
     {
       title: 'Client',
