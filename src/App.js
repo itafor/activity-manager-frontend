@@ -64,11 +64,11 @@ function App() {
               path='/bookings'
               element={<Bookings />}
             />
-            <Route
+            {/* <Route
               //
               path='/bookings/:id'
               element={<BookingInfo />}
-            />
+            /> */}
 
             <Route
               //
@@ -115,7 +115,7 @@ function App() {
           </Route>
 
           {/* Catch all routes -> push to not found page */}
-          {/* <Route path="*" element={<NotFoundPage />} /> */}
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </Suspense>

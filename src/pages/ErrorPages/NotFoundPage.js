@@ -1,7 +1,15 @@
-import React from "react";
+import React from 'react'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const NotFoundPage = () => {
-  return <div>NotFoundPage</div>;
-};
+  const navigate = useNavigate()
 
-export default NotFoundPage;
+  useEffect(() => {
+    navigate(-1)
+  }, [])
+
+  return <div>NotFoundPage</div>
+}
+
+export default NotFoundPage

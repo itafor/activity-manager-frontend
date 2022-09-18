@@ -120,7 +120,7 @@ const ServiceProvidersTable = ({
       title: 'Services',
       dataIndex: 'services',
       key: 'services',
-      render: (services) => services.join(', ') || 'Null',
+      render: (services) => (Array.isArray(services) && services.length) || 0,
     },
     {
       title: 'Description',
