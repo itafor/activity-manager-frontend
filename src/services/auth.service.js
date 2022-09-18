@@ -35,7 +35,7 @@ const logout = () => {
 }
 
 const changePassword = async (data) => {
-  const response = await AutInstance.post(`/admin/change/password`)
+  const response = await AutInstance.post(`/admin/change/password`, data)
   return response.data
 }
 
