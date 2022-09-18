@@ -1,11 +1,19 @@
-import { Avatar, Table } from 'antd'
+import { Avatar, Button, Table } from 'antd'
 import moment from 'moment'
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { UserOutlined } from '@ant-design/icons'
 import { getColumnSearchProps } from '../../utils/tableColSearch'
+import { UserOutlined } from '@ant-design/icons'
 
-const ClientsTable = ({ data, loading }) => {
+const ServiceProvidersTable = ({
+  data,
+  loading,
+  setSingleData,
+  setUpdate,
+  handleVisible,
+  handleDelete,
+  deleteLoading,
+}) => {
   const [searchText, setSearchText] = useState('')
   const [searchedColumn, setSearchedColumn] = useState('')
   const searchInput = useRef(null)
@@ -25,9 +33,9 @@ const ClientsTable = ({ data, loading }) => {
     {
       key: 'id',
       align: 'center',
-      render: (patient) => (
-        <Link to={`${patient?.id}`}>
-          {patient?.profile_photo_url ? (
+      render: (serviceProvider) => (
+        <Link to={`${serviceProvider?.id}`}>
+          {serviceProvider?.profile_photo_url ? (
             <img
               style={{
                 width: '60px',
@@ -35,7 +43,7 @@ const ClientsTable = ({ data, loading }) => {
                 borderRadius: '50%',
                 objectFit: 'cover',
               }}
-              src={patient?.profile_photo_url}
+              src={serviceProvider?.profile_photo_url}
               height={60}
               width={60}
               alt='avatar'
@@ -50,6 +58,7 @@ const ClientsTable = ({ data, loading }) => {
       title: 'First Name',
       dataIndex: 'first_name',
       key: 'first_name',
+      width: 150,
       ...getColumnSearchProps({
         dataIndex: 'first_name',
         handleReset,
@@ -65,6 +74,7 @@ const ClientsTable = ({ data, loading }) => {
       title: 'Last Name',
       dataIndex: 'last_name',
       key: 'last_name',
+      width: 150,
       ...getColumnSearchProps({
         dataIndex: 'last_name',
         handleReset,
@@ -102,9 +112,21 @@ const ClientsTable = ({ data, loading }) => {
     },
     {
       title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
-      render: (address) => address || 'Null',
+      dataIndex: 'location',
+      key: 'location',
+      render: (location) => location || 'Null',
+    },
+    {
+      title: 'Services',
+      dataIndex: 'services',
+      key: 'services',
+      render: (services) => services.join(', ') || 'Null',
+    },
+    {
+      title: 'Description',
+      dataIndex: 'description',
+      key: 'description',
+      render: (description) => description || 'Null',
     },
     {
       title: 'Earnings',
@@ -113,25 +135,21 @@ const ClientsTable = ({ data, loading }) => {
       render: (earnings) => `₦${Number(earnings).toLocaleString()}` || 'Null',
     },
     {
-      title: 'Client Type',
-      dataIndex: 'user_type',
-      key: 'user_type',
+      title: 'Reviews',
+      dataIndex: 'provider_reviews_count',
+      key: 'provider_reviews_count',
     },
     {
-      title: 'Stars',
-      dataIndex: 'star_rating_count',
-      key: 'star_rating_count',
-      render: (star_rating_count) => star_rating_count || 'Null',
-    },
-    {
-      title: 'Bookings',
-      dataIndex: 'client_orders_count',
-      key: 'client_orders_count',
+      title: 'Rating',
+      dataIndex: 'ratings',
+      key: 'ratings',
+      render: (ratings) => ratings || 'Null',
     },
     {
       title: 'Date Created',
       dataIndex: 'created_at',
       key: 'created_at',
+      width: 150,
       render: (created_at) => (
         <span style={{ whiteSpace: 'nowrap' }}> {moment(created_at).format('DD MMM YYYY')}</span>
       ),
@@ -152,4 +170,4 @@ const ClientsTable = ({ data, loading }) => {
   )
 }
 
-export default ClientsTable
+export default ServiceProvidersTable

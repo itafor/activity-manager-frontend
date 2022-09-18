@@ -3,10 +3,6 @@ import { Tabs } from 'antd'
 import { useSelector } from 'react-redux'
 import ClientInfoDetails from './ClientInfoDetails'
 import BookingTable from '../Bookings/BookingTable';
-// import SelectedCourses from './SelectedCourses'
-// import Posts from './Posts'
-// import Orders from './Orders'
-// import AboutUser from './AboutUser'
 
 
 const { TabPane } = Tabs
