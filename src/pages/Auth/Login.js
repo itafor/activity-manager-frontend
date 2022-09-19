@@ -82,7 +82,7 @@ const Login = () => {
       </Form>
       {error?.error && <Typography.Text type='danger'>{error?.message}</Typography.Text>}
 
-      <div className='no-account'>
+      {/* <div className='no-account'>
         <Typography.Text type='secondary'>
           <Link className='forgot-password' to='/reset-password'>
             Forgot password?
@@ -96,7 +96,7 @@ const Login = () => {
             </Link>
           </Typography.Text>
         </Typography.Text>
-      </div>
+      </div> */}
     </LoginContainer>
   )
 }
