@@ -1,9 +1,8 @@
 import { Avatar, Button, Card, notification, Typography } from 'antd'
 import Meta from 'antd/lib/card/Meta'
 import React, { useRef } from 'react'
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { BsPhone, BsArrowLeft, BsEnvelope } from 'react-icons/bs'
 import styled from 'styled-components'
 import { editProfilePicture } from '../../redux/profileSlice'
@@ -11,7 +10,6 @@ import { editProfilePicture } from '../../redux/profileSlice'
 const ProfileInfo = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { id } = useParams()
   const { singleData, loading } = useSelector((state) => state.profile)
   const imageUploadRef = useRef()
   const formData = new FormData()

@@ -20,7 +20,6 @@ const EditProfile = () => {
       }
       if (response.type === 'profile/editProfile/rejected') {
         setLoading(false)
-        console.log(response)
         setError({ message: response?.payload?.message, errors: response?.payload?.errors })
       }
     })

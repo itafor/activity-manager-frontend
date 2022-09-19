@@ -19,13 +19,10 @@ const ChangePassword = () => {
       }
       if (response.type === 'auth/changePassword/rejected') {
         setLoading(false)
-        console.log(response)
         setError({ message: response?.payload?.message, errors: response?.payload?.errors })
       }
     })
   }
-
-  console.log(error)
 
   return (
     <Row>

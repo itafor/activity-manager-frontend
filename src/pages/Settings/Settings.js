@@ -1,6 +1,6 @@
 import { PageHeader } from 'antd'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { getProfile } from '../../redux/profileSlice'
 import ProfileInfo from './ProfileInfo'
 import SettingsTabs from './SettingsTabs'
