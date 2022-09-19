@@ -34,11 +34,9 @@ const Signup = () => {
         <picture>
           <source sizes='24' srcSet={Logo512} media='(min-width: 600px)' />
           <source sizes='24' srcSet={Logo192} media='(min-width: 300px)' />
-          <img alt='Docs and Nurs' />
+          <img alt='Xpro' />
         </picture>
-        <Typography.Title style={{ textAlign: 'center' }} level={4}>
-          Docs & Nurs
-        </Typography.Title>
+        <Typography.Title style={{ textAlign: 'center' }} level={4}></Typography.Title>
         <Typography.Title level={2}>Register</Typography.Title>
         <br />
       </div>

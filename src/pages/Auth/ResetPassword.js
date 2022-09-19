@@ -1,94 +1,131 @@
-import { Form, Input, Button, Typography, Row, Col, Space, Avatar } from "antd";
+import { Form, Input, Button, Typography, Row, Col, Space, Avatar, notification } from 'antd'
 
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import Logo512 from "../../assets/images/logo512.png";
-import Logo192 from "../../assets/images/logo192.png";
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import Logo512 from '../../assets/images/logo512.png'
+import Logo192 from '../../assets/images/logo192.png'
+import { useDispatch } from 'react-redux'
+import { resetPassword } from '../../redux/authSlice'
 
 const ResetPassword = () => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm()
+  const dispatch = useDispatch()
+  const [error, setError] = useState('null')
+  const navigate = useNavigate()
 
   const onFinish = (value) => {
-    console.log(value);
-  };
+    dispatch(resetPassword(value)).then((response) => {
+      if (response.type === 'auth/resetPassword/fulfilled') {
+        notification.success({ message: 'Password reset successfully' })
+        navigate('/login')
+      } else if (response.type === 'auth/resetPassword/rejected') {
+        setError(response?.payload?.message)
+      } else {
+        notification.error({ message: 'Error resetting password, please try again later' })
+      }
+    })
+  }
   return (
     <LoginContainer>
-      <div className="logo">
+      <div className='logo'>
         <picture>
-          <source sizes="24" srcSet={Logo512} media="(min-width: 600px)" />
-          <source sizes="24" srcSet={Logo192} media="(min-width: 300px)" />
-          <img alt="Docs and Nurs" />
+          <source sizes='24' srcSet={Logo512} media='(min-width: 600px)' />
+          <source sizes='24' srcSet={Logo192} media='(min-width: 300px)' />
+          <img alt='Xpro' />
         </picture>
-        <Typography.Title style={{ textAlign: "center" }} level={4}>
-          Docs & Nurs
-        </Typography.Title>
-        <Typography.Title level={2}>Login</Typography.Title>
-        <br />
+        <Typography.Title style={{ textAlign: 'center' }} level={4}></Typography.Title>
+        <Typography.Title level={2}>Reset Password</Typography.Title>
       </div>
+      {error && <Typography.Text type='danger'>{error}</Typography.Text>}
+      <br />
+      <br />
       <Form
-        requiredMark="optional"
+        requiredMark='optional'
         form={form}
         onFinish={onFinish}
-        name="multi-form"
-        layout="vertical"
-        autoComplete="false"
+        name='multi-form'
+        layout='vertical'
+        autoComplete='false'
+        onFieldsChange={() => setError(null)}
       >
         <Form.Item
           rules={[
             {
               required: true,
-              message: "Please enter your email address",
+              message: 'Please enter the OTP sent to your email address',
             },
             {
-              type: "email",
-              message: "Please enter a valid email",
+              pattern: '^[0-9]+$',
+              message: 'OTP must be a number',
             },
           ]}
-          label="Email "
-          name="email"
+          label='OTP '
+          name='otp'
         >
-          <Input size="large" placeholder="Email" autoComplete={"off"} />
+          <Input size='large' placeholder='OTP' autoComplete={'off'} />
         </Form.Item>
         <Form.Item
           rules={[
             {
               required: true,
-              message: "Please enter your password",
+              message: 'Please enter your password',
             },
           ]}
-          label="Password "
-          name="password"
+          label='Password '
+          name='password'
         >
-          <Input autoComplete="off" size="large" type="password" />
+          <Input autoComplete='off' size='large' type='password' />
+        </Form.Item>
+        <Form.Item
+          rules={[
+            {
+              required: true,
+              message: 'Please enter retype your password',
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve()
+                }
+                return Promise.reject(new Error('The two passwords that you entered do not match!'))
+              },
+            }),
+          ]}
+          label='Confirm Password  '
+          name='password_confirmation'
+        >
+          <Input autoComplete='off' size='large' type='password' />
         </Form.Item>
         <Form.Item>
-          <Button size="large" htmlType="submit" type="primary" block>
-            Sign In
+          <Button size='large' htmlType='submit' type='primary' block>
+            Reset Password
           </Button>
         </Form.Item>
       </Form>
 
-      <div className="no-account">
-        <Typography.Text type="secondary">
-          <Link className="forgot-password" to="/reset-password">
-            Forgot password?
+      <div className='no-account'>
+        <Typography.Text type='secondary'>
+          Go Back to
+          <Link className='forgot-password' to='/Login'>
+            {' '}
+            Login
           </Link>
         </Typography.Text>
-        <Typography.Text className="forgot-password" type="secondary">
-          Don&#39;t have an account?{" "}
-          <Typography.Text strong type="link">
-            <Link className="create-account" to="/create-account">
+        <Typography.Text className='forgot-password' type='secondary'>
+          Don&#39;t have an account?{' '}
+          <Typography.Text strong type='link'>
+            <Link className='create-account' to='/create-account'>
               Create Account
             </Link>
           </Typography.Text>
         </Typography.Text>
       </div>
     </LoginContainer>
-  );
-};
+  )
+}
 
-export default ResetPassword;
+export default ResetPassword
 
 const LoginContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
@@ -129,4 +166,4 @@ const LoginContainer = styled.div`
       white-space: nowrap;
     }
   }
-`;
+`

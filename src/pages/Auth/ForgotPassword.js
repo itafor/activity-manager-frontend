@@ -1,16 +1,30 @@
-import { Form, Input, Button, Typography, Row, Col, Space, Avatar } from 'antd'
-
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Form, Input, Button, Typography, Row, Col, Space, Avatar, notification } from 'antd'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Logo512 from '../../assets/images/logo512.png'
 import Logo192 from '../../assets/images/logo192.png'
+import { useDispatch } from 'react-redux'
+import { sendOTP } from '../../redux/authSlice'
 
 const ForgotPassword = () => {
   const [form] = Form.useForm()
+  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const onFinish = (value) => {
-    console.log(value)
+    setLoading(true)
+    dispatch(sendOTP(value)).then((response) => {
+      if (response.type === 'auth/sendOTP/fulfilled') {
+        notification.success({ message: 'OTP successfully sent to your email' })
+        navigate('/reset-confirmation')
+        setLoading(false)
+      } else {
+        notification.error({ message: 'Error sending OTP, Please try again later' })
+        setLoading(false)
+      }
+    })
   }
   return (
     <LoginContainer>
@@ -18,10 +32,10 @@ const ForgotPassword = () => {
         <picture>
           <source sizes='24' srcSet={Logo512} media='(min-width: 600px)' />
           <source sizes='24' srcSet={Logo192} media='(min-width: 300px)' />
-          <img alt='Docs and Nurs' />
+          <img alt='Xpro' />
         </picture>
         <Typography.Title style={{ textAlign: 'center' }} level={4}>
-          Docs & Nurs
+          {' '}
         </Typography.Title>
         <Typography.Title level={2}>Forgot Password?</Typography.Title>
         <Typography.Paragraph>
@@ -55,7 +69,7 @@ const ForgotPassword = () => {
           <Input size='large' placeholder='Email' autoComplete={'off'} />
         </Form.Item>
         <Form.Item>
-          <Button size='large' htmlType='submit' type='primary' block>
+          <Button loading={loading} size='large' htmlType='submit' type='primary' block>
             Submit
           </Button>
         </Form.Item>
