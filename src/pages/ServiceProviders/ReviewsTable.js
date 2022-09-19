@@ -1,14 +1,26 @@
 import { Table } from 'antd'
 import moment from 'moment'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ReviewsTable = ({ data, loading, parent }) => {
   const columns = [
     {
       title: 'Client',
-      dataIndex: 'client',
-      key: 'client',
-      render: (client) => client?.first_name,
+      dataIndex: 'reviewer',
+      key: 'reviewer',
+      render: (reviewer) => (
+        <Link to={`/clients/${reviewer?.id}`}>
+          {reviewer?.first_name} {reviewer?.last_name}
+        </Link>
+      ),
+      width: 200,
+    },
+    {
+      title: 'Booking ID',
+      dataIndex: 'booking',
+      key: 'booking',
+      render: (booking) => booking?.order_id,
       width: 200,
     },
     {

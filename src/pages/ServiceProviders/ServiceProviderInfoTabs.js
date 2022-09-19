@@ -9,6 +9,7 @@ const { TabPane } = Tabs
 
 const ServiceProviderInfoTab = (props) => {
   const { singleData } = useSelector((state) => state.serviceProviders)
+  console.log(singleData)
 
   return (
     <div {...props}>
@@ -20,7 +21,7 @@ const ServiceProviderInfoTab = (props) => {
           <ServiceTable parent={'client'} loading={false} data={singleData?.services} />
         </TabPane>
         <TabPane tab='Reviews' key='3'>
-          <ReviewsTable parent={'client'} loading={false} data={singleData?.client_orders} />
+          <ReviewsTable parent={'client'} loading={false} data={singleData?.provider_reviews} />
         </TabPane>
       </Tabs>
     </div>
