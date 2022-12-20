@@ -1,7 +1,8 @@
 import axios from 'axios'
 import ExpirySession from '../utils/expirySession'
 
-export const baseURL = 'https://xpro.getshopeasy.com/api/v1'
+export const baseURL = 'http://127.0.0.1:8000/api/v1'
+//'https://xpro.getshopeasy.com/api/v1'
 
 const instance = axios.create({
   baseURL: baseURL,

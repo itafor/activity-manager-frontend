@@ -20,6 +20,7 @@ import ServiceProviders, { ServiceProviderInfo } from './pages/ServiceProviders'
 import PaymentMethods from './pages/PaymentMethods'
 import Transactions from './pages/Transactions'
 import Settings from './pages/Settings'
+import ListCategory from './pages/Category/ListCategory'
 
 // import Settings from "./pages/Settings";
 
@@ -116,6 +117,11 @@ function App() {
 
           {/* Catch all routes -> push to not found page */}
           <Route path='*' element={<NotFoundPage />} />
+          <Route
+            //
+            path='/product/categories'
+            element={<ListCategory />}
+          />
         </Routes>
       </BrowserRouter>
     </Suspense>

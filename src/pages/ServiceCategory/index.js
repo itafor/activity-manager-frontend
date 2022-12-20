@@ -1,5 +1,5 @@
-import { lazy } from "react";
+import { lazy } from 'react'
 
-const ServiceCategory = lazy(() => import("./ServiceCategory"));
+const ServiceCategory = lazy(() => import('./ServiceCategory'))
 
-export default ServiceCategory;
+export default ServiceCategory

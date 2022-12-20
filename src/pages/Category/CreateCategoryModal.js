@@ -7,7 +7,7 @@ import {
   getAllServiceCategory,
 } from '../../redux/serviceCategorySlice'
 
-const CreateServiceCategoryModal = ({ visibility, handleVisible, update, singleData }) => {
+const CreateCategoryModal = ({ visibility, handleVisible, update, singleData }) => {
   const [confirmLoading, setConfirmLoading] = useState(false)
   const dispatch = useDispatch()
 
@@ -130,4 +130,4 @@ const CreateServiceCategoryModal = ({ visibility, handleVisible, update, singleD
   )
 }
 
-export default CreateServiceCategoryModal
+export default CreateCategoryModal

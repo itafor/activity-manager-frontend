@@ -11,8 +11,8 @@ import LogoMini from '../assets/images/logo-mini.png'
 import { toggleCollapseSider } from '../redux/appSlice'
 import { AiOutlineLeft } from 'react-icons/ai'
 import { BsCreditCard, BsWallet2 } from 'react-icons/bs'
-import {BiCategory, BiCreditCard, BiUserPlus} from 'react-icons/bi'
-import {CgNotes} from 'react-icons/cg'
+import { BiCategory, BiCreditCard, BiUserPlus } from 'react-icons/bi'
+import { CgNotes } from 'react-icons/cg'
 
 const AppSider = () => {
   const navigate = useNavigate()
@@ -51,8 +51,8 @@ const AppSider = () => {
     getItem('Service Providers', 'service-provider', <BiUserPlus size={20} />),
     getItem(' Payment Method', 'payment-method', <BiCreditCard size={16} />),
     getItem(' Transactions', 'transactions', <CgNotes size={16} />),
-    // getItem("Chats", "chats", <UploadOutlined size={16} />),
-   
+    // getItem('Chats', 'chats', <UploadOutlined size={16} />),
+
     getItem('Settings', 'settings', <RiSettings2Line size={16} />),
   ]
 
@@ -63,7 +63,11 @@ const AppSider = () => {
   return (
     <>
       <StyledLogo className='logo'>
-        { !app.siderCollapsed ? <img style={{padding:'8px'}} height={40} src={Logo} alt='Xpro' /> : <img style={{padding:'8px'}} height={40} src={LogoMini} alt='Xpro' /> }
+        {!app.siderCollapsed ? (
+          <img style={{ padding: '8px' }} height={40} src={Logo} alt='Xpro' />
+        ) : (
+          <img style={{ padding: '8px' }} height={40} src={LogoMini} alt='Xpro' />
+        )}
         {/* <Typography.Title
           style={{
             display: app.siderCollapsed === true ? 'none' : 'block',
@@ -118,7 +122,7 @@ const StyledLogo = styled.div`
   align-items: flex-end;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  background-color: #2E338A;
+  background-color: #2e338a;
   h5 {
     color: white;
   }

@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import ServiceCategoryTable from './ServiceCategoryTable'
+import CategoryTable from './CategoryTable'
 import { Button, notification, PageHeader } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteServiceCategory, getAllServiceCategory } from '../../redux/serviceCategorySlice'
-import CreateServiceCategoryModal from './CreateServiceCategoryModal'
-import ProductCategoryModal from './ProductCategoryModal'
-import CategoryDatatable from './CategoryDatatable'
+import CreateCategoryModal from './CreateCategoryModal'
 
-const ServiceCategory = () => {
+const ListCategory = () => {
   const { serviceCategory } = useSelector((state) => state)
   const dispatch = useDispatch()
 
@@ -56,7 +54,6 @@ const ServiceCategory = () => {
 
   useEffect(() => {
     dispatch(getAllServiceCategory())
-    console.log('categore b=data', serviceCategory)
   }, [])
 
   return (
@@ -64,14 +61,12 @@ const ServiceCategory = () => {
       <PageHeader
         extra={[
           <Button onClick={() => setShowCreateModal(true)} key='top_physicians'>
-            Create Category old
+            Create Category
           </Button>,
-          <ProductCategoryModal key='createModal' />,
         ]}
         title='Service Categories'
       />
-      <CategoryDatatable categories={serviceCategory?.data} setSingleData={setSingleData} />
-      <ServiceCategoryTable
+      <CategoryTable
         parent={'service-category'}
         data={serviceCategory?.data}
         loading={serviceCategory?.loading}
@@ -80,7 +75,7 @@ const ServiceCategory = () => {
         handleDelete={handleDelete}
         deleteLoading={confirmLoading}
       />
-      <CreateServiceCategoryModal
+      <CreateCategoryModal
         key={modalKey}
         visibility={showCreateModal}
         handleVisible={setShowCreateModal}
@@ -91,4 +86,4 @@ const ServiceCategory = () => {
   )
 }
 
-export default ServiceCategory
+export default ListCategory
