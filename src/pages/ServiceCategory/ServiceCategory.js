@@ -4,7 +4,7 @@ import { Button, notification, PageHeader } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteServiceCategory, getAllServiceCategory } from '../../redux/serviceCategorySlice'
 import CreateServiceCategoryModal from './CreateServiceCategoryModal'
-import ProductCategoryModal from './ProductCategoryModal'
+import CreateCategoryModal from './CreateCategoryModal'
 import CategoryDatatable from './CategoryDatatable'
 
 const ServiceCategory = () => {
@@ -16,6 +16,7 @@ const ServiceCategory = () => {
   const [modalKey, setModalKey] = useState(1)
   const [editData, setEditData] = useState({})
   const [confirmLoading, setConfirmLoading] = useState(false)
+  const [childData, setChildData] = useState('')
 
   const setSingleData = (data) => {
     setEditData(data)
@@ -23,13 +24,17 @@ const ServiceCategory = () => {
   }
 
   const handleDelete = ({ id }) => {
+    if (!window.confirm('Do You want to permanently delete the selected category?')) {
+      return
+    }
+
     dispatch(deleteServiceCategory(id))
       .then((response) => {
         setConfirmLoading(false)
         if (response.type === 'serviceCategory/delete/fulfilled') {
           dispatch(getAllServiceCategory())
           notification.success({
-            message: ' Service category deleted successfully',
+            message: ' Category deleted successfully',
           })
         } else if (response.type === 'serviceCategory/delete/rejected') {
           notification.error({
@@ -47,6 +52,7 @@ const ServiceCategory = () => {
   }
 
   useEffect(() => {
+    console.log('childData', childData && childData)
     setModalKey(modalKey + 1)
     if (showCreateModal === false) {
       setEditData({})
@@ -56,22 +62,13 @@ const ServiceCategory = () => {
 
   useEffect(() => {
     dispatch(getAllServiceCategory())
-    console.log('categore b=data', serviceCategory)
   }, [])
 
   return (
     <div>
-      <PageHeader
-        extra={[
-          <Button onClick={() => setShowCreateModal(true)} key='top_physicians'>
-            Create Category old
-          </Button>,
-          <ProductCategoryModal key='createModal' />,
-        ]}
-        title='Service Categories'
-      />
-      <CategoryDatatable categories={serviceCategory?.data} setSingleData={setSingleData} />
-      <ServiceCategoryTable
+      <PageHeader extra={[<CreateCategoryModal key='createModal' />]} title='Categories' />
+      <CategoryDatatable categories={serviceCategory?.data} handleDelete={handleDelete} />
+      {/* <ServiceCategoryTable
         parent={'service-category'}
         data={serviceCategory?.data}
         loading={serviceCategory?.loading}
@@ -86,7 +83,7 @@ const ServiceCategory = () => {
         handleVisible={setShowCreateModal}
         update={update}
         singleData={editData}
-      />
+      /> */}
     </div>
   )
 }
