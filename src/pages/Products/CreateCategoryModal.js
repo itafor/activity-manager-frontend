@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { editServiceCategory, getAllServiceCategory } from '../../redux/serviceCategorySlice'
+import { useDispatch } from 'react-redux'
+import { createServiceCategory, getAllServiceCategory } from '../../redux/serviceCategorySlice'
 import Messages from '../../ToastMessages/Messages'
-import { useDispatch, useSelector } from 'react-redux'
 
 const initialFormState = {
   name: '',
   description: '',
-  category_id: '',
 }
 
-function UpdateCategoryModal({ category }) {
+function CreateCategoryModal() {
   const [show, setShow] = useState(false)
   const [image, setImage] = useState('')
   const [categoryFormData, setCategoryFormData] = useState(initialFormState)
-  const { serviceCategory } = useSelector((state) => state)
 
   const [confirmLoading, setConfirmLoading] = useState(false)
   const dispatch = useDispatch()
@@ -26,7 +24,6 @@ function UpdateCategoryModal({ category }) {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  useEffect(() => {}, [])
   const onChangeImage = (e) => {
     setImage(e.target.files[0])
   }
@@ -48,71 +45,61 @@ function UpdateCategoryModal({ category }) {
     setImage('')
   }
 
-  const handleUpdateCategory = (e) => {
+  const handleCreateCategory = (e) => {
     e.preventDefault()
     var formData = new FormData()
-    formData.append('name', category ? category.name : categoryFormData.name)
+    formData.append('name', categoryFormData.name)
     formData.append('image', image)
-    formData.append('description', category ? category.description : categoryFormData.description)
-    formData.append('category_id', category?.id)
-    const data = {
-      name: categoryFormData.name,
-      image: categoryFormData.image,
-      description: categoryFormData.description,
-      category_id: categoryFormData.category_id,
-    }
+    formData.append('description', categoryFormData.description)
     console.log('formvalues', formData)
 
     setConfirmLoading(true)
-    dispatch(editServiceCategory(formData))
+    dispatch(createServiceCategory(formData))
       .then((response) => {
         setConfirmLoading(false)
-        if (response.type === 'serviceCategory/edit/fulfilled') {
+        if (response.type === 'serviceCategory/create/fulfilled') {
           dispatch(getAllServiceCategory())
           handleClose()
           clearFormData()
-          Messages.successMessage('category updated successfully', 'top-right')
-        } else if (response.type === 'serviceCategory/edit/rejected') {
-          console.log('error notificatom', 'Error updating service category, please try again')
-          Messages.errorMessage('Error updating category', 'top-right')
+          Messages.successMessage('category created successfully', 'top-right')
+        } else if (response.type === 'serviceCategory/create/rejected') {
+          console.log('error notificatom', 'Error creating service category, please try again')
         }
       })
       .catch((error) => {
         setConfirmLoading(false)
-        console.log('error notificatom', 'Error editing service category, please try again')
+        console.log('error notificatom', 'Error creating service category, please try again')
       })
   }
 
   return (
     <>
       <Button variant='primary' onClick={handleShow}>
-        Edit
+        Create Category
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton onClick={clearFormData}>
-          <Modal.Title>Update Category</Modal.Title>
+          <Modal.Title>Create Category</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleUpdateCategory}>
+          <Form onSubmit={handleCreateCategory}>
             <Form.Group className='mb-3' controlId='formBasicEmail'>
-              <Form.Label>Name</Form.Label>
+              <Form.Label>Name{categoryFormData.name}</Form.Label>
               <Form.Control
                 type='text'
                 name='name'
-                defaultValue={category?.name}
                 placeholder='Enter category name'
                 onChange={(evt) => handleInputChange(evt)}
               />
             </Form.Group>
 
             <Form.Group className='mb-3' controlId='formBasicPassword'>
-              <Form.Label>Description </Form.Label>
+              <Form.Label>Description {categoryFormData.description}</Form.Label>
               <Form.Control
                 type='text'
                 name='description'
                 placeholder='description'
-                defaultValue={category?.description}
                 onChange={(evt) => handleInputChange(evt)}
               />
             </Form.Group>
@@ -124,9 +111,6 @@ function UpdateCategoryModal({ category }) {
                 onChange={(evnt) => onChangeImage(evnt)}
                 placeholder='Password'
               />
-              <span>
-                <img src={category?.image} alt='horse' width='{50}' height='{50}' />
-              </span>
             </Form.Group>
 
             <Button variant='primary' type='submit' disabled={confirmLoading ? true : false}>
@@ -140,4 +124,4 @@ function UpdateCategoryModal({ category }) {
   )
 }
 
-export default UpdateCategoryModal
+export default CreateCategoryModal

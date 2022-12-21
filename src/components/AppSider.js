@@ -13,6 +13,7 @@ import { AiOutlineLeft } from 'react-icons/ai'
 import { BsCreditCard, BsWallet2 } from 'react-icons/bs'
 import { BiCategory, BiCreditCard, BiUserPlus } from 'react-icons/bi'
 import { CgNotes } from 'react-icons/cg'
+import Products from '../pages/Products/Products'
 
 const AppSider = () => {
   const navigate = useNavigate()
@@ -47,11 +48,11 @@ const AppSider = () => {
   const items = [
     getItem('Bookings', 'bookings', <GrDocumentTime size={16} />),
     getItem('Clients', 'clients', <RiUserLine size={18} />),
-    getItem(' Service Category', 'service-category', <BiCategory size={18} />),
+    getItem('Categories', 'product-categories', <BiCategory size={18} />),
     getItem('Service Providers', 'service-provider', <BiUserPlus size={20} />),
     getItem(' Payment Method', 'payment-method', <BiCreditCard size={16} />),
     getItem(' Transactions', 'transactions', <CgNotes size={16} />),
-    // getItem('Chats', 'chats', <UploadOutlined size={16} />),
+    // getItem('Products', 'products', <Products size={16} />),
 
     getItem('Settings', 'settings', <RiSettings2Line size={16} />),
   ]

@@ -15,12 +15,12 @@ import ResetPassword from './pages/Auth/ResetPassword'
 import Dashboard from './pages/Dashboard'
 import Bookings, { BookingInfo } from './pages/Bookings'
 import Clients, { ClientInfo } from './pages/Clients'
-import ServiceCategory from './pages/ServiceCategory'
 import ServiceProviders, { ServiceProviderInfo } from './pages/ServiceProviders'
 import PaymentMethods from './pages/PaymentMethods'
 import Transactions from './pages/Transactions'
 import Settings from './pages/Settings'
-import ListCategory from './pages/Category/ListCategory'
+import ProductCategories from './pages/ServiceCategory/ProductCategories'
+import Products from './pages/Products/Products'
 
 // import Settings from "./pages/Settings";
 
@@ -83,9 +83,10 @@ function App() {
             />
             <Route
               //
-              path='/service-category'
-              element={<ServiceCategory />}
+              path='/product-categories'
+              element={<ProductCategories />}
             />
+            <Route path='/products' element={<Products />} />
             <Route
               //
               path='/service-provider/:id'
@@ -117,11 +118,6 @@ function App() {
 
           {/* Catch all routes -> push to not found page */}
           <Route path='*' element={<NotFoundPage />} />
-          <Route
-            //
-            path='/product/categories'
-            element={<ListCategory />}
-          />
         </Routes>
       </BrowserRouter>
     </Suspense>
