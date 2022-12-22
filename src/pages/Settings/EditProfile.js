@@ -1,6 +1,6 @@
 import { Button, Col, Form, Input, notification, Row, Space, Typography } from 'antd'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { editProfile, getProfile } from '../../redux/profileSlice'
 
 const EditProfile = () => {
@@ -8,6 +8,7 @@ const EditProfile = () => {
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
   const [form] = Form.useForm()
+  const { singleData } = useSelector((state) => state.profile)
 
   const handleSubmit = async (values) => {
     setLoading(true)

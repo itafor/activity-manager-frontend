@@ -26,7 +26,7 @@ const DashboardLayout = (props) => {
         </Header>
         <Layout>
           <ContentStyle>{props.children}</ContentStyle>
-          {/* <Footer className="app-footer">
+          {/* <Footer className='app-footer'>
             <AppFooter />
           </Footer> */}
         </Layout>

@@ -20,7 +20,9 @@ import PaymentMethods from './pages/PaymentMethods'
 import Transactions from './pages/Transactions'
 import Settings from './pages/Settings'
 import ProductCategories from './pages/ServiceCategory/ProductCategories'
-import Products from './pages/Products/Products'
+import Products from './pages/Product/Products'
+import CreateProduct from './pages/Product/CreateProduct'
+import ProductDetails from './pages/Product/ProductDetails'
 
 // import Settings from "./pages/Settings";
 
@@ -86,7 +88,6 @@ function App() {
               path='/product-categories'
               element={<ProductCategories />}
             />
-            <Route path='/products' element={<Products />} />
             <Route
               //
               path='/service-provider/:id'
@@ -113,7 +114,13 @@ function App() {
               element={<Settings />}
             />
 
-            {/* <Route path="*" element={<NotFoundPage />} /> */}
+            <Route path='products' element={<Products />} />
+            <Route path='product/create' element={<CreateProduct />} />
+            <Route
+              //
+              path='/product/details/:id/:refkey'
+              element={<ProductDetails />}
+            />
           </Route>
 
           {/* Catch all routes -> push to not found page */}

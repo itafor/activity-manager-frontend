@@ -1,6 +1,6 @@
 {
-  "short_name": "Xpro",
-  "name": "XPro admin dashboard",
+  "short_name": "Aveo",
+  "name": "Aveo admin dashboard",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,8 +8,8 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
+      "src": "aveologo.jpg",
+      "type": "image/jpg",
       "sizes": "192x192"
     },
     {

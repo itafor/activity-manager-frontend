@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Dashboard = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
-    navigate("/bookings");
-  }, []);
+    navigate('/products')
+  }, [])
 
-  return <div onClick={() => navigate("/patients")}>Dashboard</div>;
-};
+  return <div onClick={() => navigate('/patients')}>Dashboard</div>
+}
 
-export default Dashboard;
+export default Dashboard

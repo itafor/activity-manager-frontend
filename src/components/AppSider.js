@@ -6,14 +6,13 @@ import { RiUserLine, RiUserHeartLine, RiSettings2Line } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import Logo from '../assets/images/logo192.png'
+import Logo from '../assets/images/aveologo.jpg'
 import LogoMini from '../assets/images/logo-mini.png'
 import { toggleCollapseSider } from '../redux/appSlice'
 import { AiOutlineLeft } from 'react-icons/ai'
 import { BsCreditCard, BsWallet2 } from 'react-icons/bs'
 import { BiCategory, BiCreditCard, BiUserPlus } from 'react-icons/bi'
 import { CgNotes } from 'react-icons/cg'
-import Products from '../pages/Products/Products'
 
 const AppSider = () => {
   const navigate = useNavigate()
@@ -46,15 +45,18 @@ const AppSider = () => {
   }
 
   const items = [
-    getItem('Bookings', 'bookings', <GrDocumentTime size={16} />),
-    getItem('Clients', 'clients', <RiUserLine size={18} />),
+    // getItem('Bookings', 'bookings', <GrDocumentTime size={16} />),
+    // getItem('Clients', 'clients', <RiUserLine size={18} />),
     getItem('Categories', 'product-categories', <BiCategory size={18} />),
-    getItem('Service Providers', 'service-provider', <BiUserPlus size={20} />),
-    getItem(' Payment Method', 'payment-method', <BiCreditCard size={16} />),
-    getItem(' Transactions', 'transactions', <CgNotes size={16} />),
-    // getItem('Products', 'products', <Products size={16} />),
+    getItem('Products', 'products', <CgNotes size={16} />),
+    getItem('Variety Boxes', 'variety-boxes', <RiUserLine size={16} />),
+    getItem('Goups', 'groups', <GrDocumentTime size={16} />),
+    getItem('Users', 'users', <BiUserPlus size={20} />),
+    getItem(' Orders', 'orders', <CgNotes size={16} />),
+    getItem('Payment', 'payment-method', <BiCreditCard size={16} />),
 
     getItem('Settings', 'settings', <RiSettings2Line size={16} />),
+    // getItem('Settings', 'settings', <RiSettings2Line size={16} />),
   ]
 
   const handleMenuClick = (values) => {
@@ -64,11 +66,12 @@ const AppSider = () => {
   return (
     <>
       <StyledLogo className='logo'>
-        {!app.siderCollapsed ? (
-          <img style={{ padding: '8px' }} height={40} src={Logo} alt='Xpro' />
+        {/* {!app.siderCollapsed ? (
+          <img style={{ padding: '8px' }} height={40} src={Logo} alt='aveo' />
         ) : (
-          <img style={{ padding: '8px' }} height={40} src={LogoMini} alt='Xpro' />
-        )}
+          <img style={{ padding: '8px' }} height={40} src={Logo} alt='aveo' />
+        )} */}
+        <span style={{ fontSize: '25px' }}>Aveo Admin</span>
         {/* <Typography.Title
           style={{
             display: app.siderCollapsed === true ? 'none' : 'block',
