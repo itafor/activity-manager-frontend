@@ -13,13 +13,19 @@ const PaymentMethodsTable = ({
 }) => {
   const columns = [
     {
-      title: 'Name',
+      title: 'Ref. Id',
       dataIndex: 'name',
       width: 300,
       key: 'name',
     },
     {
-      title: 'Description',
+      title: 'Amount',
+      dataIndex: 'description',
+      key: 'description',
+      render: (description) => description || 'Null',
+    },
+    {
+      title: 'Status',
       dataIndex: 'description',
       key: 'description',
       render: (description) => description || 'Null',

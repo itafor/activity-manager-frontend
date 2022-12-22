@@ -58,14 +58,7 @@ const PaymentMethods = () => {
 
   return (
     <div>
-      <PageHeader
-        extra={[
-          <Button onClick={() => setShowCreateModal(true)} key='top_physicians'>
-            Create Payment Methods
-          </Button>,
-        ]}
-        title='Payment Methods'
-      />
+      <PageHeader extra={[]} title='Payment Methods' />
       <PaymentMethodsTable
         parent={'payment-method'}
         data={paymentMethods?.data}
