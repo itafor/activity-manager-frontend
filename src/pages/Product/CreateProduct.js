@@ -11,7 +11,6 @@ import Button from 'react-bootstrap/Button'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllServiceCategory } from '../../redux/serviceCategorySlice'
 import { createProduct, getAllProducts } from '../../redux/productSlice'
 import Messages from '../../ToastMessages/Messages'
 
@@ -30,15 +29,18 @@ function CreateProduct() {
   const [image, setImage] = useState('')
   const [productFormData, setProductFormData] = useState(initialFormState)
   const { serviceCategory } = useSelector((state) => state)
+  const { products } = useSelector((state) => state)
 
   const [confirmLoading, setConfirmLoading] = useState(false)
   const dispatch = useDispatch()
   const [categories, setCategories] = useState(serviceCategory?.data)
+  const [relatedProducts, setSelatedProducts] = useState(products?.data)
   const navigate = useNavigate()
+  const [formValues, setFormValues] = useState([{ related_product_id: '' }])
 
   useEffect(() => {
-    // dispatch(getAllServiceCategory())
-    console.log('cate', serviceCategory)
+    dispatch(getAllProducts())
+    console.log('getAllProducts', relatedProducts)
   }, [])
 
   const onChangeImage = (e) => {
@@ -70,6 +72,8 @@ function CreateProduct() {
 
   const handleCreateProduct = (e) => {
     e.preventDefault()
+    console.log('related prod formValues', formValues)
+    // return
     var formData = new FormData()
     formData.append('name', productFormData.name)
     formData.append('image', image)
@@ -79,11 +83,23 @@ function CreateProduct() {
     formData.append('product_size', productFormData.product_size)
     formData.append('description', productFormData.description)
     formData.append('quantity_instock', productFormData.quantity_instock)
-    formData.append('related_productIds', [])
-    formData.append('more_product_images', [])
+    formData.append('related_productIds[]', 9)
+    // formData.append('related_productIds', formValues)
+    //create another endpoint for related products
+    var data = JSON.stringify({
+      name: 'product test',
+      image: '',
+      category_id: '2',
+      individual_price: '3390',
+      group_price: '44',
+      product_size: '3kg',
+      description: 'product 1',
+      quantity_instock: '2',
+      related_productIds: ['10', '9'],
+    })
 
     setConfirmLoading(true)
-    dispatch(createProduct(formData))
+    dispatch(createProduct(data))
       .then((response) => {
         setConfirmLoading(false)
         if (response.type === 'product/create/fulfilled') {
@@ -110,6 +126,36 @@ function CreateProduct() {
         </option>
       )
     })
+
+  const related_products_list =
+    relatedProducts &&
+    relatedProducts.map((product, key) => {
+      return (
+        <option value={product.id} key={key}>
+          {product.name}
+        </option>
+      )
+    })
+
+  let handleChange = (i, e) => {
+    let newFormValues = [...formValues]
+    newFormValues[i][e.target.name] = e.target.value
+    setFormValues(newFormValues)
+    console.log('multi related products values', newFormValues)
+  }
+
+  let addFormFields = () => {
+    setFormValues([...formValues, { related_product_id: '' }])
+    console.log('multi related products', formValues)
+  }
+
+  let removeFormFields = (i) => {
+    let newFormValues = [...formValues]
+    newFormValues.splice(i, 1)
+    setFormValues(newFormValues)
+    console.log('remove multi related products', formValues)
+  }
+
   return (
     <div>
       <PageHeader
@@ -198,6 +244,8 @@ function CreateProduct() {
                   />
                 </Form.Group>
               </Col>
+            </Row>
+            <Row>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicPassword'>
                   <Form.Label>Image</Form.Label>
@@ -208,8 +256,6 @@ function CreateProduct() {
                   />
                 </Form.Group>
               </Col>
-            </Row>
-            <Row>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicPassword'>
                   <Form.Label>Description {productFormData.description}</Form.Label>
@@ -222,6 +268,45 @@ function CreateProduct() {
                   />
                 </Form.Group>
               </Col>
+            </Row>
+            <Row>
+              <h3>Add related product</h3>
+              <Col>
+                {formValues.map((element, index) => (
+                  <div className='form-inline' key={index}>
+                    <Form.Group className='mb-3' controlId='formBasicPassword'>
+                      <Form.Label>Related product {index + 1}</Form.Label>
+
+                      <Form.Select
+                        name='related_product_id'
+                        value={element.related_product_id || ''}
+                        onChange={(e) => handleChange(index, e)}
+                        aria-label='Default select example'
+                      >
+                        <option>Select product</option>
+                        {related_products_list}
+                      </Form.Select>
+                    </Form.Group>
+
+                    {index ? (
+                      <button
+                        type='button'
+                        className='button remove'
+                        onClick={() => removeFormFields(index)}
+                      >
+                        Remove
+                      </button>
+                    ) : null}
+                  </div>
+                ))}
+                <div className='button-section'>
+                  <button className='button add' type='button' onClick={() => addFormFields()}>
+                    Add
+                  </button>
+                </div>
+              </Col>
+              <Col></Col>
+              <Col></Col>
             </Row>
 
             <Button variant='primary' type='submit' disabled={confirmLoading ? true : false}>

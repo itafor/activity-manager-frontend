@@ -30,16 +30,14 @@ export default function ProductDetails() {
     <div>
       <Card>
         <Card.Header>
-          <div className='pull-left' bsStyle='danger' bsSize='small'>
-            Product Details
-          </div>
-          <Button className='float-end' variant='light' bsStyle='danger' bsSize='small'>
+          <div className='pull-left'>Product Details</div>
+          <Button className='float-end' variant='light'>
             <Link to='/product/create'>Create Product </Link>
           </Button>
-          <Button className='float-end' variant='light' bsStyle='danger' bsSize='small'>
+          <Button className='float-end' variant='light'>
             <Link to='/product/create'>Edit Product </Link>
           </Button>
-          <Button className='float-end' variant='light' bsStyle='danger' bsSize='small'>
+          <Button className='float-end' variant='light'>
             <Link to='/products'>Back to list </Link>
           </Button>
         </Card.Header>
