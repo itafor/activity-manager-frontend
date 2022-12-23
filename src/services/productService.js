@@ -25,10 +25,16 @@ const deleteOne = async (data) => {
   return response.data
 }
 
+const addRelatedProduct = async (data) => {
+  const response = await AuthAPI.post(`/admin/product/create/related-product`, data)
+  return response.data
+}
+
 export const productService = {
   getAll,
   getOne,
   create,
   edit,
   deleteOne,
+  addRelatedProduct,
 }
