@@ -43,7 +43,7 @@ function CreateProduct() {
 
   useEffect(() => {
     dispatch(getAllProducts())
-    console.log('getAllProducts', relatedProducts)
+    console.log('moreImageValues', moreImageValues)
   }, [])
 
   const onChangeImage = (e) => {
@@ -91,7 +91,7 @@ function CreateProduct() {
     formData.append('product_size', productFormData.product_size)
     formData.append('description', productFormData.description)
     formData.append('quantity_instock', productFormData.quantity_instock)
-    formData.append('more_product_images[]', moreImageValues[0]?.more_images)
+    // formData.append('more_product_images[]', moreImageValues[0]?.more_images)
     // formData.append('more_product_images[]', moreImageValues[1]?.more_images)
     // formData.append('more_product_images[]', moreImageValues[2]?.more_images)
     // formData.append('more_product_images[]', moreImageValues[3]?.more_images)
@@ -116,11 +116,13 @@ function CreateProduct() {
           navigate(`/product/details/${response?.payload?.id}/${response?.payload?.sku}`)
         } else if (response.type === 'product/create/rejected') {
           console.log('error notificatom', 'Error creating product, please try again')
+          Messages.errorMessage('Error creating product, please try again', 'top-right')
         }
       })
       .catch((error) => {
         setConfirmLoading(false)
         console.log('error notificatom', 'Error creating product, please try again')
+        Messages.errorMessage('Error creating product, please try again', 'top-right')
       })
   }
   const category_list =
@@ -158,8 +160,8 @@ function CreateProduct() {
   }
 
   let addFormFields = () => {
-    if (relatedProductformValues?.length == 5) {
-      alert("You can't add more than five additional related products")
+    if (relatedProductformValues && relatedProductformValues.length == 5) {
+      alert("You can't add more than 5 related products")
       return
     }
     setRelatedProductFormValues([...relatedProductformValues, { related_product_id: '' }])
@@ -179,7 +181,7 @@ function CreateProduct() {
     newMoreImageValues[i][e.target.name] = e.target.files[0]
     setRelatedProductFormValues(newMoreImageValues)
 
-    console.log('multi images values', moreImageValues[0]?.more_images)
+    console.log('multi images values', moreImageValues)
     // } else {
     //   let newMoreImageValues = [...moreImageValues]
     //   newMoreImageValues[i][e.target.name] = ''
@@ -188,8 +190,8 @@ function CreateProduct() {
   }
 
   let addMoreImageFormFields = () => {
-    if (moreImageValues?.length == 5) {
-      alert("You can't add more than five additional product images")
+    if (moreImageValues && moreImageValues.length == 5) {
+      alert("You can't add more than 5 additional product images")
       return
     }
     setMoreImageValues([...moreImageValues, { more_images: '' }])

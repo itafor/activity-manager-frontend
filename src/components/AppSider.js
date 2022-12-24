@@ -51,7 +51,7 @@ const AppSider = () => {
     getItem('Products', 'products', <CgNotes size={16} />),
     getItem('Variety Boxes', 'variety-boxes', <RiUserLine size={16} />),
     getItem('Goups', 'groups', <GrDocumentTime size={16} />),
-    getItem('Users', 'users', <BiUserPlus size={20} />),
+    getItem('Customers', 'customers', <BiUserPlus size={20} />),
     getItem(' Orders', 'orders', <CgNotes size={16} />),
     getItem('Payment', 'payment-method', <BiCreditCard size={16} />),
 
