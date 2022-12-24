@@ -323,7 +323,7 @@ function CreateProduct() {
               </Col>
               <Col>
                 <h6>
-                  <strong>Add more product images (optional)</strong>
+                  <strong>Add more product images</strong>
                 </h6>
               </Col>
             </Row>
