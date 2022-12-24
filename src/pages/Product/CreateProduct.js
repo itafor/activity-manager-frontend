@@ -38,6 +38,7 @@ function CreateProduct() {
   const [relatedProductformValues, setRelatedProductFormValues] = useState([
     { related_product_id: '' },
   ])
+  const [moreImageValues, setMoreImageValues] = useState([{ more_images: '' }])
   const [validated, setValidated] = useState(false)
 
   useEffect(() => {
@@ -90,6 +91,11 @@ function CreateProduct() {
     formData.append('product_size', productFormData.product_size)
     formData.append('description', productFormData.description)
     formData.append('quantity_instock', productFormData.quantity_instock)
+    formData.append('more_product_images[]', moreImageValues[0]?.more_images)
+    // formData.append('more_product_images[]', moreImageValues[1]?.more_images)
+    // formData.append('more_product_images[]', moreImageValues[2]?.more_images)
+    // formData.append('more_product_images[]', moreImageValues[3]?.more_images)
+    // formData.append('more_product_images[]', moreImageValues[4]?.more_images)
 
     setConfirmLoading(true)
     dispatch(createProduct(formData))
@@ -152,6 +158,10 @@ function CreateProduct() {
   }
 
   let addFormFields = () => {
+    if (relatedProductformValues?.length == 5) {
+      alert("You can't add more than five additional related products")
+      return
+    }
     setRelatedProductFormValues([...relatedProductformValues, { related_product_id: '' }])
     console.log('multi related products', relatedProductformValues)
   }
@@ -164,29 +174,33 @@ function CreateProduct() {
   }
 
   let handleMoreImageChange = (i, e) => {
-    if (!isNaN(e.target.value)) {
-      let newrelatedProductformValues = [...relatedProductformValues]
-      newrelatedProductformValues[i][e.target.name] = e.target.value
-      setRelatedProductFormValues(newrelatedProductformValues)
+    // if (isNaN(e.target.files[0])) {
+    let newMoreImageValues = [...moreImageValues]
+    newMoreImageValues[i][e.target.name] = e.target.files[0]
+    setRelatedProductFormValues(newMoreImageValues)
 
-      console.log('multi related products values', relatedProductformValues)
-    } else {
-      let newrelatedProductformValues = [...relatedProductformValues]
-      newrelatedProductformValues[i][e.target.name] = ''
-      setRelatedProductFormValues(newrelatedProductformValues)
-    }
+    console.log('multi images values', moreImageValues[0]?.more_images)
+    // } else {
+    //   let newMoreImageValues = [...moreImageValues]
+    //   newMoreImageValues[i][e.target.name] = ''
+    //   setMoreImageValues(newMoreImageValues)
+    // }
   }
 
   let addMoreImageFormFields = () => {
-    setRelatedProductFormValues([...relatedProductformValues, { related_product_id: '' }])
-    console.log('multi related products', relatedProductformValues)
+    if (moreImageValues?.length == 5) {
+      alert("You can't add more than five additional product images")
+      return
+    }
+    setMoreImageValues([...moreImageValues, { more_images: '' }])
+    console.log('multi related products', moreImageValues)
   }
 
   let removeMoreImageFormFields = (i) => {
-    let newrelatedProductformValues = [...relatedProductformValues]
-    newrelatedProductformValues.splice(i, 1)
-    setRelatedProductFormValues(newrelatedProductformValues)
-    console.log('remove multi related products', newrelatedProductformValues)
+    let newMoreImageValues = [...moreImageValues]
+    newMoreImageValues.splice(i, 1)
+    setMoreImageValues(newMoreImageValues)
+    console.log('remove multi related products', newMoreImageValues)
   }
 
   return (
@@ -366,8 +380,45 @@ function CreateProduct() {
               </Col>
               <Col>
                 <h6>
-                  <strong>Add more product images</strong>
+                  <strong>Add More Images (optional)</strong>
                 </h6>
+
+                {moreImageValues.map((element, index) => (
+                  <div className='form-inline' key={index}>
+                    <InputGroup key={index}>
+                      <Form.Group className='mb-3' controlId='formBasicPassword'>
+                        <Form.Label>image {index + 1}</Form.Label>
+
+                        <Form.Control
+                          type='file'
+                          name='more_images'
+                          // value={element.related_product_id || ''}
+                          onChange={(e) => handleMoreImageChange(index, e)}
+                        />
+                      </Form.Group>
+
+                      {index ? (
+                        <span
+                          className='button remove'
+                          onClick={() => removeMoreImageFormFields(index)}
+                          style={{ color: 'red', cursor: 'pointer' }}
+                          title='Delete from list'
+                        >
+                          Remove
+                        </span>
+                      ) : null}
+                    </InputGroup>
+                  </div>
+                ))}
+                <div className='button-section'>
+                  <button
+                    className='button add mb-3'
+                    type='button'
+                    onClick={() => addMoreImageFormFields()}
+                  >
+                    Add More
+                  </button>
+                </div>
               </Col>
             </Row>
 
