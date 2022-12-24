@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { PageHeader } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
-import { CDBCard, CDBCardBody, CDBDataTable, CDBContainer } from 'cdbreact'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
@@ -37,7 +36,7 @@ function CreateProduct() {
   const [relatedProducts, setSelatedProducts] = useState(products?.data)
   const navigate = useNavigate()
   const [formValues, setFormValues] = useState([{ related_product_id: '' }])
-  const [related_product_ids, setRelatedProductIds] = useState([])
+  const [validated, setValidated] = useState(false)
 
   useEffect(() => {
     dispatch(getAllProducts())
@@ -71,30 +70,15 @@ function CreateProduct() {
     setImage('')
   }
 
-  const createRelatedProducts = (data) => {
-    dispatch(createRelatedProduct(data))
-      .then((response) => {
-        setConfirmLoading(false)
-        if (response.type === 'relatedProduct/create/fulfilled') {
-          dispatch(getAllProducts())
-          console.log('new related product', response)
-          clearFormData()
-          Messages.successMessage('Product created successfully', 'top-right')
-          // navigate(`/product/details/${response?.payload?.id}/${response?.payload?.sku}`)
-        } else if (response.type === 'relatedProduct/create/rejected') {
-          console.log('error notificatom', 'Error creating related product, please try again')
-        }
-      })
-      .catch((error) => {
-        setConfirmLoading(false)
-        console.log('error notificatom', 'Error creating related product, please try again')
-      })
-  }
-
   const handleCreateProduct = (e) => {
     e.preventDefault()
-    console.log('related prod formValues', formValues)
-    // return
+    const form = e.currentTarget
+    if (form.checkValidity() === false) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+
+    setValidated(true)
     var formData = new FormData()
     formData.append('name', productFormData.name)
     formData.append('image', image)
@@ -172,13 +156,9 @@ function CreateProduct() {
 
   let removeFormFields = (i) => {
     let newFormValues = [...formValues]
-    let newRelatdPro = [...related_product_ids]
     newFormValues.splice(i, 1)
     setFormValues(newFormValues)
-    newRelatdPro.splice(i, 1)
-
     console.log('remove multi related products', newFormValues)
-    console.log('remove multi related id', newRelatdPro)
   }
 
   return (
@@ -195,17 +175,21 @@ function CreateProduct() {
       <Card>
         <Card.Header>Craete Product</Card.Header>
         <Card.Body>
-          <Form onSubmit={handleCreateProduct}>
+          <Form noValidate validated={validated} onSubmit={handleCreateProduct}>
             <Row>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicEmail'>
                   <Form.Label>Name{productFormData.name}</Form.Label>
                   <Form.Control
                     type='text'
+                    required
                     name='name'
                     placeholder='Product name'
                     onChange={(evt) => handleInputChange(evt)}
                   />
+                  <Form.Control.Feedback type='invalid'>
+                    The product name is required.
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
               <Col>
@@ -215,6 +199,7 @@ function CreateProduct() {
                     name='category_id'
                     onChange={(evt) => handleInputChange(evt)}
                     aria-label='Default select example'
+                    required
                   >
                     <option>select category</option>
                     {category_list}
@@ -296,7 +281,9 @@ function CreateProduct() {
             </Row>
             <Row>
               <Col>
-                <h3>Add related product</h3>
+                <h6>
+                  <strong>Add related products (optional)</strong>
+                </h6>
 
                 {formValues.map((element, index) => (
                   <div className='form-inline' key={index}>
@@ -335,7 +322,9 @@ function CreateProduct() {
                 </div>
               </Col>
               <Col>
-                <h3>Add more product images</h3>
+                <h6>
+                  <strong>Add more product images (optional)</strong>
+                </h6>
               </Col>
             </Row>
 
