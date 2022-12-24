@@ -91,7 +91,7 @@ function CreateProduct() {
     formData.append('product_size', productFormData.product_size)
     formData.append('description', productFormData.description)
     formData.append('quantity_instock', productFormData.quantity_instock)
-    // formData.append('more_product_images[]', moreImageValues[0]?.more_images)
+    formData.append('more_product_images[]', image)
     // formData.append('more_product_images[]', moreImageValues[1]?.more_images)
     // formData.append('more_product_images[]', moreImageValues[2]?.more_images)
     // formData.append('more_product_images[]', moreImageValues[3]?.more_images)
@@ -417,6 +417,7 @@ function CreateProduct() {
                     className='button add mb-3'
                     type='button'
                     onClick={() => addMoreImageFormFields()}
+                    disabled
                   >
                     Add More
                   </button>
