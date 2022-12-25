@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux'
 const initialFormState = {
   name: '',
   description: '',
-  category_id: '',
 }
 
 function UpdateCategoryModal({ category }) {
@@ -26,7 +25,14 @@ function UpdateCategoryModal({ category }) {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    setCategoryFormData({
+      name: category.name,
+      description: category.description,
+    })
+    console.log('category', category)
+  }, [category])
+
   const onChangeImage = (e) => {
     setImage(e.target.files[0])
   }
@@ -51,18 +57,12 @@ function UpdateCategoryModal({ category }) {
   const handleUpdateCategory = (e) => {
     e.preventDefault()
     var formData = new FormData()
-    formData.append('name', category ? category.name : categoryFormData.name)
+    formData.append('name', categoryFormData.name)
     formData.append('image', image)
-    formData.append('description', category ? category.description : categoryFormData.description)
+    formData.append('description', categoryFormData.description)
     formData.append('category_id', category?.id)
-    const data = {
-      name: categoryFormData.name,
-      image: categoryFormData.image,
-      description: categoryFormData.description,
-      category_id: categoryFormData.category_id,
-    }
-    console.log('formvalues', formData)
 
+    // return
     setConfirmLoading(true)
     dispatch(editServiceCategory(formData))
       .then((response) => {
@@ -100,7 +100,7 @@ function UpdateCategoryModal({ category }) {
               <Form.Control
                 type='text'
                 name='name'
-                defaultValue={category?.name}
+                defaultValue={category.name}
                 placeholder='Enter category name'
                 onChange={(evt) => handleInputChange(evt)}
               />
@@ -112,7 +112,7 @@ function UpdateCategoryModal({ category }) {
                 type='text'
                 name='description'
                 placeholder='description'
-                defaultValue={category?.description}
+                defaultValue={category.description}
                 onChange={(evt) => handleInputChange(evt)}
               />
             </Form.Group>
