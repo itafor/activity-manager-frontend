@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { PageHeader } from 'antd'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { createProduct, createRelatedProduct, getAllProducts } from '../../redux/productSlice'
 import Messages from '../../ToastMessages/Messages'
+import { getAllServiceCategory } from '../../redux/serviceCategorySlice'
 
 const initialFormState = {
   name: '',
@@ -42,8 +43,11 @@ function CreateProduct() {
   const [validated, setValidated] = useState(false)
 
   useEffect(() => {
+    dispatch(getAllServiceCategory())
+  }, [])
+
+  useEffect(() => {
     dispatch(getAllProducts())
-    console.log('moreImageValues', moreImageValues)
   }, [])
 
   const onChangeImage = (e) => {
@@ -71,6 +75,8 @@ function CreateProduct() {
       product_size: '',
     })
     setImage('')
+    setMoreImageValues([{ more_images: '' }])
+    setRelatedProductFormValues([{ related_product_id: '' }])
   }
 
   const handleCreateProduct = (e) => {
@@ -91,11 +97,21 @@ function CreateProduct() {
     formData.append('product_size', productFormData.product_size)
     formData.append('description', productFormData.description)
     formData.append('quantity_instock', productFormData.quantity_instock)
-    formData.append('more_product_images[]', image)
-    // formData.append('more_product_images[]', moreImageValues[1]?.more_images)
-    // formData.append('more_product_images[]', moreImageValues[2]?.more_images)
-    // formData.append('more_product_images[]', moreImageValues[3]?.more_images)
-    // formData.append('more_product_images[]', moreImageValues[4]?.more_images)
+    if (moreImageValues && moreImageValues.length >= 1 && moreImageValues.more_images !== null) {
+      formData.append('more_product_images[]', moreImageValues[0]?.more_images)
+    }
+    if (moreImageValues && moreImageValues.length >= 2) {
+      formData.append('more_product_images[]', moreImageValues[1]?.more_images)
+    }
+    if (moreImageValues && moreImageValues.length >= 3) {
+      formData.append('more_product_images[]', moreImageValues[2]?.more_images)
+    }
+    if (moreImageValues && moreImageValues.length >= 4) {
+      formData.append('more_product_images[]', moreImageValues[3]?.more_images)
+    }
+    if (moreImageValues && moreImageValues.length >= 5) {
+      formData.append('more_product_images[]', moreImageValues[4]?.more_images)
+    }
 
     setConfirmLoading(true)
     dispatch(createProduct(formData))
@@ -176,20 +192,23 @@ function CreateProduct() {
   }
 
   let handleMoreImageChange = (i, e) => {
-    // if (isNaN(e.target.files[0])) {
-    let newMoreImageValues = [...moreImageValues]
-    newMoreImageValues[i][e.target.name] = e.target.files[0]
-    setRelatedProductFormValues(newMoreImageValues)
+    e.preventDefault()
+    if (isNaN(e.target.files[0])) {
+      let newMoreImageValues = [...moreImageValues]
+      newMoreImageValues[i][e.target.name] = e.target.files[0]
+      setMoreImageValues(newMoreImageValues)
 
-    console.log('multi images values', moreImageValues)
-    // } else {
-    //   let newMoreImageValues = [...moreImageValues]
-    //   newMoreImageValues[i][e.target.name] = ''
-    //   setMoreImageValues(newMoreImageValues)
-    // }
+      console.log('multi images values', moreImageValues)
+    } else {
+      let newMoreImageValues = [...moreImageValues]
+      newMoreImageValues[i][e.target.name] = ''
+      setMoreImageValues(newMoreImageValues)
+    }
   }
 
-  let addMoreImageFormFields = () => {
+  let addMoreImageFormFields = (e) => {
+    e.preventDefault()
+
     if (moreImageValues && moreImageValues.length == 5) {
       alert("You can't add more than 5 additional product images")
       return
@@ -217,13 +236,19 @@ function CreateProduct() {
       />
 
       <Card>
-        <Card.Header>Craete Product</Card.Header>
+        <Card.Header>
+          <small>
+            Fields marked with an asterisk (<span style={{ color: 'red' }}>*</span>) are required
+          </small>
+        </Card.Header>
         <Card.Body>
           <Form noValidate validated={validated} onSubmit={handleCreateProduct}>
             <Row>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicEmail'>
-                  <Form.Label>Name{productFormData.name}</Form.Label>
+                  <Form.Label>
+                    Name <span style={{ color: 'red' }}>*</span>
+                  </Form.Label>
                   <Form.Control
                     type='text'
                     required
@@ -238,7 +263,9 @@ function CreateProduct() {
               </Col>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicPassword'>
-                  <Form.Label>Category {productFormData.category_id}</Form.Label>
+                  <Form.Label>
+                    Category <span style={{ color: 'red' }}>*</span>
+                  </Form.Label>
                   <Form.Select
                     name='category_id'
                     onChange={(evt) => handleInputChange(evt)}
@@ -254,7 +281,9 @@ function CreateProduct() {
             <Row>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicPassword'>
-                  <Form.Label>Individual price{productFormData.individual_price}</Form.Label>
+                  <Form.Label>
+                    Individual price <span style={{ color: 'red' }}>*</span>
+                  </Form.Label>
                   <Form.Control
                     type='number'
                     name='individual_price'
@@ -269,7 +298,9 @@ function CreateProduct() {
               </Col>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicPassword'>
-                  <Form.Label>Group price{productFormData.group_price}</Form.Label>
+                  <Form.Label>
+                    Group price <span style={{ color: 'red' }}>*</span>
+                  </Form.Label>
                   <Form.Control
                     type='number'
                     name='group_price'
@@ -286,7 +317,9 @@ function CreateProduct() {
             <Row>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicPassword'>
-                  <Form.Label>Quantity in-stock{productFormData.quantity_instock} </Form.Label>
+                  <Form.Label>
+                    Quantity in-stock <span style={{ color: 'red' }}>*</span>{' '}
+                  </Form.Label>
                   <Form.Control
                     type='text'
                     name='quantity_instock'
@@ -301,7 +334,9 @@ function CreateProduct() {
               </Col>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicPassword'>
-                  <Form.Label>Product Size {productFormData.product_size}</Form.Label>
+                  <Form.Label>
+                    Product Size <span style={{ color: 'red' }}>*</span>
+                  </Form.Label>
                   <Form.Control
                     type='text'
                     name='product_size'
@@ -318,7 +353,9 @@ function CreateProduct() {
             <Row>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicPassword'>
-                  <Form.Label>Image: ('jpg,jpeg and png')</Form.Label>
+                  <Form.Label>
+                    Image <span style={{ color: 'red' }}>*</span> ('jpg,jpeg and png')
+                  </Form.Label>
                   <Form.Control type='file' onChange={(evnt) => onChangeImage(evnt)} required />
                   <Form.Control.Feedback type='invalid'>
                     The Image field is required.
@@ -375,27 +412,38 @@ function CreateProduct() {
                   </div>
                 ))}
                 <div className='button-section'>
-                  <button className='button add mb-3' type='button' onClick={() => addFormFields()}>
+                  <button
+                    className='button add mb-3 float-centre'
+                    type='button'
+                    onClick={() => addFormFields()}
+                  >
                     Add More
                   </button>
                 </div>
               </Col>
               <Col>
                 <h6>
-                  <strong>Add More Images (optional)</strong>
+                  <strong>Add More Images (optional except first field)</strong>
                 </h6>
 
                 {moreImageValues.map((element, index) => (
                   <div className='form-inline' key={index}>
                     <InputGroup key={index}>
                       <Form.Group className='mb-3' controlId='formBasicPassword'>
-                        <Form.Label>image {index + 1}</Form.Label>
-
+                        <Form.Label>
+                          image {index + 1}
+                          &nbsp;
+                          <span style={{ color: 'red' }}>
+                            {' '}
+                            * &nbsp;
+                            {index === 0 ? <small>first field is required</small> : ''}
+                          </span>
+                        </Form.Label>
                         <Form.Control
                           type='file'
                           name='more_images'
-                          // value={element.related_product_id || ''}
                           onChange={(e) => handleMoreImageChange(index, e)}
+                          required={index === 0 ? true : false}
                         />
                       </Form.Group>
 
@@ -416,8 +464,7 @@ function CreateProduct() {
                   <button
                     className='button add mb-3'
                     type='button'
-                    onClick={() => addMoreImageFormFields()}
-                    disabled
+                    onClick={(e) => addMoreImageFormFields(e)}
                   >
                     Add More
                   </button>
