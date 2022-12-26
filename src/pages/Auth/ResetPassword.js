@@ -3,16 +3,17 @@ import { Form, Input, Button, Typography, Row, Col, Space, Avatar, notification 
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import Logo512 from '../../assets/images/logo512.png'
-import Logo192 from '../../assets/images/logo192.png'
+import Logo512 from '../../assets/images/aveologo.jpg'
+import Logo192 from '../../assets/images/aveologo.jpg'
 import { useDispatch } from 'react-redux'
-import { resetPassword } from '../../redux/authSlice'
+import { resetPassword, sendOTP } from '../../redux/authSlice'
 
 const ResetPassword = () => {
   const [form] = Form.useForm()
   const dispatch = useDispatch()
   const [error, setError] = useState('null')
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
   const onFinish = (value) => {
     dispatch(resetPassword(value)).then((response) => {
@@ -23,6 +24,22 @@ const ResetPassword = () => {
         setError(response?.payload?.message)
       } else {
         notification.error({ message: 'Error resetting password, please try again later' })
+      }
+    })
+  }
+
+  const resendOTP = (e) => {
+    e.preventDefault()
+    const email = localStorage.getItem('admin_email')
+    const values = { email: email }
+    setLoading(true)
+    dispatch(sendOTP(values)).then((response) => {
+      if (response.type === 'auth/sendOTP/fulfilled') {
+        notification.success({ message: 'We have sent another OTP to your email' })
+        setLoading(false)
+      } else {
+        notification.error({ message: 'Error sending OTP, Please try again later' })
+        setLoading(false)
       }
     })
   }
@@ -65,6 +82,21 @@ const ResetPassword = () => {
         >
           <Input size='large' placeholder='OTP' autoComplete={'off'} />
         </Form.Item>
+        <Typography.Text type='secondary'>
+          {loading ? (
+            <span className='mb-50' style={{ fontSize: '16', margin: '120px' }}>
+              sending OTP....
+            </span>
+          ) : (
+            <span
+              className='mb-50'
+              style={{ cursor: 'pointer', fontSize: '16', margin: '120px' }}
+              onClick={(e) => resendOTP(e)}
+            >
+              Resend OTP
+            </span>
+          )}
+        </Typography.Text>
         <Form.Item
           rules={[
             {
@@ -97,6 +129,7 @@ const ResetPassword = () => {
         >
           <Input autoComplete='off' size='large' type='password' />
         </Form.Item>
+
         <Form.Item>
           <Button size='large' htmlType='submit' type='primary' block>
             Reset Password
@@ -112,14 +145,14 @@ const ResetPassword = () => {
             Login
           </Link>
         </Typography.Text>
-        <Typography.Text className='forgot-password' type='secondary'>
+        {/* <Typography.Text className='forgot-password' type='secondary'>
           Don&#39;t have an account?{' '}
           <Typography.Text strong type='link'>
             <Link className='create-account' to='/create-account'>
               Create Account
             </Link>
           </Typography.Text>
-        </Typography.Text>
+        </Typography.Text> */}
       </div>
     </LoginContainer>
   )

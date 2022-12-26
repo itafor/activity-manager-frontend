@@ -2,9 +2,9 @@ import { Form, Input, Button, Typography, Row, Col, Space, Avatar, notification 
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import Logo512 from '../../assets/images/logo512.png'
-import Logo192 from '../../assets/images/logo192.png'
-import { useDispatch } from 'react-redux'
+import Logo512 from '../../assets/images/aveologo.jpg'
+import Logo192 from '../../assets/images/aveologo.jpg'
+import { useDispatch, useSelector } from 'react-redux'
 import { sendOTP } from '../../redux/authSlice'
 
 const ForgotPassword = () => {
@@ -12,11 +12,13 @@ const ForgotPassword = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const { auth } = useSelector((state) => state)
 
   const onFinish = (value) => {
     setLoading(true)
     dispatch(sendOTP(value)).then((response) => {
       if (response.type === 'auth/sendOTP/fulfilled') {
+        localStorage.setItem('admin_email', response?.payload)
         notification.success({ message: 'OTP successfully sent to your email' })
         navigate('/reset-confirmation')
         setLoading(false)

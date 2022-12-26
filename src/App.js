@@ -48,8 +48,8 @@ function App() {
           <Route path='/' element={<AuthRoutes />}>
             <Route path='/login' element={<Login />} />
             {/* <Route path='/create-account' element={<Signup />} /> */}
-            {/* <Route path='/reset-password' element={<ForgotPassword />} /> */}
-            {/* <Route path='/reset-confirmation' element={<ResetPassword />} /> */}
+            <Route path='/reset-password' element={<ForgotPassword />} />
+            <Route path='/reset-confirmation' element={<ResetPassword />} />
             {/* <Route path="*" element={<NotFoundPage />} /> */}
           </Route>
 
