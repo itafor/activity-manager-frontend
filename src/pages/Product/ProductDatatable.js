@@ -34,12 +34,16 @@ const ProductDatatable = ({ products, handleDelete }) => {
             <td>{moment(product.created_at).format('DD MMM YYYY')}</td>
 
             <td>
-              <Button>
-                <Link to={`/product/edit/${product.id}/${product.sku}`}>{'Edit'}</Link>
+              <Button danger onClick={() => handleDelete(product)}>
+                delete
               </Button>
               &nbsp;
               <Button>
-                <Link to={`/product/details/${product.id}/${product.sku}`}>{'View'}</Link>
+                <Link to={`/product/edit/${product?.id}/${product?.sku}`}>{'Edit'}</Link>
+              </Button>
+              &nbsp;
+              <Button>
+                <Link to={`/product/details/${product?.id}/${product?.sku}`}>{'View'}</Link>
               </Button>
             </td>
           </tr>

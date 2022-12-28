@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, notification, PageHeader } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteServiceCategory, getAllServiceCategory } from '../../redux/serviceCategorySlice'
-import { getAllProducts } from '../../redux/productSlice'
+import { deleteProduct, getAllProducts } from '../../redux/productSlice'
 import ProductDatatable from './ProductDatatable'
 import { Link } from 'react-router-dom'
 
@@ -16,28 +16,28 @@ const Products = () => {
   useEffect(() => {
     dispatch(getAllServiceCategory())
   }, [])
+
   const handleDelete = ({ id }) => {
-    if (!window.confirm('Do You want to permanently delete the selected category?')) {
+    // alert('id', id)
+    // return
+    if (!window.confirm('Do You want to permanently delete the selected product?')) {
       return
     }
 
-    dispatch(deleteServiceCategory(id))
+    dispatch(deleteProduct(id))
       .then((response) => {
-        setConfirmLoading(false)
-        if (response.type === 'serviceCategory/delete/fulfilled') {
-          dispatch(getAllServiceCategory())
+        if (response.type === 'product/delete/fulfilled') {
+          dispatch(getAllProducts())
           notification.success({
-            message: ' Category deleted successfully',
+            message: ' Product deleted successfully',
           })
-        } else if (response.type === 'serviceCategory/delete/rejected') {
+        } else if (response.type === 'product/delete/rejected') {
           notification.error({
-            message:
-              response?.payload?.message || 'Error deleting service category, please try again',
+            message: response?.payload?.message || 'Error deleting product, please try again',
           })
         }
       })
       .catch((error) => {
-        setConfirmLoading(false)
         notification.error({
           message: 'Error deleting service category, please try again later',
         })
