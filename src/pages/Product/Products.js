@@ -5,6 +5,7 @@ import { deleteServiceCategory, getAllServiceCategory } from '../../redux/servic
 import { deleteProduct, getAllProducts } from '../../redux/productSlice'
 import ProductDatatable from './ProductDatatable'
 import { Link } from 'react-router-dom'
+import ProductTable from './ProductTable'
 
 const Products = () => {
   const { serviceCategory } = useSelector((state) => state)
@@ -58,7 +59,8 @@ const Products = () => {
         ]}
         title='Products'
       />
-      <ProductDatatable products={products.data} handleDelete={handleDelete} />
+      {/* <ProductDatatable products={products.data} handleDelete={handleDelete} /> */}
+      <ProductTable data={products.data} loading={products.loading} handleDelete={handleDelete} />
     </div>
   )
 }
