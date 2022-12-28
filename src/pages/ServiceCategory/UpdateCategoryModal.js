@@ -125,7 +125,7 @@ function UpdateCategoryModal({ category }) {
                 placeholder='Password'
               />
               <span>
-                <img src={category?.image} alt='horse' width='{50}' height='{50}' />
+                <img src={category?.image} alt='horse' style={{ with: '70px', height: '70px' }} />
               </span>
             </Form.Group>
 

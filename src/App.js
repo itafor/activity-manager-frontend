@@ -23,6 +23,7 @@ import ProductCategories from './pages/ServiceCategory/ProductCategories'
 import Products from './pages/Product/Products'
 import CreateProduct from './pages/Product/CreateProduct'
 import ProductDetails from './pages/Product/ProductDetails'
+import EditProduct from './pages/Product/EditProduct'
 
 // import Settings from "./pages/Settings";
 
@@ -120,6 +121,11 @@ function App() {
               //
               path='/product/details/:id/:refkey'
               element={<ProductDetails />}
+            />
+            <Route
+              //
+              path='/product/edit/:id/:refkey'
+              element={<EditProduct />}
             />
           </Route>
 

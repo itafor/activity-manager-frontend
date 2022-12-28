@@ -7,7 +7,6 @@ import Table from 'react-bootstrap/Table'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { getOneProduct } from '../../redux/productSlice'
-import { notification } from 'antd'
 import { Link, useParams } from 'react-router-dom'
 import moment from 'moment'
 
@@ -23,7 +22,6 @@ export default function ProductDetails() {
   useEffect(() => {
     dispatch(getOneProduct(id))
     console.log('singleData', singleData)
-    console.log('filted relatedproducts', relatedproducts)
   }, [id])
 
   return (
@@ -35,7 +33,7 @@ export default function ProductDetails() {
             <Link to='/product/create'>Create Product </Link>
           </Button>
           <Button className='float-end' variant='light'>
-            <Link to='/product/create'>Edit Product </Link>
+            <Link to={`/product/edit/${singleData?.id}/${singleData?.sku}`}>{'Edit Product'}</Link>
           </Button>
           <Button className='float-end' variant='light'>
             <Link to='/products'>Back to list </Link>

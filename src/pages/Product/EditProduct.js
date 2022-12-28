@@ -10,9 +10,16 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { createProduct, createRelatedProduct, getAllProducts } from '../../redux/productSlice'
+import {
+  createRelatedProduct,
+  editProduct,
+  getAllProducts,
+  getOneProduct,
+} from '../../redux/productSlice'
 import Messages from '../../ToastMessages/Messages'
 import { getAllServiceCategory } from '../../redux/serviceCategorySlice'
+import { productService } from '../../services/productService'
+import { serviceCategoryService } from '../../services/serviceCategory.service'
 
 const initialFormState = {
   name: '',
@@ -23,9 +30,10 @@ const initialFormState = {
   featured_image: '',
   description: '',
   product_size: '',
+  product_id: '',
 }
 
-function CreateProduct() {
+function EditProduct() {
   const [image, setImage] = useState('')
   const [productFormData, setProductFormData] = useState(initialFormState)
   const { serviceCategory } = useSelector((state) => state)
@@ -33,21 +41,23 @@ function CreateProduct() {
 
   const [confirmLoading, setConfirmLoading] = useState(false)
   const dispatch = useDispatch()
-  const [categories, setCategories] = useState(serviceCategory?.data)
+  const [categories, setCategories] = useState([])
   const [relatedProducts, setSelatedProducts] = useState(products?.data)
-  const navigate = useNavigate()
   const [relatedProductformValues, setRelatedProductFormValues] = useState([
     { related_product_id: '' },
   ])
   const [moreImageValues, setMoreImageValues] = useState([{ more_images: '' }])
   const [validated, setValidated] = useState(false)
+  const { singleData } = useSelector((state) => state.products)
+  const { id, refkey } = useParams()
+  const [product, setProduct] = useState('')
 
   useEffect(() => {
-    dispatch(getAllServiceCategory())
+    // dispatch(getAllServiceCategory())
   }, [])
 
   useEffect(() => {
-    dispatch(getAllProducts())
+    // dispatch(getAllProducts())
   }, [])
 
   const onChangeImage = (e) => {
@@ -63,23 +73,48 @@ function CreateProduct() {
     })
   }
 
-  const clearFormData = () => {
-    setProductFormData({
-      name: '',
-      category_id: '',
-      quantity_instock: '',
-      individual_price: '',
-      group_price: '',
-      featured_image: '',
-      description: '',
-      product_size: '',
-    })
-    setImage('')
-    setMoreImageValues([{ more_images: '' }])
-    setRelatedProductFormValues([{ related_product_id: '' }])
+  useEffect(() => {
+    // dispatch(getOneProduct(id))
+    refreshProduct(id)
+    getProductCategories()
+  }, [id])
+
+  const refreshProduct = (id) => {
+    productService
+      .getOne(id)
+      .then((response) => {
+        console.log('produect resfreshed suceess', response?.data)
+        setProduct(response?.data)
+        setProductFormData({
+          name: response?.data?.name,
+          category_id: response?.data?.category_id,
+          quantity_instock: response?.data?.quantity_instock,
+          individual_price: response?.data?.individual_price,
+          group_price: response?.data?.group_price,
+          featured_image: response?.data?.featured_image,
+          description: response?.data?.description,
+          product_size: response?.data?.product_size,
+          product_id: response?.data?.id,
+        })
+      })
+      .catch((error) => {
+        console.log('produect resfreshed error', error)
+      })
   }
 
-  const handleCreateProduct = (e) => {
+  const getProductCategories = () => {
+    serviceCategoryService
+      .getAll()
+      .then((response) => {
+        console.log('getProductCategories', response?.data)
+        setCategories(response?.data)
+      })
+      .catch((error) => {
+        console.log('getProductCategories error', error)
+      })
+  }
+
+  const handleEditProduct = (e) => {
     e.preventDefault()
     const form = e.currentTarget
     if (form.checkValidity() === false) {
@@ -98,6 +133,7 @@ function CreateProduct() {
     formData.append('product_size', productFormData.product_size)
     formData.append('description', productFormData.description)
     formData.append('quantity_instock', productFormData.quantity_instock)
+    formData.append('productId', productFormData.product_id)
     if (moreImageValues && moreImageValues.length >= 1 && moreImageValues.more_images !== null) {
       formData.append('more_product_images[]', moreImageValues[0]?.more_images)
     }
@@ -113,12 +149,15 @@ function CreateProduct() {
     if (moreImageValues && moreImageValues.length >= 5) {
       formData.append('more_product_images[]', moreImageValues[4]?.more_images)
     }
-
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ', ' + pair[1])
+    }
+    // return
     setConfirmLoading(true)
-    dispatch(createProduct(formData))
+    dispatch(editProduct(formData))
       .then((response) => {
         setConfirmLoading(false)
-        if (response.type === 'product/create/fulfilled') {
+        if (response.type === 'product/edit/fulfilled') {
           var relatedProductdata = {
             product_id: response?.payload?.id,
             related_productIds: relatedProductformValues,
@@ -127,26 +166,30 @@ function CreateProduct() {
             dispatch(createRelatedProduct(relatedProductdata))
           }
           dispatch(getAllProducts())
-          console.log('new product', response)
-          clearFormData()
-          Messages.successMessage('Product created successfully', 'top-right')
-          navigate(`/product/details/${response?.payload?.id}/${response?.payload?.sku}`)
-        } else if (response.type === 'product/create/rejected') {
-          console.log('error notificatom', 'Error creating product, please try again')
-          Messages.errorMessage('Error creating product, please try again', 'top-right')
+          refreshProduct(response?.payload?.id)
+          Messages.successMessage('Product updated successfully', 'top-right')
+        } else if (response.type === 'product/edit/rejected') {
+          console.log('error notificatom', 'Error editing product, please try again')
+          console.log('error notificatom', response)
+
+          Messages.errorMessage('Error editing product, please try again', 'top-right')
         }
       })
       .catch((error) => {
         setConfirmLoading(false)
-        console.log('error notificatom', 'Error creating product, please try again')
-        Messages.errorMessage('Error creating product, please try again', 'top-right')
+        console.log('error notificatom', 'Error editing product, please try again')
+        Messages.errorMessage('Error editing product, please try again', 'top-right')
       })
   }
   const category_list =
     categories &&
     categories.map((category, key) => {
       return (
-        <option value={category.id} key={key}>
+        <option
+          value={category.id}
+          key={key}
+          selected={product?.category_id === category?.id ? true : false}
+        >
           {category.name}
         </option>
       )
@@ -233,7 +276,7 @@ function CreateProduct() {
             <Link to='/products'>Back to list </Link>
           </Button>,
         ]}
-        title='Create Product'
+        title='Edit Product'
       />
 
       <Card>
@@ -241,9 +284,12 @@ function CreateProduct() {
           <small>
             Fields marked with an asterisk (<span style={{ color: 'red' }}>*</span>) are required
           </small>
+          <Button className='float-end' variant='light'>
+            <Link to={`/product/details/${product?.id}/${product?.sku}`}>{'View details'}</Link>
+          </Button>
         </Card.Header>
         <Card.Body>
-          <Form noValidate validated={validated} onSubmit={handleCreateProduct}>
+          <Form noValidate validated={validated} onSubmit={handleEditProduct}>
             <Row>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicEmail'>
@@ -254,6 +300,7 @@ function CreateProduct() {
                     type='text'
                     required
                     name='name'
+                    defaultValue={product?.name}
                     placeholder='Product name'
                     onChange={(evt) => handleInputChange(evt)}
                   />
@@ -272,6 +319,7 @@ function CreateProduct() {
                     onChange={(evt) => handleInputChange(evt)}
                     aria-label='Default select example'
                     required
+                    // defaultValue={product && product?.category_id}
                   >
                     <option>select category</option>
                     {category_list}
@@ -288,6 +336,7 @@ function CreateProduct() {
                   <Form.Control
                     type='number'
                     name='individual_price'
+                    defaultValue={product?.individual_price}
                     onChange={(evt) => handleInputChange(evt)}
                     placeholder='individual price'
                     required
@@ -305,6 +354,7 @@ function CreateProduct() {
                   <Form.Control
                     type='number'
                     name='group_price'
+                    defaultValue={product?.group_price}
                     onChange={(evt) => handleInputChange(evt)}
                     placeholder='Group price'
                     required
@@ -324,6 +374,7 @@ function CreateProduct() {
                   <Form.Control
                     type='text'
                     name='quantity_instock'
+                    defaultValue={product?.quantity_instock}
                     placeholder='Quantity in-stock'
                     onChange={(evt) => handleInputChange(evt)}
                     required
@@ -341,6 +392,7 @@ function CreateProduct() {
                   <Form.Control
                     type='text'
                     name='product_size'
+                    defaultValue={product?.product_size}
                     placeholder='Product Size'
                     onChange={(evt) => handleInputChange(evt)}
                     required
@@ -357,11 +409,15 @@ function CreateProduct() {
                   <Form.Label>
                     Image <span style={{ color: 'red' }}>*</span> ('jpg,jpeg and png')
                   </Form.Label>
-                  <Form.Control type='file' onChange={(evnt) => onChangeImage(evnt)} required />
-                  <Form.Control.Feedback type='invalid'>
-                    The Image field is required.
-                  </Form.Control.Feedback>
+                  <Form.Control type='file' onChange={(evnt) => onChangeImage(evnt)} />
                 </Form.Group>
+                <span>
+                  <img
+                    src={product?.featured_image}
+                    alt='product image'
+                    style={{ with: '70px', height: '70px' }}
+                  />
+                </span>
               </Col>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicPassword'>
@@ -371,6 +427,7 @@ function CreateProduct() {
                     placeholder='Leave a comment here'
                     style={{ height: '100px' }}
                     name='description'
+                    defaultValue={product?.description}
                     onChange={(evt) => handleInputChange(evt)}
                   />
                 </Form.Group>
@@ -413,11 +470,7 @@ function CreateProduct() {
                   </div>
                 ))}
                 <div className='button-section'>
-                  <button
-                    className='button add mb-3 float-centre'
-                    type='button'
-                    onClick={() => addFormFields()}
-                  >
+                  <button className='float-centre' type='button' onClick={() => addFormFields()}>
                     Add More
                   </button>
                 </div>
@@ -483,4 +536,4 @@ function CreateProduct() {
     </div>
   )
 }
-export default CreateProduct
+export default EditProduct

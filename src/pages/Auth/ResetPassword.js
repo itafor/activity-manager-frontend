@@ -90,10 +90,10 @@ const ResetPassword = () => {
           ) : (
             <span
               className='mb-50'
-              style={{ cursor: 'pointer', fontSize: '16', margin: '120px' }}
+              style={{ cursor: 'pointer', fontSize: '16', margin: '100px' }}
               onClick={(e) => resendOTP(e)}
             >
-              Resend OTP
+              Didn't get the OTP? Resend
             </span>
           )}
         </Typography.Text>

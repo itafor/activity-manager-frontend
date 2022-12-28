@@ -35,7 +35,7 @@ const ProductDatatable = ({ products, handleDelete }) => {
 
             <td>
               <Button>
-                <Link to={`/product/edit/${product.id}`}>{'Edit'}</Link>
+                <Link to={`/product/edit/${product.id}/${product.sku}`}>{'Edit'}</Link>
               </Button>
               &nbsp;
               <Button>
