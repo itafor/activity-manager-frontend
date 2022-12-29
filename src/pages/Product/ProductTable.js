@@ -104,13 +104,17 @@ const ProductTable = ({ data, loading, handleDelete }) => {
       align: 'center',
       render: (singleData) => (
         <>
-          <Button style={{ marginRight: '5px' }}>
+          <Button style={{ marginRight: '5px' }} title='View product details'>
             <Link to={`/product/details/${singleData?.id}/${singleData?.sku}`}>{'View'}</Link>
           </Button>
-          <Button style={{ marginRight: '5px' }}>
+          <Button style={{ marginRight: '5px' }} title='Edit product'>
             <Link to={`/product/edit/${singleData?.id}/${singleData?.sku}`}>Edit</Link>
           </Button>
-          <Button danger onClick={() => handleDelete(singleData)}>
+          <Button
+            danger
+            onClick={() => handleDelete(singleData)}
+            title='Temporarily delete product'
+          >
             delete
           </Button>
         </>

@@ -7,6 +7,7 @@ import ProductDatatable from './ProductDatatable'
 import { useDispatch } from 'react-redux'
 
 import ProductImages from './ProductImages'
+import ProductTable from './ProductTable'
 
 function ProductTabs({ product_Images, products }) {
   const dispatch = useDispatch()
@@ -45,7 +46,8 @@ function ProductTabs({ product_Images, products }) {
 
       <Tab eventKey='related_products' title='Related products'>
         {products ? (
-          <ProductDatatable products={products} handleDelete={handleDelete} />
+          // <ProductDatatable products={products} handleDelete={handleDelete} />
+          <ProductTable data={products} loading={products.loading} handleDelete={handleDelete} />
         ) : (
           'No related products found'
         )}
