@@ -30,6 +30,11 @@ const addProductToVarietyBox = async (data) => {
   return response.data
 }
 
+const varietyBoxCategory = async () => {
+  const response = await AuthAPI.get(`/admin/category/show}`)
+  return response.data
+}
+
 export const varietyBoxService = {
   getAll,
   getOne,
@@ -37,4 +42,5 @@ export const varietyBoxService = {
   edit,
   deleteOne,
   addProductToVarietyBox,
+  varietyBoxCategory,
 }

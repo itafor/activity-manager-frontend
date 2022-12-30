@@ -73,6 +73,18 @@ export const addItemsToVarietyBox = createAsyncThunk(
   },
 )
 
+export const getVarietyBoxCategory = createAsyncThunk(
+  'varietyBox/getOne',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await varietyBoxService.varietyBoxCategory()
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error?.response?.data)
+    }
+  },
+)
+
 const initialState = {
   data: [],
   singleData: {},
@@ -170,6 +182,20 @@ const slice = createSlice({
       state.loading = false
     },
     [addItemsToVarietyBox.rejected]: (state, { payload }) => {
+      state.error = true
+      state.message = payload
+      state.loading = false
+    },
+
+    [getVarietyBoxCategory.pending]: (state) => {
+      state.loading = true
+    },
+    [getVarietyBoxCategory.fulfilled]: (state, { payload }) => {
+      state.message = payload?.message
+      state.loading = false
+      state.singleData = payload
+    },
+    [getVarietyBoxCategory.rejected]: (state, { payload }) => {
       state.error = true
       state.message = payload
       state.loading = false
