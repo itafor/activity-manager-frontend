@@ -24,6 +24,8 @@ import Products from './pages/Product/Products'
 import CreateProduct from './pages/Product/CreateProduct'
 import ProductDetails from './pages/Product/ProductDetails'
 import EditProduct from './pages/Product/EditProduct'
+import VarietyBoxes from './pages/VarietyBox/VarietyBoxes'
+import CreateVarietyBox from './pages/VarietyBox/CreateVarietyBox'
 
 // import Settings from "./pages/Settings";
 
@@ -127,6 +129,9 @@ function App() {
               path='/product/edit/:id/:refkey'
               element={<EditProduct />}
             />
+            {/* VarietyBoxes */}
+            <Route path='variety-Boxes' element={<VarietyBoxes />} />
+            <Route path='variety-Box/create' element={<CreateVarietyBox />} />
           </Route>
 
           {/* Catch all routes -> push to not found page */}
