@@ -74,7 +74,7 @@ export const addItemsToVarietyBox = createAsyncThunk(
 )
 
 export const getVarietyBoxCategory = createAsyncThunk(
-  'varietyBox/getOne',
+  'varietyBox/getCategory',
   async (data, { rejectWithValue }) => {
     try {
       const response = await varietyBoxService.varietyBoxCategory()

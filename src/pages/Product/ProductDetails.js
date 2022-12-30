@@ -21,7 +21,7 @@ export default function ProductDetails() {
 
   useEffect(() => {
     dispatch(getOneProduct(id))
-    console.log('singleData', singleData)
+    // console.log('relatedproducts', singleData?.related_products)
   }, [id])
 
   return (

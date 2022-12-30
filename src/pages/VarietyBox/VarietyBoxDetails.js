@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import ProductTabs from './ProductTabs'
+import ProductTabs from './VarietyBoxTabs'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table'
@@ -9,34 +9,34 @@ import Row from 'react-bootstrap/Row'
 import { getOneProduct } from '../../redux/productSlice'
 import { Link, useParams } from 'react-router-dom'
 import moment from 'moment'
+import { getOneVarietyBox } from '../../redux/varietyBoxSlice'
 
-export default function ProductDetails() {
-  const { singleData } = useSelector((state) => state.products)
+export default function VarietyBoxDetails() {
+  const { singleData } = useSelector((state) => state.varietyBoxes)
   const { id, refkey } = useParams()
   const dispatch = useDispatch()
 
-  const relatedproducts = singleData?.related_products?.map((prod, key) => {
+  const varietyboxproducts = singleData?.variety_products?.map((prod, key) => {
     return prod?.product
   })
 
   useEffect(() => {
-    dispatch(getOneProduct(id))
-    console.log('singleData', singleData)
+    dispatch(getOneVarietyBox(id))
   }, [id])
 
   return (
     <div>
       <Card>
         <Card.Header>
-          <div className='pull-left'>Product Details</div>
+          <div className='pull-left'>Variety Box Details</div>
           <Button className='float-end' variant='light'>
-            <Link to='/product/create'>Create Product </Link>
+            <Link to='/variety-box/create'>Create Variety Box </Link>
           </Button>
           <Button className='float-end' variant='light'>
-            <Link to={`/product/edit/${singleData?.id}/${singleData?.sku}`}>{'Edit Product'}</Link>
+            <Link to={`/variety-box/edit/${singleData?.id}/${singleData?.sku}`}>{'Edit VB'}</Link>
           </Button>
           <Button className='float-end' variant='light'>
-            <Link to='/products'>Back to list </Link>
+            <Link to='/variety-boxes'>Back to list </Link>
           </Button>
         </Card.Header>
         <Card.Body>
@@ -75,7 +75,7 @@ export default function ProductDetails() {
                   <tr>
                     <td>
                       <strong style={{ marginRight: '35px' }}>Product size:</strong>{' '}
-                      {singleData?.product_size}
+                      {singleData?.variety_box_size}
                     </td>
                   </tr>
                   <tr>
@@ -105,7 +105,7 @@ export default function ProductDetails() {
             </Col>
           </Row>
 
-          <ProductTabs product_Images={singleData?.images} products={relatedproducts} />
+          <ProductTabs product_Images={singleData?.images} products={varietyboxproducts} />
         </Card.Body>
       </Card>
     </div>

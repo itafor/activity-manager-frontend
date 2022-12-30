@@ -31,7 +31,7 @@ const addProductToVarietyBox = async (data) => {
 }
 
 const varietyBoxCategory = async () => {
-  const response = await AuthAPI.get(`/admin/category/show}`)
+  const response = await AuthAPI.get(`/admin/variety-box/category/show`)
   return response.data
 }
 

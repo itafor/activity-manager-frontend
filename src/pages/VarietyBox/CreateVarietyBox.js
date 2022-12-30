@@ -13,7 +13,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createProduct, createRelatedProduct, getAllProducts } from '../../redux/productSlice'
 import Messages from '../../ToastMessages/Messages'
 import { getAllServiceCategory } from '../../redux/serviceCategorySlice'
-import { createVarietyBox, addItemsToVarietyBox } from '../../redux/varietyBoxSlice'
+import {
+  createVarietyBox,
+  addItemsToVarietyBox,
+  getVarietyBoxCategory,
+} from '../../redux/varietyBoxSlice'
 
 const initialFormState = {
   name: '',
@@ -39,6 +43,7 @@ function CreateVarietyBox() {
   const navigate = useNavigate()
   const [varietyBoxItem, setVarietyBoxItem] = useState([{ product_id: '', quantity: '' }])
   const [validated, setValidated] = useState(false)
+  const [variety_box_category, setVarietyBoxCategory] = useState({ id: '', name: '' })
 
   useEffect(() => {
     dispatch(getAllServiceCategory())
@@ -46,7 +51,23 @@ function CreateVarietyBox() {
 
   useEffect(() => {
     dispatch(getAllProducts())
+    showVarietyboxCategory()
   }, [])
+
+  const showVarietyboxCategory = () => {
+    dispatch(getVarietyBoxCategory())
+      .then((response) => {
+        if (response.type === 'varietyBox/getCategory/fulfilled') {
+          console.log('varity category success response', response?.payload)
+          setVarietyBoxCategory({ id: response?.payload?.id, name: response?.payload?.name })
+        } else if ('varietyBox/getCategory/rejected') {
+          console.log('varity category error response', response)
+        }
+      })
+      .catch((error) => {
+        console.log('variety box category', error)
+      })
+  }
 
   const onChangeImage = (e) => {
     setImage(e.target.files[0])
@@ -59,9 +80,6 @@ function CreateVarietyBox() {
       ...productFormData,
       [name]: value,
     })
-    if ((event.target.name = 'category_id')) {
-      console.log('event.target', event.target)
-    }
   }
 
   const clearFormData = () => {
@@ -92,7 +110,7 @@ function CreateVarietyBox() {
     var formData = new FormData()
     formData.append('name', productFormData.name)
     formData.append('image', image)
-    formData.append('category_id', productFormData.category_id)
+    formData.append('category_id', variety_box_category?.id)
     formData.append('individual_price', productFormData.individual_price)
     formData.append('group_price', productFormData.group_price)
     formData.append('variety_box_size', productFormData.variety_box_size)
@@ -226,14 +244,8 @@ function CreateVarietyBox() {
                   <Form.Label>
                     Category <span style={{ color: 'red' }}>*</span>
                   </Form.Label>
-                  <Form.Select
-                    name='category_id'
-                    onChange={(evt) => handleInputChange(evt)}
-                    aria-label='Default select example'
-                    required
-                  >
-                    <option>select category</option>
-                    {category_list}
+                  <Form.Select name='category_id' aria-label='Default select example' required>
+                    <option value={variety_box_category?.id}>{variety_box_category?.name}</option>
                   </Form.Select>
                 </Form.Group>
               </Col>

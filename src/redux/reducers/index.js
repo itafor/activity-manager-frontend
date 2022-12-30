@@ -9,7 +9,7 @@ import paymentMethods from '../paymentMethodSlice'
 import transactions from '../transactionSlice'
 import profile from '../profileSlice'
 import products from '../productSlice'
-
+import varietyBoxes from '../varietyBoxSlice'
 const rootReducer = combineReducers({
   auth,
   app,
@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
   transactions,
   profile,
   products,
+  varietyBoxes,
 })
 
 export default rootReducer

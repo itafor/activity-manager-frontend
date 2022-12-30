@@ -3,18 +3,15 @@ import React, { useEffect, useState } from 'react'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import { deleteProduct, getAllProducts } from '../../redux/productSlice'
-import ProductDatatable from './ProductDatatable'
 import { useDispatch } from 'react-redux'
 
-import ProductImages from './ProductImages'
-import ProductTable from './ProductTable'
+import VarietyBoxTable from './VarietyBoxTable'
+import ProductTable from '../Product/ProductTable'
 
-function ProductTabs({ product_Images, products }) {
+function VarietyBoxTabs({ products }) {
   const dispatch = useDispatch()
 
   const handleDelete = ({ id }) => {
-    // alert('id', id)
-    // return
     if (!window.confirm('Do You want to permanently delete the selected product?')) {
       return
     }
@@ -39,14 +36,9 @@ function ProductTabs({ product_Images, products }) {
       })
   }
   return (
-    <Tabs defaultActiveKey='image' id='uncontrolled-tab-example' className='mb-3'>
-      <Tab eventKey='image' title='Other Images'>
-        <ProductImages images={product_Images} />
-      </Tab>
-
-      <Tab eventKey='related_products' title='Related products'>
+    <Tabs defaultActiveKey='products' id='uncontrolled-tab-example' className='mb-3'>
+      <Tab eventKey='products' title='Products'>
         {products ? (
-          // <ProductDatatable products={products} handleDelete={handleDelete} />
           <ProductTable data={products} loading={products.loading} handleDelete={handleDelete} />
         ) : (
           'No related products found'
@@ -56,4 +48,4 @@ function ProductTabs({ product_Images, products }) {
   )
 }
 
-export default ProductTabs
+export default VarietyBoxTabs

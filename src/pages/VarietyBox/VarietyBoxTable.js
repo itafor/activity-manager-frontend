@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import { getColumnSearchProps } from '../../utils/tableColSearch'
 
-const ProductTable = ({ data, loading, handleDelete }) => {
+const VarietyBoxTable = ({ data, loading, handleDelete }) => {
   const [searchText, setSearchText] = useState('')
   const [searchedColumn, setSearchedColumn] = useState('')
   const searchInput = useRef(null)
@@ -105,16 +105,12 @@ const ProductTable = ({ data, loading, handleDelete }) => {
       render: (singleData) => (
         <>
           <Button style={{ marginRight: '5px' }} title='View product details'>
-            <Link to={`/product/details/${singleData?.id}/${singleData?.sku}`}>{'View'}</Link>
+            <Link to={`/variety-box/details/${singleData?.id}/${singleData?.sku}`}>{'View'}</Link>
           </Button>
           <Button style={{ marginRight: '5px' }} title='Edit product'>
             <Link to={`/product/edit/${singleData?.id}/${singleData?.sku}`}>Edit</Link>
           </Button>
-          <Button
-            danger
-            onClick={() => handleDelete(singleData)}
-            title='Temporarily delete product'
-          >
+          <Button danger onClick={() => handleDelete(singleData)} title='Temporarily delete VB'>
             delete
           </Button>
         </>
@@ -136,4 +132,4 @@ const ProductTable = ({ data, loading, handleDelete }) => {
   )
 }
 
-export default ProductTable
+export default VarietyBoxTable
