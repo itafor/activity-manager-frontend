@@ -6,8 +6,8 @@ export const testBaseURL = 'http://127.0.0.1:8000/apis/v1'
 export const liveBaseURL = 'https://api.aveoco.com/apis/v1'
 
 const instance = axios.create({
-  // baseURL: stagingbaseURL,
-  baseURL: testBaseURL,
+  baseURL: stagingbaseURL,
+  // baseURL: liveBaseURL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
