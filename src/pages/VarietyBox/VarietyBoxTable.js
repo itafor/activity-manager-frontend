@@ -108,7 +108,7 @@ const VarietyBoxTable = ({ data, loading, handleDelete }) => {
             <Link to={`/variety-box/details/${singleData?.id}/${singleData?.sku}`}>{'View'}</Link>
           </Button>
           <Button style={{ marginRight: '5px' }} title='Edit product'>
-            <Link to={`/product/edit/${singleData?.id}/${singleData?.sku}`}>Edit</Link>
+            <Link to={`/variety-box/edit/${singleData?.id}/${singleData?.sku}`}>Edit</Link>
           </Button>
           <Button danger onClick={() => handleDelete(singleData)} title='Temporarily delete VB'>
             delete
