@@ -28,7 +28,7 @@ import VarietyBoxes from './pages/VarietyBox/VarietyBoxes'
 import CreateVarietyBox from './pages/VarietyBox/CreateVarietyBox'
 import VarietyBoxDetails from './pages/VarietyBox/VarietyBoxDetails'
 import EditVarietyBox from './pages/VarietyBox/EditVarietyBox'
-
+import CountdownTimer from './pages/Groups/CountdownTimer'
 // import Settings from "./pages/Settings";
 
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -143,6 +143,12 @@ function App() {
               //
               path='/variety-box/edit/:id/:refkey'
               element={<EditVarietyBox />}
+            />
+
+            <Route
+              //
+              path='/timer-countdown'
+              element={<CountdownTimer />}
             />
           </Route>
 

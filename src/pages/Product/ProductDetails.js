@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row'
 import { getOneProduct } from '../../redux/productSlice'
 import { Link, useParams } from 'react-router-dom'
 import moment from 'moment'
+import CountdownTimer from '../Groups/CountdownTimer'
 
 export default function ProductDetails() {
   const { singleData } = useSelector((state) => state.products)
@@ -88,6 +89,7 @@ export default function ProductDetails() {
                     <td>
                       <strong style={{ marginRight: '35px' }}>Created at:</strong>{' '}
                       {moment(singleData?.created_at).format('DD MMM YYYY')}
+                      {/* <CountdownTimer enddate={+new Date(singleData?.created_at)} /> */}
                     </td>
                   </tr>
                 </tbody>

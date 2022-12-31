@@ -135,7 +135,6 @@ function CreateVarietyBox() {
           clearFormData()
           document.getElementById('create-varietybox-form').reset()
           Messages.successMessage('varietyBox created successfully', 'top-right')
-          // navigate(`/varietyBox/details/${response?.payload?.id}/${response?.payload?.sku}`)
         } else if (response.type === 'varietyBox/create/rejected') {
           console.log('error notificatom', 'Error creating varietyBox, please try again')
           Messages.errorMessage('Error creating varietyBox, please try again', 'top-right')
