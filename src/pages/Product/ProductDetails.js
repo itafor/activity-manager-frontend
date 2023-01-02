@@ -9,7 +9,6 @@ import Row from 'react-bootstrap/Row'
 import { getOneProduct } from '../../redux/productSlice'
 import { Link, useParams } from 'react-router-dom'
 import moment from 'moment'
-import CountdownTimer from '../Groups/CountdownTimer'
 
 export default function ProductDetails() {
   const { singleData } = useSelector((state) => state.products)

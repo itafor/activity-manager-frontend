@@ -37,17 +37,11 @@ function CountdownTimer({ enddate }) {
     }
 
     timerComponents.push(
-      <span>
+      <span style={{ color: 'red' }}>
         {timeLeft[interval]} {interval}{' '}
       </span>,
     )
   })
-  return (
-    <div>
-      {/* <h1>HacktoberFest {year} Countdown</h1>
-      <h2>With React Hooks!</h2> */}
-      {timerComponents.length ? timerComponents : <span>Time's up!</span>}
-    </div>
-  )
+  return <div key='eee'>{timerComponents.length ? timerComponents : <span>Time's up!</span>}</div>
 }
 export default CountdownTimer
