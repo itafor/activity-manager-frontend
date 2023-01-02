@@ -1,10 +1,11 @@
-import { ConfigProvider } from "antd";
+import { ConfigProvider } from 'antd'
 
 const Theme = () =>
   ConfigProvider.config({
     theme: {
-      primaryColor: "#2E338A",
+      primaryColor: '#2A4637',
+      // primaryColor: '#2E338A',
     },
-  });
+  })
 
-export default Theme;
+export default Theme

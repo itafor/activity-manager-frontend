@@ -74,7 +74,7 @@ function CreateCategoryModal() {
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow}>
+      <Button variant='default' onClick={handleShow}>
         Create Category
       </Button>
 

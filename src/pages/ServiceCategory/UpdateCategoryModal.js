@@ -85,7 +85,7 @@ function UpdateCategoryModal({ category }) {
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow}>
+      <Button variant='default' onClick={handleShow}>
         Edit
       </Button>
 

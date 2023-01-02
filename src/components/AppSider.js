@@ -50,7 +50,7 @@ const AppSider = () => {
     getItem('Categories', 'product-categories', <BiCategory size={18} />),
     getItem('Products', 'products', <CgNotes size={16} />),
     getItem('Variety Boxes', 'variety-boxes', <RiUserLine size={16} />),
-    getItem('Goups', 'groups', <GrDocumentTime size={16} />),
+    getItem('Groups', 'groups', <GrDocumentTime size={16} />),
     getItem('Customers', 'customers', <BiUserPlus size={20} />),
     getItem(' Orders', 'orders', <CgNotes size={16} />),
     getItem('Payment', 'payment-method', <BiCreditCard size={16} />),
@@ -118,6 +118,7 @@ const AppSider = () => {
 }
 
 export default AppSider
+// background-color: #2e338a;
 
 const StyledLogo = styled.div`
   display: flex;
@@ -126,7 +127,7 @@ const StyledLogo = styled.div`
   align-items: flex-end;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  background-color: #2e338a;
+  background-color: #2a4637;
   h5 {
     color: white;
   }
