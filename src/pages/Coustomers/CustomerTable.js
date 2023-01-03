@@ -4,9 +4,8 @@ import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import { getColumnSearchProps } from '../../utils/tableColSearch'
-import CountdownTimer from './CountdownTimer'
 
-const GroupTable = ({ data, loading, handleDelete }) => {
+const CustomerTable = ({ data, loading }) => {
   const [searchText, setSearchText] = useState('')
   const [searchedColumn, setSearchedColumn] = useState('')
   const searchInput = useRef(null)
@@ -24,11 +23,11 @@ const GroupTable = ({ data, loading, handleDelete }) => {
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'group_name',
-      key: 'group_name',
+      title: 'First Name',
+      dataIndex: 'first_name',
+      key: 'first_name',
       ...getColumnSearchProps({
-        dataIndex: 'group_name',
+        dataIndex: 'first_name',
         handleReset,
         searchInput,
         handleSearch,
@@ -39,48 +38,56 @@ const GroupTable = ({ data, loading, handleDelete }) => {
       }),
     },
     {
-      title: 'Start Date',
-      dataIndex: 'start_date',
-      key: 'start_date',
-      render: (start_date) => (
-        <span style={{ whiteSpace: 'nowrap' }}>
-          {' '}
-          {moment(start_date).format('DD MMM YYYY hh:mm A')}
-        </span>
-      ),
+      title: 'Last Name',
+      dataIndex: 'last_name',
+      key: 'last_name',
+      ...getColumnSearchProps({
+        dataIndex: 'last_name',
+        handleReset,
+        searchInput,
+        handleSearch,
+        setSearchedColumn,
+        searchText,
+        setSearchText,
+        searchedColumn,
+      }),
     },
     {
-      title: 'Expiring Date',
-      dataIndex: 'end_date',
-      key: 'end_date',
-      render: (end_date) => (
-        <span style={{ whiteSpace: 'nowrap' }}>
-          {' '}
-          {moment(end_date).format('DD MMM YYYY hh:mm A')}
-        </span>
-      ),
+      title: 'Phone Number',
+      dataIndex: 'phone_number',
+      key: 'phone_number',
+      ...getColumnSearchProps({
+        dataIndex: 'phone_number',
+        handleReset,
+        searchInput,
+        handleSearch,
+        setSearchedColumn,
+        searchText,
+        setSearchText,
+        searchedColumn,
+      }),
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+      ...getColumnSearchProps({
+        dataIndex: 'email',
+        handleReset,
+        searchInput,
+        handleSearch,
+        setSearchedColumn,
+        searchText,
+        setSearchText,
+        searchedColumn,
+      }),
     },
 
     {
-      title: 'Time Left',
-      dataIndex: 'end_date',
-      key: 'time_left',
-      render: (end_date) => <CountdownTimer enddate={+new Date(end_date)} />,
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      ...getColumnSearchProps({
-        dataIndex: 'status',
-        handleReset,
-        searchInput,
-        handleSearch,
-        setSearchedColumn,
-        searchText,
-        setSearchText,
-        searchedColumn,
-      }),
+      title: 'Orders',
+      dataIndex: 'orders',
+      key: 'orders',
+      render: (orders) => <span style={{ whiteSpace: 'nowrap' }}> {orders?.length} orders</span>,
     },
 
     {
@@ -90,7 +97,7 @@ const GroupTable = ({ data, loading, handleDelete }) => {
       render: (singleData) => (
         <>
           <Button style={{ marginRight: '5px' }} title='View product details'>
-            <Link to={`/group/details/${singleData?.id}`}>{'View details'}</Link>
+            <Link to={`/customer/details/${singleData?.id}`}>{'View'}</Link>
           </Button>
         </>
       ),
@@ -111,4 +118,4 @@ const GroupTable = ({ data, loading, handleDelete }) => {
   )
 }
 
-export default GroupTable
+export default CustomerTable

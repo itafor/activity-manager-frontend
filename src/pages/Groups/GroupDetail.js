@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 // import ProductTabs from './ProductTabs'
-import Button from 'react-bootstrap/Button'
+import { Button } from 'antd'
 import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import { getOneGroup } from '../../redux/groupSlice'
 import CountdownTimer from './CountdownTimer'
 import GroupTab from './GroupTab'
+import { BsArrowLeft } from 'react-icons/bs'
 
 export default function GroupDetail() {
   const { singleData } = useSelector((state) => state.groups)
   const { id, refkey } = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   //   const relatedproducts = singleData?.related_products?.map((prod, key) => {
   //     return prod?.product
@@ -29,12 +31,19 @@ export default function GroupDetail() {
   return (
     <div>
       <Card>
+        <div className={` flex, justify-end`} onClick={() => navigate(-1)}>
+          <div to='#' className='userInfo__back  float-end'>
+            <Button
+              icon={<BsArrowLeft />}
+              type='link'
+              className='hover:text-blue-100 flex gap-1 items-center hover:gap-2 ease-in-out duration-300'
+            >
+              Back
+            </Button>
+          </div>
+        </div>
         <Card.Header>
           <div className='pull-left'>Group Details</div>
-
-          <Button className='float-end' variant='light'>
-            <Link to='/groups'>Back to list </Link>
-          </Button>
         </Card.Header>
         <Card.Body>
           <Row>

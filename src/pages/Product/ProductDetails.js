@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductTabs from './ProductTabs'
-import Button from 'react-bootstrap/Button'
+import { Button } from 'antd'
 import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/Table'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { getOneProduct } from '../../redux/productSlice'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import moment from 'moment'
+import { BsArrowLeft } from 'react-icons/bs'
 
 export default function ProductDetails() {
   const { singleData } = useSelector((state) => state.products)
   const { id, refkey } = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const relatedproducts = singleData?.related_products?.map((prod, key) => {
     return prod?.product
@@ -29,15 +31,26 @@ export default function ProductDetails() {
       <Card>
         <Card.Header>
           <div className='pull-left'>Product Details</div>
-          <Button className='float-end' variant='light'>
-            <Link to='/product/create'>Create Product </Link>
+          <Button className='float-end'>
+            <Link to='/product/create' className='float-end'>
+              Create Product{' '}
+            </Link>
           </Button>
-          <Button className='float-end' variant='light'>
+          <Button className='float-end'>
             <Link to={`/product/edit/${singleData?.id}/${singleData?.sku}`}>{'Edit Product'}</Link>
           </Button>
-          <Button className='float-end' variant='light'>
-            <Link to='/products'>Back to list </Link>
-          </Button>
+          {/* <Link to='/products'>Back to list </Link> */}
+          <div className={` flex, justify-end. float-end`} onClick={() => navigate(-1)}>
+            <div to='#' className='userInfo__back  '>
+              <Button
+                icon={<BsArrowLeft />}
+                type='link'
+                className='hover:text-blue-100 flex gap-1 items-center hover:gap-2 ease-in-out duration-300'
+              >
+                Back
+              </Button>
+            </div>
+          </div>
         </Card.Header>
         <Card.Body>
           <Row>

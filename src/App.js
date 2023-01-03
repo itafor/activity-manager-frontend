@@ -31,6 +31,8 @@ import EditVarietyBox from './pages/VarietyBox/EditVarietyBox'
 import CountdownTimer from './pages/Groups/CountdownTimer'
 import Groups from './pages/Groups/Groups'
 import GroupDetail from './pages/Groups/GroupDetail'
+import Customers from './pages/Coustomers/Customers'
+import CustomerDetail from './pages/Coustomers/CustomerDetail'
 // import Settings from "./pages/Settings";
 
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -157,6 +159,13 @@ function App() {
               //
               path='/group/details/:id'
               element={<GroupDetail />}
+            />
+
+            <Route path='customers' element={<Customers />} />
+            <Route
+              //
+              path='/customer/details/:id'
+              element={<CustomerDetail />}
             />
           </Route>
 

@@ -11,6 +11,7 @@ import profile from '../profileSlice'
 import products from '../productSlice'
 import varietyBoxes from '../varietyBoxSlice'
 import groups from '../groupSlice'
+import customers from '../customerSlice'
 
 const rootReducer = combineReducers({
   auth,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   products,
   varietyBoxes,
   groups,
+  customers,
 })
 
 export default rootReducer
