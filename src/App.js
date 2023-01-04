@@ -33,6 +33,8 @@ import Groups from './pages/Groups/Groups'
 import GroupDetail from './pages/Groups/GroupDetail'
 import Customers from './pages/Coustomers/Customers'
 import CustomerDetail from './pages/Coustomers/CustomerDetail'
+import Orders from './pages/Orders/Orders'
+import OrderDetail from './pages/Orders/OrderDetail'
 // import Settings from "./pages/Settings";
 
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -166,6 +168,13 @@ function App() {
               //
               path='/customer/details/:id'
               element={<CustomerDetail />}
+            />
+
+            <Route path='orders' element={<Orders />} />
+            <Route
+              //
+              path='/order/details/:id'
+              element={<OrderDetail />}
             />
           </Route>
 

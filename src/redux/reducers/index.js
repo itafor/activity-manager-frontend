@@ -12,6 +12,7 @@ import products from '../productSlice'
 import varietyBoxes from '../varietyBoxSlice'
 import groups from '../groupSlice'
 import customers from '../customerSlice'
+import orders from '../orderSlice'
 
 const rootReducer = combineReducers({
   auth,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   varietyBoxes,
   groups,
   customers,
+  orders,
 })
 
 export default rootReducer

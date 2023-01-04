@@ -45,7 +45,7 @@ const GroupTable = ({ data, loading, handleDelete }) => {
       render: (start_date) => (
         <span style={{ whiteSpace: 'nowrap' }}>
           {' '}
-          {moment(start_date).format('DD MMM YYYY hh:mm A')}
+          {moment(start_date).format('DD MMM YYYY HH:mm A')}
         </span>
       ),
     },
@@ -56,7 +56,7 @@ const GroupTable = ({ data, loading, handleDelete }) => {
       render: (end_date) => (
         <span style={{ whiteSpace: 'nowrap' }}>
           {' '}
-          {moment(end_date).format('DD MMM YYYY hh:mm A')}
+          {moment(end_date).format('DD MMM YYYY HH:mm A')}
         </span>
       ),
     },
