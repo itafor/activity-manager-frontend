@@ -71,7 +71,10 @@ const OrderTable = ({ data, loading }) => {
       dataIndex: 'created_at',
       key: 'created_at',
       render: (created_at) => (
-        <span style={{ whiteSpace: 'nowrap' }}> {moment(created_at).format('DD MMM YYYY')}</span>
+        <span style={{ whiteSpace: 'nowrap' }}>
+          {' '}
+          {moment(created_at).format('DD MMM YYYY HH:mm A')}
+        </span>
       ),
     },
     {

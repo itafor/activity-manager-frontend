@@ -88,7 +88,7 @@ export default function OrderDetail() {
                   <tr>
                     <td>
                       <strong style={{ marginRight: '35px' }}>Created at:</strong>{' '}
-                      {moment(singleData?.created_at).format('DD MMM YYYY')}
+                      {moment(singleData?.created_at).format('DD MMM YYYY HH:mm A')}
                     </td>
                   </tr>
                 </tbody>
