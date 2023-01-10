@@ -125,13 +125,13 @@ const UserActivitiesTable = ({ data, loading, handleDelete, user_name, user }) =
             {/* <UpdateGlobalActivity activity={singleData} /> */}
             <EditIndividualActivity user_name={user_name} user={user} activity={singleData} />
           </Button>
-          <Button
+          {/* <Button
             danger
             onClick={() => handleDelete(singleData)}
             title={`Delete activity for ${user_name}`}
           >
             delete
-          </Button>
+          </Button> */}
         </>
       ),
     },
