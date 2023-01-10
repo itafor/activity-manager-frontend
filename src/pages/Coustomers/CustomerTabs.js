@@ -2,26 +2,27 @@ import React, { useEffect } from 'react'
 import { Tabs } from 'antd'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import OrderTable from '../Orders/OrderTable'
-import GroupTable from '../Groups/GroupTable'
+import UserActivitiesTable from './UserActivitiesTable'
 
 const { TabPane } = Tabs
 
-const CustomerTabs = ({ orders, props, groups }) => {
+const CustomerTabs = ({ activities, props, user_name, user }) => {
   const { singleData, loading } = useSelector((state) => state.customers)
   useEffect(() => {
-    console.log('orders', orders)
+    console.log('activities', activities)
   }, [])
 
   return (
     <StyledDiv {...props}>
       <Tabs defaultActiveKey='1'>
-        <TabPane tab='Orders' key='1'>
+        <TabPane tab='Activities' key='1'>
           {/* <EditProfile singleData={singleData} /> */}
-          <OrderTable data={orders ? orders : []} loading={false} />
-        </TabPane>
-        <TabPane tab='Custmer Groups' key='2'>
-          <GroupTable data={groups} loading={loading} />
+          <UserActivitiesTable
+            data={activities ? activities : []}
+            loading={false}
+            user_name={user_name}
+            user={user}
+          />
         </TabPane>
       </Tabs>
     </StyledDiv>

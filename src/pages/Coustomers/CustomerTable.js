@@ -23,11 +23,11 @@ const CustomerTable = ({ data, loading }) => {
 
   const columns = [
     {
-      title: 'First Name',
-      dataIndex: 'first_name',
-      key: 'first_name',
+      title: 'Full Name',
+      dataIndex: 'full_name',
+      key: 'full_name',
       ...getColumnSearchProps({
-        dataIndex: 'first_name',
+        dataIndex: 'full_name',
         handleReset,
         searchInput,
         handleSearch,
@@ -37,36 +37,7 @@ const CustomerTable = ({ data, loading }) => {
         searchedColumn,
       }),
     },
-    {
-      title: 'Last Name',
-      dataIndex: 'last_name',
-      key: 'last_name',
-      ...getColumnSearchProps({
-        dataIndex: 'last_name',
-        handleReset,
-        searchInput,
-        handleSearch,
-        setSearchedColumn,
-        searchText,
-        setSearchText,
-        searchedColumn,
-      }),
-    },
-    {
-      title: 'Phone Number',
-      dataIndex: 'phone_number',
-      key: 'phone_number',
-      ...getColumnSearchProps({
-        dataIndex: 'phone_number',
-        handleReset,
-        searchInput,
-        handleSearch,
-        setSearchedColumn,
-        searchText,
-        setSearchText,
-        searchedColumn,
-      }),
-    },
+
     {
       title: 'Email',
       dataIndex: 'email',
@@ -84,10 +55,12 @@ const CustomerTable = ({ data, loading }) => {
     },
 
     {
-      title: 'Orders',
-      dataIndex: 'orders',
-      key: 'orders',
-      render: (orders) => <span style={{ whiteSpace: 'nowrap' }}> {orders?.length} orders</span>,
+      title: 'Activities',
+      dataIndex: 'activities',
+      key: 'activities',
+      render: (activities) => (
+        <span style={{ whiteSpace: 'nowrap' }}> {activities?.length} activiies</span>
+      ),
     },
 
     {
@@ -97,7 +70,7 @@ const CustomerTable = ({ data, loading }) => {
       render: (singleData) => (
         <>
           <Button style={{ marginRight: '5px' }} title='View product details'>
-            <Link to={`/customer/details/${singleData?.id}`}>{'View'}</Link>
+            <Link to={`/user/details/${singleData?.id}`}>{'View details'}</Link>
           </Button>
         </>
       ),

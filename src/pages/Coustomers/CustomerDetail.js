@@ -8,6 +8,7 @@ import { BsPhone, BsArrowLeft, BsEnvelope, BsLadder } from 'react-icons/bs'
 import styled from 'styled-components'
 import { getAllCustomers, getOneCustomer } from '../../redux/customerSlice'
 import CustomerTabs from './CustomerTabs'
+import AddIndividualActivity from './AddIndividualActivity'
 
 function CustomerDetail() {
   const dispatch = useDispatch()
@@ -16,11 +17,11 @@ function CustomerDetail() {
   const { id } = useParams()
   useEffect(() => {
     dispatch(getOneCustomer(id))
-    console.log('single', singleData)
+    console.log('single users', singleData)
   }, [id])
 
-  const my_groups = singleData?.my_groups?.map((group, key) => {
-    return group?.group
+  const userActivities = singleData?.activities?.map((activity, key) => {
+    return activity?.pivot
   })
   return (
     <StyledContainer>
@@ -41,13 +42,6 @@ function CustomerDetail() {
             <Meta
               avatar={
                 <div className='avatar_overlay'>
-                  {/* <input
-                    onChange={(e) => handleImageUpload(e)}
-                    name='profile_picture'
-                    ref={imageUploadRef}
-                    accept='image/png, image/gif, image/jpeg'
-                    type='file'
-                  /> */}
                   <Avatar
                     size={100}
                     src={singleData?.profile_photo_url || 'https://joeschmoe.io/api/v1/random'}
@@ -55,9 +49,9 @@ function CustomerDetail() {
                 </div>
               }
               title={
-                <Typography.Title level={2} className='text-3xl m-0 w-full'>{`${
-                  singleData?.first_name + ' ' + singleData?.last_name || ''
-                } ${singleData?.full_name || ''}`}</Typography.Title>
+                <Typography.Title level={2} className='text-3xl m-0 w-full'>
+                  {`${singleData?.full_name} `}
+                </Typography.Title>
               }
               description={
                 <div className='metaDescription'>
@@ -73,32 +67,23 @@ function CustomerDetail() {
                       <BsEnvelope size={15} /> {singleData?.email || ''}
                     </a>
                   </div>
-                  <div className='flex align-middle items-center gap-3 flex-wrap '>
-                    <a href='#' className='text-sm'>
-                      Address: &nbsp; {singleData?.address || ''}
-                    </a>
-                  </div>
-                  <div className='flex align-middle items-center gap-3 flex-wrap '>
-                    <a href='#' className='text-sm'>
-                      State: &nbsp; {singleData?.state || ''}
-                    </a>
-                  </div>
-                  <div className='flex align-middle items-center gap-3 flex-wrap '>
-                    <a href='#' className='text-sm'>
-                      Town/City: &nbsp; {singleData?.town_or_city || ''}
-                    </a>
-                  </div>
-                  <div className='flex align-middle items-center gap-3 flex-wrap '>
-                    <a href='#' className='text-sm'>
-                      Account Verification: &nbsp;
-                      {singleData?.email_verified_at !== null ? 'Verified' : 'Not Verified'}
-                    </a>
-                  </div>
                 </div>
               }
             />
+            <div className='float-end'>
+              <Button
+                style={{ marginRight: '5px' }}
+                title={`Add activity for ${singleData?.full_name}`}
+              >
+                <AddIndividualActivity user_name={singleData?.full_name} user={singleData} />
+              </Button>
+            </div>
           </Card>
-          <CustomerTabs orders={singleData?.orders} groups={my_groups ? my_groups : []} />
+          <CustomerTabs
+            activities={userActivities ? userActivities : []}
+            user_name={singleData?.full_name}
+            user={singleData}
+          />
         </div>
       </div>
     </StyledContainer>

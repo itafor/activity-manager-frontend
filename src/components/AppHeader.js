@@ -50,7 +50,7 @@ const AppHeader = () => {
         justifyContent: 'space-between',
       }}
     >
-      <h1>Aveo </h1>
+      <h1>Activity Manager </h1>
       <Button type='primary' onClick={() => dispatch(logout())}>
         Logout
       </Button>

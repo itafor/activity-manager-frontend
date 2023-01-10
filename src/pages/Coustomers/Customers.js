@@ -15,7 +15,7 @@ function Customers() {
   }, [])
   return (
     <div>
-      <PageHeader extra={[]} title='Customers' />
+      <PageHeader extra={[]} title='Users' />
       <CustomerTable data={customers.data} loading={customers.loading} />
     </div>
   )

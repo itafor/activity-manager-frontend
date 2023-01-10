@@ -28,7 +28,6 @@ const AppSider = () => {
       }
       return acc
     }, 'appointments')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname])
 
   const toggleSiderCollapse = () => {
@@ -47,13 +46,14 @@ const AppSider = () => {
   const items = [
     // getItem('Bookings', 'bookings', <GrDocumentTime size={16} />),
     // getItem('Clients', 'clients', <RiUserLine size={18} />),
-    getItem('Categories', 'product-categories', <BiCategory size={18} />),
-    getItem('Products', 'products', <CgNotes size={16} />),
-    getItem('Variety Boxes', 'variety-boxes', <RiUserLine size={16} />),
-    getItem('Groups', 'groups', <GrDocumentTime size={16} />),
-    getItem('Customers', 'customers', <BiUserPlus size={20} />),
-    getItem(' Orders', 'orders', <CgNotes size={16} />),
-    getItem('Payment', 'payment-method', <BiCreditCard size={16} />),
+    // getItem('Categories', 'product-categories', <BiCategory size={18} />),
+    getItem('Activities', 'activities', <CgNotes size={16} />),
+    // getItem('Products', 'products', <CgNotes size={16} />),
+    // getItem('Variety Boxes', 'variety-boxes', <RiUserLine size={16} />),
+    // getItem('Groups', 'groups', <GrDocumentTime size={16} />),
+    getItem('Users', 'users', <BiUserPlus size={20} />),
+    // getItem(' Orders', 'orders', <CgNotes size={16} />),
+    // getItem('Payment', 'payment-method', <BiCreditCard size={16} />),
 
     getItem('Settings', 'settings', <RiSettings2Line size={16} />),
     // getItem('Settings', 'settings', <RiSettings2Line size={16} />),
@@ -71,7 +71,7 @@ const AppSider = () => {
         ) : (
           <img style={{ padding: '8px' }} height={40} src={Logo} alt='aveo' />
         )} */}
-        <span style={{ fontSize: '25px' }}>Aveo Admin</span>
+        <span style={{ fontSize: '25px' }}>A. Manager</span>
         {/* <Typography.Title
           style={{
             display: app.siderCollapsed === true ? 'none' : 'block',

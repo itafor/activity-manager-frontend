@@ -30,9 +30,7 @@ const Login = () => {
     <LoginContainer>
       <div className='logo'>
         <picture>
-          <source sizes='24' srcSet={Logo512} media='(min-width: 600px)' />
-          <source sizes='24' srcSet={Logo192} media='(min-width: 300px)' />
-          <img alt='Xpro' />
+          <Typography.Title level={1}>Activity Manager</Typography.Title>
         </picture>
         <Typography.Title style={{ textAlign: 'center' }} level={2}></Typography.Title>
         <Typography.Title level={2}>Login</Typography.Title>
@@ -83,11 +81,11 @@ const Login = () => {
       {error?.error && <Typography.Text type='danger'>{error?.message}</Typography.Text>}
 
       <div className='no-account'>
-        <Typography.Text type='secondary'>
+        {/* <Typography.Text type='secondary'>
           <Link className='forgot-password' to='/reset-password'>
             Forgot password?
           </Link>
-        </Typography.Text>
+        </Typography.Text> */}
         {/* <Typography.Text className='forgot-password' type='secondary'>
           Don&#39;t have an account?{' '}
           <Typography.Text strong type='link'>

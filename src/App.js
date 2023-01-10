@@ -35,6 +35,9 @@ import Customers from './pages/Coustomers/Customers'
 import CustomerDetail from './pages/Coustomers/CustomerDetail'
 import Orders from './pages/Orders/Orders'
 import OrderDetail from './pages/Orders/OrderDetail'
+import Activities from './pages/Activity/Activities'
+import CreateGlobalActivity from './pages/Activity/CreateGlobalActivity'
+import ActivityDetails from './pages/Activity/ActivityDetails'
 // import Settings from "./pages/Settings";
 
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -163,10 +166,10 @@ function App() {
               element={<GroupDetail />}
             />
 
-            <Route path='customers' element={<Customers />} />
+            <Route path='users' element={<Customers />} />
             <Route
               //
-              path='/customer/details/:id'
+              path='/user/details/:id'
               element={<CustomerDetail />}
             />
 
@@ -175,6 +178,19 @@ function App() {
               //
               path='/order/details/:id'
               element={<OrderDetail />}
+            />
+
+            <Route path='activities' element={<Activities />} />
+            <Route path='activity/global/create' element={<CreateGlobalActivity />} />
+            <Route
+              //
+              path='/activity/details/:id'
+              element={<ActivityDetails />}
+            />
+            <Route
+              //
+              path='/product/edit/:id/:refkey'
+              element={<EditProduct />}
             />
           </Route>
 
