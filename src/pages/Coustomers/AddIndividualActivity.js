@@ -69,7 +69,7 @@ function AddIndividualActivity({ user_name, user }) {
     formData.append('title', activityFormData.title)
     formData.append('image', image)
     formData.append('description', activityFormData.description)
-    formData.append('activity_date', formatDate(activityFormData.activity_date))
+    formData.append('activity_date', activityFormData.activity_date)
     formData.append('user_id', user?.id)
 
     setConfirmLoading(true)
