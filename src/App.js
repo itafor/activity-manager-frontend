@@ -38,6 +38,9 @@ import OrderDetail from './pages/Orders/OrderDetail'
 import Activities from './pages/Activity/Activities'
 import CreateGlobalActivity from './pages/Activity/CreateGlobalActivity'
 import ActivityDetails from './pages/Activity/ActivityDetails'
+import Subjects from './pages/Subjects/Subjects'
+import Learnerclasses from './pages/Learnerclasses/Learnerclasses'
+import LearnerAges from './pages/LearnerAges/LearnerAges'
 // import Settings from "./pages/Settings";
 
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -192,6 +195,11 @@ function App() {
               path='/product/edit/:id/:refkey'
               element={<EditProduct />}
             />
+
+            {/* subject */}
+            <Route path='subjects' element={<Subjects />} />
+            <Route path='learner-classes' element={<Learnerclasses />} />
+            <Route path='learner-ages' element={<LearnerAges />} />
           </Route>
 
           {/* Catch all routes -> push to not found page */}

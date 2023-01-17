@@ -14,6 +14,9 @@ import groups from '../groupSlice'
 import customers from '../customerSlice'
 import orders from '../orderSlice'
 import activities from '../activitySlice'
+import subjects from '../subjectSlice'
+import learnerClasses from '../LearnerClassSlice'
+import learnerAges from '../LearnerAgeSlice'
 
 const rootReducer = combineReducers({
   auth,
@@ -31,6 +34,9 @@ const rootReducer = combineReducers({
   customers,
   orders,
   activities,
+  subjects,
+  learnerClasses,
+  learnerAges,
 })
 
 export default rootReducer

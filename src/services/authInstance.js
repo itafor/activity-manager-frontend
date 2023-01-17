@@ -3,11 +3,11 @@ import ExpirySession from '../utils/expirySession'
 
 export const stagingbaseURL = 'https://aveo-agroshop-itafor.vercel.app/apis/v1'
 export const testBaseURL = 'http://127.0.0.1:8000/api/v1'
-export const liveBaseURL = 'https://api.aveoco.com/api/v1'
+export const liveBaseURL = 'https://schoolapi.ncktech.com/api/v1'
 
 const instance = axios.create({
-  baseURL: stagingbaseURL,
-  // baseURL: liveBaseURL,
+  // baseURL: stagingbaseURL,
+  baseURL: liveBaseURL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

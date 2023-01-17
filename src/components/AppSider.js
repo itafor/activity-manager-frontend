@@ -6,8 +6,9 @@ import { RiUserLine, RiUserHeartLine, RiSettings2Line } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import Logo from '../assets/images/aveologo.jpg'
 import LogoMini from '../assets/images/logo-mini.png'
+import Logo from '../assets/logo.svg'
+
 import { toggleCollapseSider } from '../redux/appSlice'
 import { AiOutlineLeft } from 'react-icons/ai'
 import { BsCreditCard, BsWallet2 } from 'react-icons/bs'
@@ -44,11 +45,11 @@ const AppSider = () => {
   }
 
   const items = [
-    // getItem('Bookings', 'bookings', <GrDocumentTime size={16} />),
+    getItem('Subjects', 'subjects', <GrDocumentTime size={16} />),
     // getItem('Clients', 'clients', <RiUserLine size={18} />),
     // getItem('Categories', 'product-categories', <BiCategory size={18} />),
-    getItem('Activities', 'activities', <CgNotes size={16} />),
-    // getItem('Products', 'products', <CgNotes size={16} />),
+    getItem('Learner classes', 'learner-classes', <CgNotes size={16} />),
+    getItem('Learner ages', 'learner-ages', <CgNotes size={16} />),
     // getItem('Variety Boxes', 'variety-boxes', <RiUserLine size={16} />),
     // getItem('Groups', 'groups', <GrDocumentTime size={16} />),
     getItem('Users', 'users', <BiUserPlus size={20} />),
@@ -66,12 +67,11 @@ const AppSider = () => {
   return (
     <>
       <StyledLogo className='logo'>
-        {/* {!app.siderCollapsed ? (
+        {!app.siderCollapsed ? (
           <img style={{ padding: '8px' }} height={40} src={Logo} alt='aveo' />
         ) : (
           <img style={{ padding: '8px' }} height={40} src={Logo} alt='aveo' />
-        )} */}
-        <span style={{ fontSize: '25px' }}>A. Manager</span>
+        )}
         {/* <Typography.Title
           style={{
             display: app.siderCollapsed === true ? 'none' : 'block',
@@ -127,7 +127,7 @@ const StyledLogo = styled.div`
   align-items: flex-end;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  background-color: #2a4637;
+  background-color: #faa32c;
   h5 {
     color: white;
   }
