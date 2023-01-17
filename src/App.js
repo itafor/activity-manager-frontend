@@ -41,6 +41,9 @@ import ActivityDetails from './pages/Activity/ActivityDetails'
 import Subjects from './pages/Subjects/Subjects'
 import Learnerclasses from './pages/Learnerclasses/Learnerclasses'
 import LearnerAges from './pages/LearnerAges/LearnerAges'
+import Courses from './pages/course/Courses'
+import CreateCourse from './pages/course/CreateCourse'
+import CourseDetail from './pages/course/CourseDetail'
 // import Settings from "./pages/Settings";
 
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -200,6 +203,15 @@ function App() {
             <Route path='subjects' element={<Subjects />} />
             <Route path='learner-classes' element={<Learnerclasses />} />
             <Route path='learner-ages' element={<LearnerAges />} />
+
+            <Route path='courses' element={<Courses />} />
+            <Route path='course/create' element={<CreateCourse />} />
+            <Route path='/course/details/:id/:title_slug' element={<CourseDetail />} />
+            {/* <Route
+             
+              path='/variety-box/edit/:id/:title_slug'
+              element={<EditVarietyBox />}
+            /> */}
           </Route>
 
           {/* Catch all routes -> push to not found page */}

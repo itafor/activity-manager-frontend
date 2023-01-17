@@ -46,11 +46,9 @@ const AppSider = () => {
 
   const items = [
     getItem('Subjects', 'subjects', <GrDocumentTime size={16} />),
-    // getItem('Clients', 'clients', <RiUserLine size={18} />),
-    // getItem('Categories', 'product-categories', <BiCategory size={18} />),
     getItem('Learner classes', 'learner-classes', <CgNotes size={16} />),
     getItem('Learner ages', 'learner-ages', <CgNotes size={16} />),
-    // getItem('Variety Boxes', 'variety-boxes', <RiUserLine size={16} />),
+    getItem('Courses', 'courses', <RiUserLine size={16} />),
     // getItem('Groups', 'groups', <GrDocumentTime size={16} />),
     getItem('Users', 'users', <BiUserPlus size={20} />),
     // getItem(' Orders', 'orders', <CgNotes size={16} />),
