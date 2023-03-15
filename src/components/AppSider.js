@@ -56,6 +56,8 @@ const AppSider = () => {
 
     getItem('Settings', 'settings', <RiSettings2Line size={16} />),
     // getItem('Settings', 'settings', <RiSettings2Line size={16} />),
+
+    getItem('Categories', 'categories', <GrDocumentTime size={16} />),
   ]
 
   const handleMenuClick = (values) => {

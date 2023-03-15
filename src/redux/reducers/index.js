@@ -18,6 +18,7 @@ import subjects from '../subjectSlice'
 import learnerClasses from '../LearnerClassSlice'
 import learnerAges from '../LearnerAgeSlice'
 import courses from '../courseSlice'
+import categories from '../categorySlice'
 
 const rootReducer = combineReducers({
   auth,
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   learnerClasses,
   learnerAges,
   courses,
+  categories,
 })
 
 export default rootReducer

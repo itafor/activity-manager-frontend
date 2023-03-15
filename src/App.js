@@ -44,6 +44,7 @@ import LearnerAges from './pages/LearnerAges/LearnerAges'
 import Courses from './pages/course/Courses'
 import CreateCourse from './pages/course/CreateCourse'
 import CourseDetail from './pages/course/CourseDetail'
+import Categories from './pages/Category/Categories'
 // import Settings from "./pages/Settings";
 
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -81,7 +82,6 @@ function App() {
               path='/dashboard'
               element={<Dashboard />}
             />
-
             <Route
               //
               path='/bookings'
@@ -92,7 +92,6 @@ function App() {
               path='/bookings/:id'
               element={<BookingInfo />}
             /> */}
-
             <Route
               //
               path='/clients'
@@ -133,7 +132,6 @@ function App() {
               path='/settings'
               element={<Settings />}
             />
-
             <Route path='products' element={<Products />} />
             <Route path='product/create' element={<CreateProduct />} />
             <Route
@@ -159,7 +157,6 @@ function App() {
               path='/variety-box/edit/:id/:refkey'
               element={<EditVarietyBox />}
             />
-
             <Route
               //
               path='/timer-countdown'
@@ -171,21 +168,18 @@ function App() {
               path='/group/details/:id'
               element={<GroupDetail />}
             />
-
             <Route path='users' element={<Customers />} />
             <Route
               //
               path='/user/details/:id'
               element={<CustomerDetail />}
             />
-
             <Route path='orders' element={<Orders />} />
             <Route
               //
               path='/order/details/:id'
               element={<OrderDetail />}
             />
-
             <Route path='activities' element={<Activities />} />
             <Route path='activity/global/create' element={<CreateGlobalActivity />} />
             <Route
@@ -198,20 +192,15 @@ function App() {
               path='/product/edit/:id/:refkey'
               element={<EditProduct />}
             />
-
             {/* subject */}
             <Route path='subjects' element={<Subjects />} />
             <Route path='learner-classes' element={<Learnerclasses />} />
             <Route path='learner-ages' element={<LearnerAges />} />
-
             <Route path='courses' element={<Courses />} />
             <Route path='course/create' element={<CreateCourse />} />
             <Route path='/course/details/:id/:title_slug' element={<CourseDetail />} />
-            {/* <Route
-             
-              path='/variety-box/edit/:id/:title_slug'
-              element={<EditVarietyBox />}
-            /> */}
+            {/* LUSRY RouteS */}
+            <Route path='categories' element={<Categories />} />
           </Route>
 
           {/* Catch all routes -> push to not found page */}

@@ -20,6 +20,7 @@ const ProfileInfo = () => {
       if (response?.type === 'profile/editPicture/fulfilled') {
         notification.success({ message: 'Profile picture updated successfully' })
       } else {
+        console.log(response)
         notification.error({ message: 'Error updating profile image, please try again later' })
       }
     })
