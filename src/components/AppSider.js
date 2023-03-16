@@ -45,6 +45,8 @@ const AppSider = () => {
   }
 
   const items = [
+    getItem('Categories', 'categories', <GrDocumentTime size={16} />),
+    getItem('Companies', 'companies', <GrDocumentTime size={16} />),
     getItem('Subjects', 'subjects', <GrDocumentTime size={16} />),
     getItem('Learner classes', 'learner-classes', <CgNotes size={16} />),
     getItem('Learner ages', 'learner-ages', <CgNotes size={16} />),
@@ -56,8 +58,6 @@ const AppSider = () => {
 
     getItem('Settings', 'settings', <RiSettings2Line size={16} />),
     // getItem('Settings', 'settings', <RiSettings2Line size={16} />),
-
-    getItem('Categories', 'categories', <GrDocumentTime size={16} />),
   ]
 
   const handleMenuClick = (values) => {
