@@ -14,7 +14,6 @@ const Categories = () => {
 
   useEffect(() => {
     dispatch(getAllCategories())
-    console.log('Categories', categories)
   }, [])
 
   const handleDelete = ({ id }) => {

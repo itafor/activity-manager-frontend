@@ -20,6 +20,7 @@ import learnerAges from '../LearnerAgeSlice'
 import courses from '../courseSlice'
 import categories from '../categorySlice'
 import companies from '../companySlice'
+import insurances from '../InsuranceSlice'
 
 const rootReducer = combineReducers({
   auth,
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
   courses,
   categories,
   companies,
+  insurances,
 })
 
 export default rootReducer

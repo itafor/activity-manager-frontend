@@ -4,9 +4,9 @@ import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import { getColumnSearchProps } from '../../utils/tableColSearch'
-import UpdateCompany from './UpdateCompany'
+import UpdateInsurance from './UpdateInsurance'
 
-const CompanyTable = ({ data, loading, handleDelete }) => {
+const InsuranceTable = ({ data, loading, handleDelete, categories, companies }) => {
   const [searchText, setSearchText] = useState('')
   const [searchedColumn, setSearchedColumn] = useState('')
   const searchInput = useRef(null)
@@ -38,42 +38,33 @@ const CompanyTable = ({ data, loading, handleDelete }) => {
         searchedColumn,
       }),
     },
+
     {
-      title: 'Website',
-      dataIndex: 'website',
-      key: 'website',
-      ...getColumnSearchProps({
-        dataIndex: 'website',
-        handleReset,
-        searchInput,
-        handleSearch,
-        setSearchedColumn,
-        searchText,
-        setSearchText,
-        searchedColumn,
-      }),
+      title: 'Category',
+      dataIndex: 'category',
+      key: 'category',
+      render: (category) => (
+        <span style={{ whiteSpace: 'nowrap' }}> {category && category?.name}</span>
+      ),
     },
 
     {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
-      render: (description) => (
-        <span style={{ whiteSpace: 'nowrap' }}>
-          {' '}
-          {description && description?.substring(0, 5)}{' '}
-          {description && description?.length >= 20 && '...'}
-        </span>
+      title: 'Company',
+      dataIndex: 'company',
+      key: 'company',
+      render: (company) => (
+        <span style={{ whiteSpace: 'nowrap' }}> {company && company?.name}</span>
       ),
     },
+
     {
-      title: 'Logo',
+      title: 'Banner',
       key: 'id',
-      dataIndex: 'logo',
+      dataIndex: 'banner',
       align: 'center',
-      render: (logo) => (
-        <Link to={`${logo}`}>
-          {logo ? (
+      render: (banner) => (
+        <Link to={`${banner}`}>
+          {banner ? (
             <img
               style={{
                 width: '60px',
@@ -81,7 +72,7 @@ const CompanyTable = ({ data, loading, handleDelete }) => {
                 borderRadius: '50%',
                 objectFit: 'cover',
               }}
-              src={logo}
+              src={banner}
               height={60}
               width={60}
               alt='avatar'
@@ -92,14 +83,7 @@ const CompanyTable = ({ data, loading, handleDelete }) => {
         </Link>
       ),
     },
-    {
-      title: 'Insurances',
-      dataIndex: 'insurances',
-      key: 'insurances',
-      render: (insurances) => (
-        <span style={{ whiteSpace: 'nowrap' }}> {insurances && insurances?.length}</span>
-      ),
-    },
+
     {
       title: 'Craeted At',
       dataIndex: 'created_at',
@@ -127,15 +111,19 @@ const CompanyTable = ({ data, loading, handleDelete }) => {
         <>
           <div>
             <Button style={{ marginRight: '5px' }} title='View product details'>
-              <Link to={`/company/details/${singleData?.id}/${singleData?.slug}`}>{'View'}</Link>
+              <Link to={`/insurance/details/${singleData?.id}/${singleData?.slug}`}>{'View'}</Link>
             </Button>
-            <Button style={{ marginRight: '5px' }} title='Edit company'>
-              <UpdateCompany company={singleData} />
+            <Button style={{ marginRight: '5px' }} title='Edit insurance'>
+              <UpdateInsurance
+                insurance={singleData}
+                categories={categories}
+                companies={companies}
+              />
             </Button>
             <Button
               danger
               onClick={() => handleDelete(singleData)}
-              title='Permantly delete company'
+              title='Permantly delete insurance'
             >
               delete
             </Button>
@@ -150,7 +138,7 @@ const CompanyTable = ({ data, loading, handleDelete }) => {
       <Table
         columns={columns}
         loading={loading}
-        pagination={data && data?.length > 10 ? true : false}
+        pagination={data?.length > 10 ? true : false}
         dataSource={data}
         rowKey='id'
         scroll={{ x: 'max-content' }}
@@ -159,4 +147,4 @@ const CompanyTable = ({ data, loading, handleDelete }) => {
   )
 }
 
-export default CompanyTable
+export default InsuranceTable

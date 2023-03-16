@@ -47,6 +47,7 @@ const AppSider = () => {
   const items = [
     getItem('Categories', 'categories', <GrDocumentTime size={16} />),
     getItem('Companies', 'companies', <GrDocumentTime size={16} />),
+    getItem('Insurances', 'insurances', <GrDocumentTime size={16} />),
     getItem('Subjects', 'subjects', <GrDocumentTime size={16} />),
     getItem('Learner classes', 'learner-classes', <CgNotes size={16} />),
     getItem('Learner ages', 'learner-ages', <CgNotes size={16} />),
@@ -127,7 +128,7 @@ const StyledLogo = styled.div`
   align-items: flex-end;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  background-color: #faa32c;
+  background-color: #2e338a;
   h5 {
     color: white;
   }

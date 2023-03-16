@@ -6,7 +6,7 @@ const getAll = async (data) => {
 }
 
 const getOne = async (data) => {
-  const response = await AuthAPI.get(`/admin/company/show/show/${data}`)
+  const response = await AuthAPI.get(`/admin/company/show/${data}`)
   return response.data
 }
 

@@ -13,7 +13,7 @@ const ClientInfoDetails = ({ singleData }) => {
         <RowDetails label='Rating' value={singleData?.star_rating_count || 'Null'} />
         <RowDetails label='Location' value={singleData?.location || 'Null'} />
         <RowDetails label='Social Provider' value={singleData?.social_provider || 'Null'} />
-        <RowDetails label='Is Social' value={singleData?.is_social === 0 ? 'True' : 'False' } />
+        <RowDetails label='Is Social' value={singleData?.is_social === 0 ? 'True' : 'False'} />
         <RowDetails
           label='Email verified on'
           value={moment(singleData?.email_verified_at).format('DD MMM YYYY')}

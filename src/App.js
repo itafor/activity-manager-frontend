@@ -46,6 +46,9 @@ import CreateCourse from './pages/course/CreateCourse'
 import CourseDetail from './pages/course/CourseDetail'
 import Categories from './pages/Category/Categories'
 import Companies from './pages/Company/Companies'
+import Insurances from './pages/Insurance/Insurances'
+import InsuranceDetail from './pages/Insurance/InsuranceDetail'
+import CompanyDetails from './pages/Company/CompanyDetails'
 // import Settings from "./pages/Settings";
 
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -203,6 +206,9 @@ function App() {
             {/* LUSRY RouteS */}
             <Route path='categories' element={<Categories />} />
             <Route path='companies' element={<Companies />} />
+            <Route path='/company/details/:id/:slug' element={<CompanyDetails />} />
+            <Route path='insurances' element={<Insurances />} />
+            <Route path='/insurance/details/:id/:slug' element={<InsuranceDetail />} />
           </Route>
 
           {/* Catch all routes -> push to not found page */}
