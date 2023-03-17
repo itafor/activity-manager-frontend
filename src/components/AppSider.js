@@ -48,6 +48,7 @@ const AppSider = () => {
     getItem('Categories', 'categories', <GrDocumentTime size={16} />),
     getItem('Companies', 'companies', <GrDocumentTime size={16} />),
     getItem('Insurances', 'insurances', <GrDocumentTime size={16} />),
+    getItem('Lessons', 'lessons', <GrDocumentTime size={16} />),
     getItem('Subjects', 'subjects', <GrDocumentTime size={16} />),
     getItem('Learner classes', 'learner-classes', <CgNotes size={16} />),
     getItem('Learner ages', 'learner-ages', <CgNotes size={16} />),

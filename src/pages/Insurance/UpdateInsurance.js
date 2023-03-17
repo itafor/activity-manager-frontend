@@ -57,7 +57,7 @@ function UpdateInsurance({ insurance, categories, companies }) {
       terms_condition: insurance.terms_condition,
       discount: insurance.discount,
     })
-    console.log('insurance', insurance)
+    // console.log('insurance', insurance)
   }, [insurance])
 
   const clearFormData = () => {
@@ -95,7 +95,6 @@ function UpdateInsurance({ insurance, categories, companies }) {
           dispatch(getAllInsurances())
           handleClose()
           //   clearFormData()
-          console.log('response act', response)
           notification.success({
             message: 'Insurance updated successfully',
           })

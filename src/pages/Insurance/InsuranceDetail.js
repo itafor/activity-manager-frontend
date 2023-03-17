@@ -3,12 +3,14 @@ import Meta from 'antd/lib/card/Meta'
 import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { BsPhone, BsArrowLeft, BsEnvelope } from 'react-icons/bs'
 import styled from 'styled-components'
-// import ClientInfoTabs from './ClientInfoTabs'
 import { getOneInsurance } from '../../redux/InsuranceSlice'
 import moment from 'moment'
+
+import { NumericFormat } from 'react-number-format'
+import InsuranceTabs from './InsuranceTabs'
 
 const InsuranceDetail = () => {
   const navigate = useNavigate()
@@ -18,7 +20,6 @@ const InsuranceDetail = () => {
 
   useEffect(() => {
     dispatch(getOneInsurance(id))
-    console.log('single ins', singleData)
   }, [id])
 
   return (
@@ -53,13 +54,17 @@ const InsuranceDetail = () => {
                   }
                   {singleData?.description && (
                     <div className='flex align-middle items-center gap-3 flex-wrap'>
-                      <a className='text-sm' href={`tel:${singleData?.description}`}>
-                        {singleData?.description || 'no phone'}
-                      </a>
+                      <p>{singleData?.description || 'No description'}</p>
                     </div>
                   )}
                   <div className='flex align-middle items-center gap-4 flex-wrap insuranceprice'>
-                    <strong>Price:</strong> {singleData?.price || ''}
+                    <strong>Price:</strong>
+                    <NumericFormat
+                      value={singleData?.price}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={'₦'}
+                    />
                   </div>
                   <div className='flex align-middle items-center gap-4 flex-wrap insuranceprice'>
                     <strong>Is-discounted:</strong> {singleData?.is_discounted || ''}
@@ -68,22 +73,33 @@ const InsuranceDetail = () => {
                     <strong>Discount:</strong> {singleData?.discount || 'N/A'}
                   </div>
                   <div className='flex align-middle items-center gap-4 flex-wrap insuranceprice'>
-                    <strong>Discounted Price:</strong> {singleData?.discounted_price || ''}
+                    <strong>Discounted Price:</strong>
+                    <NumericFormat
+                      value={singleData?.discounted_price}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={'₦'}
+                    />
                   </div>
                   <div className='flex align-middle items-center gap-4 flex-wrap insuranceprice'>
                     <strong>Category:</strong> {singleData?.category?.name || ''}
                   </div>
                   <div className='flex align-middle items-center gap-4 flex-wrap insuranceprice'>
-                    <strong>Company:</strong> {singleData?.company?.name || ''}
+                    <Link
+                      to={`/company/details/${singleData?.company?.id}/${singleData?.company?.slug}`}
+                    >
+                      <strong style={{ cursor: 'none' }}>Company:</strong>{' '}
+                      {singleData?.company?.name || ''}
+                    </Link>
                   </div>
                   <div className='flex align-middle items-center gap-4 flex-wrap insuranceprice'>
-                    <strong>Star Ratings:</strong> {singleData?.rating_count || ''}
+                    <strong>Star Ratings:</strong> {singleData?.rating_count || '0'}
                   </div>
                   <div className='flex align-middle items-center gap-4 flex-wrap insuranceprice'>
-                    <strong>Ratings counts:</strong> {singleData?.ratings?.length || ''}
+                    <strong>Ratings counts:</strong> {singleData?.ratings?.length}
                   </div>
                   <div className='flex align-middle items-center gap-4 flex-wrap insuranceprice'>
-                    <strong>Lessons:</strong> {singleData?.lessons?.length || ''}
+                    <strong>Lessons:</strong> {singleData?.lessons?.length}
                   </div>
                   <div className='flex align-middle items-center gap-4 flex-wrap insuranceprice'>
                     <strong>Created At:</strong>{' '}
@@ -97,7 +113,7 @@ const InsuranceDetail = () => {
             />
           </Card>
 
-          {/* <ClientInfoTabs className='infoTab' /> */}
+          <InsuranceTabs lessons={singleData?.lessons} />
         </div>
       </div>
     </StyledContainer>

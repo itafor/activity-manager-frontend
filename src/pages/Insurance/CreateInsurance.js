@@ -44,9 +44,7 @@ function CreateInsurance({ categories, companies }) {
       [name]: value,
     })
   }
-  useEffect(() => {
-    console.log('new companies', companies)
-  }, [])
+  useEffect(() => {}, [])
   const clearFormData = () => {
     setinsuranceFormData({
       name: '',
@@ -81,7 +79,6 @@ function CreateInsurance({ categories, companies }) {
           dispatch(getAllInsurances())
           handleClose()
           clearFormData()
-          console.log('response act', response)
           notification.success({
             message: 'insurance created successfully',
           })
@@ -89,7 +86,6 @@ function CreateInsurance({ categories, companies }) {
           notification.error({
             message: response?.payload?.message,
           })
-          console.log('error notificatom', response?.payload?.message)
         }
       })
       .catch((error) => {

@@ -5,10 +5,10 @@ const Dashboard = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    navigate('/activities')
+    navigate('/insurances')
   }, [])
 
-  return <div onClick={() => navigate('/patients')}>Dashboard</div>
+  return <div onClick={() => navigate('/insurances')}>Dashboard</div>
 }
 
 export default Dashboard

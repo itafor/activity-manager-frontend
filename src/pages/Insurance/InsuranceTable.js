@@ -85,21 +85,11 @@ const InsuranceTable = ({ data, loading, handleDelete, categories, companies }) 
     },
 
     {
-      title: 'Craeted At',
-      dataIndex: 'created_at',
-      key: 'created_at',
-      ...getColumnSearchProps({
-        dataIndex: 'created_at',
-        handleReset,
-        searchInput,
-        handleSearch,
-        setSearchedColumn,
-        searchText,
-        setSearchText,
-        searchedColumn,
-      }),
-      render: (created_at) => (
-        <span style={{ whiteSpace: 'nowrap' }}> {moment(created_at).format('DD MMM YYYY')}</span>
+      title: 'Lessons',
+      dataIndex: 'lessons',
+      key: 'lessons',
+      render: (lessons) => (
+        <span style={{ whiteSpace: 'nowrap' }}> {lessons && lessons?.length}</span>
       ),
     },
 

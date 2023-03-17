@@ -1,19 +1,16 @@
 class ExpirySession {
   static get = (key) => {
-    console.log('key', key)
-    if (key != '') {
-      let stringValue = window.localStorage.getItem(key) // get details about token.
-      if (stringValue !== null) {
-        let value = JSON.parse(stringValue)
-        let expirationDate = new Date(value.expirationDate)
-        if (expirationDate > new Date()) {
-          return value.value
-        } else {
-          window.localStorage.removeItem(key) // remove token if expired.
-        }
+    let stringValue = window.localStorage.getItem(key) // get details about token.
+    if (stringValue !== null) {
+      let value = JSON.parse(stringValue)
+      let expirationDate = new Date(value.expirationDate)
+      if (expirationDate > new Date()) {
+        return value.value
+      } else {
+        window.localStorage.removeItem(key) // remove token if expired.
       }
-      return null
     }
+    return null
   }
 
   static set = (key, value, expirationInSeconds = 14400) => {

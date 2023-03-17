@@ -21,7 +21,6 @@ const Insurances = () => {
     dispatch(getAllInsurances())
     dispatch(getAllCategories())
     dispatch(getAllCompanies())
-    console.log('categorie test', categories)
   }, [])
 
   const handleDelete = ({ id }) => {
