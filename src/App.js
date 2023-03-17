@@ -51,6 +51,8 @@ import InsuranceDetail from './pages/Insurance/InsuranceDetail'
 import CompanyDetails from './pages/Company/CompanyDetails'
 import Lessons from './pages/Lesson/Lessons'
 import LessonDetails from './pages/Lesson/LessonDetails'
+import Claims from './pages/Claim/Claims'
+import ClaimDetails from './pages/Claim/ClaimDetails'
 // import Settings from "./pages/Settings";
 
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -213,6 +215,9 @@ function App() {
             <Route path='/insurance/details/:id/:slug' element={<InsuranceDetail />} />
             <Route path='lessons' element={<Lessons />} />
             <Route path='/lesson/details/:id/:slug' element={<LessonDetails />} />
+
+            <Route path='claims' element={<Claims />} />
+            <Route path='/claim/details/:id/:slug' element={<ClaimDetails />} />
           </Route>
 
           {/* Catch all routes -> push to not found page */}

@@ -22,6 +22,7 @@ import categories from '../categorySlice'
 import companies from '../companySlice'
 import insurances from '../InsuranceSlice'
 import lessons from '../lessonSlice'
+import claims from '../claimSlice'
 
 const rootReducer = combineReducers({
   auth,
@@ -47,6 +48,7 @@ const rootReducer = combineReducers({
   companies,
   insurances,
   lessons,
+  claims,
 })
 
 export default rootReducer
