@@ -50,7 +50,7 @@ const AppHeader = () => {
         justifyContent: 'space-between',
       }}
     >
-      <h1>SchoolPal </h1>
+      <h1>Lusry </h1>
       <Button type='primary' onClick={() => dispatch(logout())}>
         Logout
       </Button>

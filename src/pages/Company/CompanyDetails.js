@@ -53,13 +53,14 @@ const CompanyDetails = () => {
                   }
                   {singleData?.description && (
                     <div className='flex align-middle items-center gap-3 flex-wrap'>
-                      <a className='text-sm' href={`tel:${singleData?.description}`}>
-                        {singleData?.description || 'no phone'}
-                      </a>
+                      <p>{singleData?.description || ''}</p>
                     </div>
                   )}
                   <div className='flex align-middle items-center gap-4 flex-wrap company-detail'>
-                    <strong>Website:</strong> {singleData?.website || ''}
+                    <strong>Website:</strong>
+                    <a className='text-sm' href={`${singleData?.website}`} target='_blank'>
+                      {singleData?.website || 'no website'}
+                    </a>
                   </div>
 
                   <div className='flex align-middle items-center gap-4 flex-wrap company-detail'>
