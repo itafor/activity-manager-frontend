@@ -7,6 +7,8 @@ import CreateInsurance from './CreateInsurance'
 import InsuranceTable from './InsuranceTable'
 import { getAllCategories } from '../../redux/categorySlice'
 import { getAllCompanies } from '../../redux/companySlice'
+import CategoryTabs from './CategoryTabs'
+import { InsuranceService } from '../../services/InsuranceService'
 
 const Insurances = () => {
   const { insurances } = useSelector((state) => state)
@@ -15,13 +17,64 @@ const Insurances = () => {
 
   const dispatch = useDispatch()
 
-  const [confirmLoading, setConfirmLoading] = useState(false)
+  const [motoInsurances, setMotoInsurances] = useState([])
+  const [travelInsurances, settravelInsurances] = useState([])
+  const [shopInsurances, setshopInsurances] = useState([])
+  const [homeInsurances, sethomeInsurances] = useState([])
+  const [discountedInsurances, setdiscountedInsurances] = useState([])
+  const [popularInsurances, setpopularInsurances] = useState([])
 
   useEffect(() => {
     dispatch(getAllInsurances())
     dispatch(getAllCategories())
     dispatch(getAllCompanies())
+    listMotoInsurances()
+    listTravelInsurances()
+    listShopInsurances()
+    listHomeInsurances()
+    listDiscountedInsurances()
+    listPopularInsurances()
   }, [])
+
+  const listMotoInsurances = () => {
+    setMotoInsurances(
+      insurances?.data.filter((insurance) => insurance?.category?.name == 'Moto Insurance'),
+    )
+  }
+
+  const listTravelInsurances = () => {
+    settravelInsurances(
+      insurances?.data.filter((insurance) => insurance?.category?.name == 'Travel Insurance'),
+    )
+  }
+
+  const listShopInsurances = () => {
+    setshopInsurances(
+      insurances?.data.filter((insurance) => insurance?.category?.name == 'Shop Insurance'),
+    )
+  }
+
+  const listHomeInsurances = () => {
+    sethomeInsurances(
+      insurances?.data.filter((insurance) => insurance?.category?.name == 'Home Insurance'),
+    )
+  }
+
+  const listDiscountedInsurances = () => {
+    setdiscountedInsurances(
+      insurances?.data.filter((insurance) => insurance?.is_discounted == 'yes'),
+    )
+  }
+
+  const listPopularInsurances = () => {
+    InsuranceService.getPopularInsurance()
+      .then((res) => {
+        setpopularInsurances(res?.data)
+      })
+      .catch((err) => {
+        console.log('popular error', err)
+      })
+  }
 
   const handleDelete = ({ id }) => {
     if (!window.confirm('Do You want to permanently delete the selected insurance?')) {
@@ -58,13 +111,22 @@ const Insurances = () => {
         ]}
         title='Insurances'
       />
-      <InsuranceTable
+      <CategoryTabs
+        insurances={insurances.data}
+        motos={motoInsurances}
+        shops={shopInsurances}
+        travels={travelInsurances}
+        homes={homeInsurances}
+        discounted={discountedInsurances}
+        popular={popularInsurances}
+      />
+      {/* <InsuranceTable
         data={insurances.data}
         loading={insurances.loading}
         handleDelete={handleDelete}
         categories={categories.data}
         companies={companies.data}
-      />
+      /> */}
     </div>
   )
 }

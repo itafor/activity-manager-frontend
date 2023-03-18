@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import { getColumnSearchProps } from '../../utils/tableColSearch'
 import UpdateInsurance from './UpdateInsurance'
+import { NumericFormat } from 'react-number-format'
 
 const InsuranceTable = ({ data, loading, handleDelete, categories, companies }) => {
   const [searchText, setSearchText] = useState('')
@@ -48,12 +49,46 @@ const InsuranceTable = ({ data, loading, handleDelete, categories, companies }) 
       ),
     },
 
+    // {
+    //   title: 'Company',
+    //   dataIndex: 'company',
+    //   key: 'company',
+    //   render: (company) => (
+    //     <span style={{ whiteSpace: 'nowrap' }}> {company && company?.name}</span>
+    //   ),
+    // },
+
     {
-      title: 'Company',
-      dataIndex: 'company',
-      key: 'company',
-      render: (company) => (
-        <span style={{ whiteSpace: 'nowrap' }}> {company && company?.name}</span>
+      title: 'Price',
+      dataIndex: 'price',
+      key: 'price',
+      render: (price) => (
+        <span style={{ whiteSpace: 'nowrap' }}>
+          <NumericFormat value={price} displayType={'text'} thousandSeparator={true} prefix={'₦'} />
+        </span>
+      ),
+    },
+
+    {
+      title: 'Discount',
+      dataIndex: 'discount',
+      key: 'discount',
+      render: (discount) => <span style={{ whiteSpace: 'nowrap' }}> {discount}</span>,
+    },
+
+    {
+      title: 'Discounted price',
+      dataIndex: 'discounted_price',
+      key: 'discounted_price',
+      render: (discounted_price) => (
+        <span style={{ whiteSpace: 'nowrap' }}>
+          <NumericFormat
+            value={discounted_price}
+            displayType={'text'}
+            thousandSeparator={true}
+            prefix={'₦'}
+          />
+        </span>
       ),
     },
 

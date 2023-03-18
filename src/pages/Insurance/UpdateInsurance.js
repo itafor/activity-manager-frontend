@@ -234,7 +234,7 @@ function UpdateInsurance({ insurance, categories, companies }) {
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicPassword'>
                   <Form.Label>
-                    Discount <span style={{ color: 'red' }}>*</span>
+                    Discount (Enter zero to unset discount)<span style={{ color: 'red' }}>*</span>
                   </Form.Label>
                   <Form.Control
                     type='number'

@@ -205,15 +205,12 @@ function CreateInsurance({ categories, companies }) {
               </Col>
               <Col>
                 <Form.Group className='mb-3' controlId='formBasicPassword'>
-                  <Form.Label>
-                    Discount <span style={{ color: 'red' }}>*</span>
-                  </Form.Label>
+                  <Form.Label>Discount</Form.Label>
                   <Form.Control
                     type='number'
                     name='discount'
                     onChange={(evt) => handleInputChange(evt)}
                     placeholder='discount'
-                    required
                   />
                   <Form.Control.Feedback type='invalid'>
                     The discount field is required.

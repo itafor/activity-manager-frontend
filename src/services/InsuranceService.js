@@ -25,10 +25,16 @@ const deleteOne = async (data) => {
   return response.data
 }
 
+const getPopularInsurance = async () => {
+  const response = await AuthAPI.get(`/user/insurance/popular-insurance`)
+  return response.data
+}
+
 export const InsuranceService = {
   getAll,
   getOne,
   createInsurance,
   editInsurance,
   deleteOne,
+  getPopularInsurance,
 }
