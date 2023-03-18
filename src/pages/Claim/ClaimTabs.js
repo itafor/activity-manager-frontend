@@ -7,7 +7,7 @@ import UpdateClaimStatus from './UpdateClaimStatus'
 
 const { TabPane } = Tabs
 
-const ClaimTabs = ({ images, claim }) => {
+const ClaimTabs = ({ images, claim, handleUpdateClaimStatus, handleInputChange }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {}, [])
@@ -20,7 +20,11 @@ const ClaimTabs = ({ images, claim }) => {
         </TabPane>
 
         <TabPane tab='Update Status' key='2'>
-          <UpdateClaimStatus claim={claim} />
+          <UpdateClaimStatus
+            claim={claim}
+            handleUpdateClaimStatus={handleUpdateClaimStatus}
+            handleInputChange={handleInputChange}
+          />
         </TabPane>
       </Tabs>
     </div>

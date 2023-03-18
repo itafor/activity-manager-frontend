@@ -10,6 +10,11 @@ const getOne = async (data) => {
   return response.data
 }
 
+const getPaidClaims = async (data) => {
+  const response = await AuthAPI.get(`/admin/claim/paid-claims`)
+  return response.data
+}
+
 const updateClaimStatus = async (data) => {
   const response = await AuthAPI.post(`/admin/claim/update-status`, data)
   return response.data
@@ -18,5 +23,6 @@ const updateClaimStatus = async (data) => {
 export const claimService = {
   getAll,
   getOne,
+  getPaidClaims,
   updateClaimStatus,
 }

@@ -16,29 +16,12 @@ const initialFormState = {
   claim_id: '',
 }
 
-function UpdateClaimStatus({ claim }) {
+function UpdateClaimStatus({ claim, handleUpdateClaimStatus, handleInputChange }) {
   const [show, setShow] = useState(false)
   const [image, setImage] = useState('')
   const [claimFormData, setclaimFormData] = useState(initialFormState)
   const { id } = useParams()
   const [confirmLoading, setConfirmLoading] = useState(false)
-  const dispatch = useDispatch()
-
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
-
-  const onChangeImage = (e) => {
-    setImage(e.target.files[0])
-  }
-
-  const handleInputChange = (event) => {
-    event.preventDefault()
-    const { name, value } = event.target
-    setclaimFormData({
-      ...claimFormData,
-      [name]: value,
-    })
-  }
 
   useEffect(() => {
     setclaimFormData({
@@ -47,46 +30,6 @@ function UpdateClaimStatus({ claim }) {
     })
     console.log('claim', claim)
   }, [claim])
-
-  const clearFormData = () => {
-    setclaimFormData({
-      status: '',
-      claim_id: '',
-    })
-    setImage('')
-  }
-
-  const handleUpdateClaimStatus = (e) => {
-    e.preventDefault()
-    var formData = new FormData()
-    formData.append('status', claimFormData.status)
-    formData.append('claim_id', claimFormData.claim_id)
-
-    setConfirmLoading(true)
-    dispatch(updateClaimStatus(formData))
-      .then((response) => {
-        setConfirmLoading(false)
-        if (response.type === 'claim/edit/fulfilled') {
-          dispatch(getOneClaim(id))
-          window.location.reload()
-          handleClose()
-          //   clearFormData()
-          console.log('response act', response)
-          notification.success({
-            message: 'claim status updated successfully',
-          })
-        } else if (response.type === 'claim/edit/rejected') {
-          notification.error({
-            message: response?.payload?.message,
-          })
-          console.log('error notificatom', response?.payload?.message)
-        }
-      })
-      .catch((error) => {
-        setConfirmLoading(false)
-        console.log('error notificatom', 'Error updating claim, please try again')
-      })
-  }
 
   return (
     <>
@@ -103,7 +46,7 @@ function UpdateClaimStatus({ claim }) {
             <option value='Paid'>Paid</option>
             <option value='Pending'>Pending</option>
             <option value='Declined'>Declined</option>
-            <option value='Approved'>Approved</option>
+            {/* <option value='Approved'>Approved</option> */}
           </Form.Select>
         </Form.Group>
 

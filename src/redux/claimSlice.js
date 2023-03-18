@@ -19,6 +19,15 @@ export const getOneClaim = createAsyncThunk('claim/getOne', async (data, { rejec
   }
 })
 
+export const getPaidClaims = createAsyncThunk('claim/paid', async (_, { rejectWithValue }) => {
+  try {
+    const response = await claimService.getPaidClaims()
+    return response.data
+  } catch (error) {
+    return rejectWithValue(error?.response?.data)
+  }
+})
+
 export const updateClaimStatus = createAsyncThunk(
   'claim/edit',
   async (data, { rejectWithValue }) => {
@@ -76,6 +85,20 @@ const slice = createSlice({
       state.singleData = payload
     },
     [getOneClaim.rejected]: (state, { payload }) => {
+      state.error = true
+      state.message = payload
+      state.loading = false
+    },
+
+    [getPaidClaims.pending]: (state) => {
+      state.loading = true
+    },
+    [getPaidClaims.fulfilled]: (state, { payload }) => {
+      state.message = payload?.message
+      state.loading = false
+      state.singleData = payload
+    },
+    [getPaidClaims.rejected]: (state, { payload }) => {
       state.error = true
       state.message = payload
       state.loading = false

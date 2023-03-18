@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import { getColumnSearchProps } from '../../utils/tableColSearch'
+import Commons from '../../utils/Commons'
 
 const ClaimTable = ({ data, loading }) => {
   const [searchText, setSearchText] = useState('')
@@ -23,6 +24,14 @@ const ClaimTable = ({ data, loading }) => {
 
   const columns = [
     {
+      title: 'Category',
+      dataIndex: 'category',
+      key: 'category',
+      render: (category) => (
+        <span style={{ whiteSpace: 'nowrap' }}> {category && category?.name}</span>
+      ),
+    },
+    {
       title: 'Policy number',
       dataIndex: 'policy_number',
       key: 'policy_number',
@@ -38,19 +47,12 @@ const ClaimTable = ({ data, loading }) => {
       }),
     },
     {
-      title: 'status',
+      title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      ...getColumnSearchProps({
-        dataIndex: 'status',
-        handleReset,
-        searchInput,
-        handleSearch,
-        setSearchedColumn,
-        searchText,
-        setSearchText,
-        searchedColumn,
-      }),
+      render: (status) => (
+        <span style={{ whiteSpace: 'nowrap' }}> {Commons.getClaimStatus(status)}</span>
+      ),
     },
 
     {
@@ -85,14 +87,6 @@ const ClaimTable = ({ data, loading }) => {
     },
 
     {
-      title: 'Category',
-      dataIndex: 'category',
-      key: 'category',
-      render: (category) => (
-        <span style={{ whiteSpace: 'nowrap' }}> {category && category?.name}</span>
-      ),
-    },
-    {
       title: 'Company',
       dataIndex: 'company',
       key: 'company',
@@ -124,7 +118,7 @@ const ClaimTable = ({ data, loading }) => {
       <Table
         columns={columns}
         loading={loading}
-        pagination={data.length > 10 ? true : false}
+        pagination={data?.length > 10 ? true : false}
         dataSource={data}
         rowKey='id'
         scroll={{ x: 'max-content' }}
