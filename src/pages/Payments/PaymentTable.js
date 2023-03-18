@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import { getColumnSearchProps } from '../../utils/tableColSearch'
 import { NumericFormat } from 'react-number-format'
-import { useEffect } from 'react'
 
-const OrderTable = ({ data, loading }) => {
+const PaymentTable = ({ data, loading }) => {
   const [searchText, setSearchText] = useState('')
   const [searchedColumn, setSearchedColumn] = useState('')
   const searchInput = useRef(null)
@@ -25,11 +24,11 @@ const OrderTable = ({ data, loading }) => {
 
   const columns = [
     {
-      title: 'Insurance type',
-      dataIndex: 'insurance_type',
-      key: 'insurance_type',
+      title: 'Reference',
+      dataIndex: 'reference',
+      key: 'reference',
       ...getColumnSearchProps({
-        dataIndex: 'insurance_type',
+        dataIndex: 'reference',
         handleReset,
         searchInput,
         handleSearch,
@@ -40,37 +39,7 @@ const OrderTable = ({ data, loading }) => {
       }),
     },
     {
-      title: 'Track no.',
-      dataIndex: 'track_no',
-      key: 'track_no',
-      ...getColumnSearchProps({
-        dataIndex: 'track_no',
-        handleReset,
-        searchInput,
-        handleSearch,
-        setSearchedColumn,
-        searchText,
-        setSearchText,
-        searchedColumn,
-      }),
-    },
-    {
-      title: 'Payment status',
-      dataIndex: 'payment_status',
-      key: 'payment_status',
-      ...getColumnSearchProps({
-        dataIndex: 'payment_status',
-        handleReset,
-        searchInput,
-        handleSearch,
-        setSearchedColumn,
-        searchText,
-        setSearchText,
-        searchedColumn,
-      }),
-    },
-    {
-      title: 'Amount',
+      title: 'Aamount',
       dataIndex: 'amount',
       key: 'amount',
       render: (amount) => (
@@ -83,6 +52,43 @@ const OrderTable = ({ data, loading }) => {
           />
         </span>
       ),
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      ...getColumnSearchProps({
+        dataIndex: 'status',
+        handleReset,
+        searchInput,
+        handleSearch,
+        setSearchedColumn,
+        searchText,
+        setSearchText,
+        searchedColumn,
+      }),
+    },
+    {
+      title: 'channel',
+      dataIndex: 'channel',
+      key: 'channel',
+      ...getColumnSearchProps({
+        dataIndex: 'channel',
+        handleReset,
+        searchInput,
+        handleSearch,
+        setSearchedColumn,
+        searchText,
+        setSearchText,
+        searchedColumn,
+      }),
+    },
+
+    {
+      title: 'user',
+      dataIndex: 'user',
+      key: 'user',
+      render: (user) => <span style={{ whiteSpace: 'nowrap' }}> {user?.first_name}</span>,
     },
 
     {
@@ -112,7 +118,9 @@ const OrderTable = ({ data, loading }) => {
         <>
           <div>
             <Button style={{ marginRight: '5px' }} title='View product details'>
-              <Link to={`/order/details/${singleData?.id}/${singleData?.track_no}`}>{'View'}</Link>
+              <Link to={`/payment/details/${singleData?.id}/${singleData?.reference}`}>
+                {'View'}
+              </Link>
             </Button>
           </div>
         </>
@@ -134,4 +142,4 @@ const OrderTable = ({ data, loading }) => {
   )
 }
 
-export default OrderTable
+export default PaymentTable

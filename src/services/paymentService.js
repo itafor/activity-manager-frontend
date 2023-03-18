@@ -1,16 +1,16 @@
 import AuthAPI from './authInstance'
 
 const getAll = async () => {
-  const response = await AuthAPI.get(`/admin/order/list`)
+  const response = await AuthAPI.get(`/admin/payment/list`)
   return response.data
 }
 
 const getOne = async (data) => {
-  const response = await AuthAPI.get(`/admin/order/show/${data}`)
+  const response = await AuthAPI.get(`/admin/payment/show/${data}`)
   return response.data
 }
 
-export const OrderService = {
+export const paymentService = {
   getAll,
   getOne,
 }

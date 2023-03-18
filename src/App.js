@@ -33,8 +33,7 @@ import Groups from './pages/Groups/Groups'
 import GroupDetail from './pages/Groups/GroupDetail'
 import Customers from './pages/Coustomers/Customers'
 import CustomerDetail from './pages/Coustomers/CustomerDetail'
-import Orders from './pages/Orders/Orders'
-import OrderDetail from './pages/Orders/OrderDetail'
+
 import Activities from './pages/Activity/Activities'
 import CreateGlobalActivity from './pages/Activity/CreateGlobalActivity'
 import ActivityDetails from './pages/Activity/ActivityDetails'
@@ -53,6 +52,14 @@ import Lessons from './pages/Lesson/Lessons'
 import LessonDetails from './pages/Lesson/LessonDetails'
 import Claims from './pages/Claim/Claims'
 import ClaimDetails from './pages/Claim/ClaimDetails'
+import Users from './pages/Users/ListUsers'
+import UserDetails from './pages/Users/UserDetails'
+import ListUsers from './pages/Users/ListUsers'
+import ListOrders from './pages/Orders/ListOrders'
+import OrderDetails from './pages/Orders/OrderDetails'
+import ListPayments from './pages/Payments/ListPayments'
+import PaymentDetails from './pages/Payments/PaymentDetails'
+import ListContacts from './pages/ContactSupport/ListContacts'
 // import Settings from "./pages/Settings";
 
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -176,18 +183,12 @@ function App() {
               path='/group/details/:id'
               element={<GroupDetail />}
             />
-            <Route path='users' element={<Customers />} />
             <Route
               //
               path='/user/details/:id'
               element={<CustomerDetail />}
             />
-            <Route path='orders' element={<Orders />} />
-            <Route
-              //
-              path='/order/details/:id'
-              element={<OrderDetail />}
-            />
+
             <Route path='activities' element={<Activities />} />
             <Route path='activity/global/create' element={<CreateGlobalActivity />} />
             <Route
@@ -218,6 +219,13 @@ function App() {
 
             <Route path='claims' element={<Claims />} />
             <Route path='/claim/details/:id/:slug' element={<ClaimDetails />} />
+            <Route path='users' element={<ListUsers />} />
+            <Route path='/user/details/:id/:email' element={<UserDetails />} />
+            <Route path='orders' element={<ListOrders />} />
+            <Route path='/order/details/:id/:track_no' element={<OrderDetails />} />
+            <Route path='payments' element={<ListPayments />} />
+            <Route path='/payment/details/:id/:ref' element={<PaymentDetails />} />
+            <Route path='contacts' element={<ListContacts />} />
           </Route>
 
           {/* Catch all routes -> push to not found page */}

@@ -1,23 +1,26 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { OrderService } from '../services/OrderService'
+import { paymentService } from '../services/paymentService'
 
-export const getAllOrders = createAsyncThunk('order/getAll', async (_, { rejectWithValue }) => {
+export const getAllPayments = createAsyncThunk('payment/getAll', async (_, { rejectWithValue }) => {
   try {
-    const response = await OrderService.getAll()
+    const response = await paymentService.getAll()
     return response.data
   } catch (error) {
     return rejectWithValue(error?.response?.data)
   }
 })
 
-export const getOneOrder = createAsyncThunk('order/getOne', async (data, { rejectWithValue }) => {
-  try {
-    const response = await OrderService.getOne(data)
-    return response.data
-  } catch (error) {
-    return rejectWithValue(error?.response?.data)
-  }
-})
+export const getOnePayment = createAsyncThunk(
+  'payment/getOne',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await paymentService.getOne(data)
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error?.response?.data)
+    }
+  },
+)
 
 const initialState = {
   data: [],
@@ -28,7 +31,7 @@ const initialState = {
 }
 
 const slice = createSlice({
-  name: 'order',
+  name: 'payment',
   initialState,
   reducers: {
     checkAll: (state) => {
@@ -39,31 +42,31 @@ const slice = createSlice({
     },
   },
   extraReducers: {
-    [getAllOrders.pending]: (state) => {
+    [getAllPayments.pending]: (state) => {
       if (state.data.length <= 0) {
         state.loading = true
       }
     },
-    [getAllOrders.fulfilled]: (state, action) => {
+    [getAllPayments.fulfilled]: (state, action) => {
       state.error = false
       state.data = action.payload
       state.loading = false
     },
-    [getAllOrders.rejected]: (state, action) => {
+    [getAllPayments.rejected]: (state, action) => {
       state.error = true
       state.message = action.payload
       state.loading = false
     },
 
-    [getOneOrder.pending]: (state) => {
+    [getOnePayment.pending]: (state) => {
       state.loading = true
     },
-    [getOneOrder.fulfilled]: (state, { payload }) => {
+    [getOnePayment.fulfilled]: (state, { payload }) => {
       state.message = payload?.message
       state.loading = false
       state.singleData = payload
     },
-    [getOneOrder.rejected]: (state, { payload }) => {
+    [getOnePayment.rejected]: (state, { payload }) => {
       state.error = true
       state.message = payload
       state.loading = false

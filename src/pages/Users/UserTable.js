@@ -4,10 +4,8 @@ import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import { getColumnSearchProps } from '../../utils/tableColSearch'
-import { NumericFormat } from 'react-number-format'
-import { useEffect } from 'react'
 
-const OrderTable = ({ data, loading }) => {
+const UserTable = ({ data, loading }) => {
   const [searchText, setSearchText] = useState('')
   const [searchedColumn, setSearchedColumn] = useState('')
   const searchInput = useRef(null)
@@ -25,11 +23,11 @@ const OrderTable = ({ data, loading }) => {
 
   const columns = [
     {
-      title: 'Insurance type',
-      dataIndex: 'insurance_type',
-      key: 'insurance_type',
+      title: 'First Name',
+      dataIndex: 'first_name',
+      key: 'first_name',
       ...getColumnSearchProps({
-        dataIndex: 'insurance_type',
+        dataIndex: 'first_name',
         handleReset,
         searchInput,
         handleSearch,
@@ -40,11 +38,11 @@ const OrderTable = ({ data, loading }) => {
       }),
     },
     {
-      title: 'Track no.',
-      dataIndex: 'track_no',
-      key: 'track_no',
+      title: 'Last name',
+      dataIndex: 'last_name',
+      key: 'last_name',
       ...getColumnSearchProps({
-        dataIndex: 'track_no',
+        dataIndex: 'last_name',
         handleReset,
         searchInput,
         handleSearch,
@@ -55,11 +53,11 @@ const OrderTable = ({ data, loading }) => {
       }),
     },
     {
-      title: 'Payment status',
-      dataIndex: 'payment_status',
-      key: 'payment_status',
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
       ...getColumnSearchProps({
-        dataIndex: 'payment_status',
+        dataIndex: 'email',
         handleReset,
         searchInput,
         handleSearch,
@@ -70,21 +68,52 @@ const OrderTable = ({ data, loading }) => {
       }),
     },
     {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount',
-      render: (amount) => (
-        <span style={{ whiteSpace: 'nowrap' }}>
-          <NumericFormat
-            value={amount}
-            displayType={'text'}
-            thousandSeparator={true}
-            prefix={'₦'}
-          />
-        </span>
+      title: 'Phone number',
+      dataIndex: 'phone_number',
+      key: 'phone_number',
+      ...getColumnSearchProps({
+        dataIndex: 'phone_number',
+        handleReset,
+        searchInput,
+        handleSearch,
+        setSearchedColumn,
+        searchText,
+        setSearchText,
+        searchedColumn,
+      }),
+    },
+    {
+      title: 'Profile picture',
+      key: 'id',
+      dataIndex: 'profile_picture',
+      align: 'center',
+      render: (profile_picture) => (
+        <Link to={`${profile_picture}`}>
+          {profile_picture ? (
+            <img
+              style={{
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+              }}
+              src={profile_picture}
+              height={60}
+              width={60}
+              alt='avatar'
+            />
+          ) : (
+            <Avatar style={{ backgroundColor: '#3f8bcaa1' }} icon={<UserOutlined />} size={50} />
+          )}
+        </Link>
       ),
     },
-
+    {
+      title: 'Orders',
+      dataIndex: 'orders',
+      key: 'orders',
+      render: (orders) => <span style={{ whiteSpace: 'nowrap' }}> {orders?.length}</span>,
+    },
     {
       title: 'Craeted At',
       dataIndex: 'created_at',
@@ -112,7 +141,7 @@ const OrderTable = ({ data, loading }) => {
         <>
           <div>
             <Button style={{ marginRight: '5px' }} title='View product details'>
-              <Link to={`/order/details/${singleData?.id}/${singleData?.track_no}`}>{'View'}</Link>
+              <Link to={`/user/details/${singleData?.id}/${singleData?.email}`}>{'View'}</Link>
             </Button>
           </div>
         </>
@@ -125,7 +154,7 @@ const OrderTable = ({ data, loading }) => {
       <Table
         columns={columns}
         loading={loading}
-        pagination={data?.length > 10 ? true : false}
+        pagination={data.length > 10 ? true : false}
         dataSource={data}
         rowKey='id'
         scroll={{ x: 'max-content' }}
@@ -134,4 +163,4 @@ const OrderTable = ({ data, loading }) => {
   )
 }
 
-export default OrderTable
+export default UserTable

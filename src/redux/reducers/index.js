@@ -12,7 +12,6 @@ import products from '../productSlice'
 import varietyBoxes from '../varietyBoxSlice'
 import groups from '../groupSlice'
 import customers from '../customerSlice'
-import orders from '../orderSlice'
 import activities from '../activitySlice'
 import subjects from '../subjectSlice'
 import learnerClasses from '../LearnerClassSlice'
@@ -23,6 +22,10 @@ import companies from '../companySlice'
 import insurances from '../InsuranceSlice'
 import lessons from '../lessonSlice'
 import claims from '../claimSlice'
+import users from '../userSlice'
+import orders from '../orderSlice'
+import payments from '../paymentSlice'
+import contacts from '../supportSlice'
 
 const rootReducer = combineReducers({
   auth,
@@ -38,7 +41,6 @@ const rootReducer = combineReducers({
   varietyBoxes,
   groups,
   customers,
-  orders,
   activities,
   subjects,
   learnerClasses,
@@ -49,6 +51,10 @@ const rootReducer = combineReducers({
   insurances,
   lessons,
   claims,
+  users,
+  orders,
+  payments,
+  contacts,
 })
 
 export default rootReducer

@@ -1,18 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { OrderService } from '../services/OrderService'
+import { userService } from '../services/userService'
 
-export const getAllOrders = createAsyncThunk('order/getAll', async (_, { rejectWithValue }) => {
+export const getAllUsers = createAsyncThunk('user/getAll', async (_, { rejectWithValue }) => {
   try {
-    const response = await OrderService.getAll()
+    const response = await userService.getAll()
     return response.data
   } catch (error) {
     return rejectWithValue(error?.response?.data)
   }
 })
 
-export const getOneOrder = createAsyncThunk('order/getOne', async (data, { rejectWithValue }) => {
+export const getOneUser = createAsyncThunk('user/getOne', async (data, { rejectWithValue }) => {
   try {
-    const response = await OrderService.getOne(data)
+    const response = await userService.getOne(data)
     return response.data
   } catch (error) {
     return rejectWithValue(error?.response?.data)
@@ -28,7 +28,7 @@ const initialState = {
 }
 
 const slice = createSlice({
-  name: 'order',
+  name: 'user',
   initialState,
   reducers: {
     checkAll: (state) => {
@@ -39,31 +39,31 @@ const slice = createSlice({
     },
   },
   extraReducers: {
-    [getAllOrders.pending]: (state) => {
+    [getAllUsers.pending]: (state) => {
       if (state.data.length <= 0) {
         state.loading = true
       }
     },
-    [getAllOrders.fulfilled]: (state, action) => {
+    [getAllUsers.fulfilled]: (state, action) => {
       state.error = false
       state.data = action.payload
       state.loading = false
     },
-    [getAllOrders.rejected]: (state, action) => {
+    [getAllUsers.rejected]: (state, action) => {
       state.error = true
       state.message = action.payload
       state.loading = false
     },
 
-    [getOneOrder.pending]: (state) => {
+    [getOneUser.pending]: (state) => {
       state.loading = true
     },
-    [getOneOrder.fulfilled]: (state, { payload }) => {
+    [getOneUser.fulfilled]: (state, { payload }) => {
       state.message = payload?.message
       state.loading = false
       state.singleData = payload
     },
-    [getOneOrder.rejected]: (state, { payload }) => {
+    [getOneUser.rejected]: (state, { payload }) => {
       state.error = true
       state.message = payload
       state.loading = false

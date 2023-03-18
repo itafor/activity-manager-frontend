@@ -50,13 +50,16 @@ const AppSider = () => {
     getItem('Insurances', 'insurances', <GrDocumentTime size={16} />),
     getItem('Lessons', 'lessons', <GrDocumentTime size={16} />),
     getItem('Claims', 'claims', <GrDocumentTime size={16} />),
+    getItem('Users', 'users', <BiUserPlus size={20} />),
+    getItem('Orders', 'orders', <BiUserPlus size={20} />),
+    getItem('Payments', 'payments', <BiUserPlus size={20} />),
+    getItem('Contact-Support', 'contacts', <BiUserPlus size={20} />),
     getItem('Subjects', 'subjects', <GrDocumentTime size={16} />),
+
     getItem('Learner classes', 'learner-classes', <CgNotes size={16} />),
     getItem('Learner ages', 'learner-ages', <CgNotes size={16} />),
     getItem('Courses', 'courses', <RiUserLine size={16} />),
     // getItem('Groups', 'groups', <GrDocumentTime size={16} />),
-    getItem('Users', 'users', <BiUserPlus size={20} />),
-    // getItem(' Orders', 'orders', <CgNotes size={16} />),
     // getItem('Payment', 'payment-method', <BiCreditCard size={16} />),
 
     getItem('Settings', 'settings', <RiSettings2Line size={16} />),
