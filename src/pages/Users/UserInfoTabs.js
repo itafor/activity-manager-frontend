@@ -2,10 +2,11 @@ import React from 'react'
 import { Tabs } from 'antd'
 import { useSelector } from 'react-redux'
 import UserInfo from './UserInfo'
+import OrderTable from '../Orders/OrderTable'
 
 const { TabPane } = Tabs
 
-const UserInfoTabs = ({ user }) => {
+const UserInfoTabs = ({ user, orders }) => {
   //   const { singleData } = useSelector((state) => state.clients)
 
   return (
@@ -14,7 +15,9 @@ const UserInfoTabs = ({ user }) => {
         <TabPane tab='User Info' key='1'>
           <UserInfo singleData={user} />
         </TabPane>
-        <TabPane tab='Orders' key='2'></TabPane>
+        <TabPane tab='Orders' key='2'>
+          <OrderTable data={orders} />
+        </TabPane>
       </Tabs>
     </div>
   )

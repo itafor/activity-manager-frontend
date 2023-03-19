@@ -14,6 +14,17 @@ import { AiOutlineLeft } from 'react-icons/ai'
 import { BsCreditCard, BsWallet2 } from 'react-icons/bs'
 import { BiCategory, BiCreditCard, BiUserPlus } from 'react-icons/bi'
 import { CgNotes } from 'react-icons/cg'
+import {
+  DashboardOutlined,
+  UnorderedListOutlined,
+  ContactsOutlined,
+  BorderRightOutlined,
+  CommentOutlined,
+  SyncOutlined,
+  BranchesOutlined,
+  BarcodeOutlined,
+  NotificationOutlined,
+} from '@ant-design/icons'
 
 const AppSider = () => {
   const navigate = useNavigate()
@@ -45,16 +56,17 @@ const AppSider = () => {
   }
 
   const items = [
-    getItem('Dashboard', 'dashboard', <GrDocumentTime size={16} />),
-    getItem('Categories', 'categories', <RiUserLine size={16} />),
-    getItem('Companies', 'companies', <GrDocumentTime size={16} />),
+    getItem('Dashboard', 'dashboard', <DashboardOutlined />),
+    getItem('Categories', 'categories', <BarcodeOutlined />),
+    getItem('Companies', 'companies', <BorderRightOutlined />),
     getItem('Insurances', 'insurances', <GrDocumentTime size={16} />),
     getItem('Lessons', 'lessons', <CgNotes size={16} />),
-    getItem('Claims', 'claims', <GrDocumentTime size={16} />),
+    getItem('Claims', 'claims', <BranchesOutlined />),
     getItem('Users', 'users', <BiUserPlus size={20} />),
-    getItem('Orders', 'orders', <BiUserPlus size={20} />),
+    getItem('Orders', 'orders', <UnorderedListOutlined />),
     getItem('Payments', 'payments', <BiCreditCard size={20} />),
-    getItem('Contact-Support', 'contacts', <BiUserPlus size={20} />),
+    getItem('Contact-Support', 'contacts', <ContactsOutlined />),
+    getItem('Notifications', 'notifications', <NotificationOutlined />),
     getItem('Settings', 'settings', <RiSettings2Line size={16} />),
   ]
 

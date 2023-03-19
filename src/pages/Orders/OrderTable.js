@@ -25,6 +25,15 @@ const OrderTable = ({ data, loading }) => {
 
   const columns = [
     {
+      title: 'Insurance Category',
+      dataIndex: 'insurance',
+      key: 'insurance',
+      render: (insurance) => (
+        <span style={{ whiteSpace: 'nowrap' }}> {insurance && insurance?.category?.name}</span>
+      ),
+    },
+
+    {
       title: 'Insurance type',
       dataIndex: 'insurance_type',
       key: 'insurance_type',

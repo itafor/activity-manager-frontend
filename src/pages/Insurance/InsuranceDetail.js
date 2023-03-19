@@ -113,7 +113,7 @@ const InsuranceDetail = () => {
             />
           </Card>
 
-          <InsuranceTabs lessons={singleData?.lessons} />
+          <InsuranceTabs lessons={singleData?.lessons} ratings={singleData?.ratings} />
         </div>
       </div>
     </StyledContainer>

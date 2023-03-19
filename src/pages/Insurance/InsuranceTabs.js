@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllInsurances } from '../../redux/InsuranceSlice'
 import LessonTable from '../Lesson/LessonTable'
 import { deleteLesson, getAllLessons } from '../../redux/lessonSlice'
-import InsuranceRatingTable from './InsuranceRatingTable'
+import InsuranceRatings from './InsuranceRatings'
 
 const { TabPane } = Tabs
 
@@ -54,7 +54,7 @@ const InsuranceTabs = ({ lessons, ratings }) => {
           />
         </TabPane>
         <TabPane tab='Ratings' key='2'>
-          <InsuranceRatingTable data={ratings} loading={false} />
+          <InsuranceRatings ratings={ratings} loading={false} />
         </TabPane>
       </Tabs>
     </div>

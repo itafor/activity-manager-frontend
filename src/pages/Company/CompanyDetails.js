@@ -75,7 +75,10 @@ const CompanyDetails = () => {
             />
           </Card>
 
-          <CompanyTabs insurances={singleData && singleData?.insurances} />
+          <CompanyTabs
+            insurances={singleData && singleData?.insurances}
+            ratings={singleData?.ratings}
+          />
         </div>
       </div>
     </StyledContainer>

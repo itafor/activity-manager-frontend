@@ -23,7 +23,7 @@ const UserDetails = () => {
     <StyledContainer>
       <div>
         <div className='userInfo'>
-          <Card loading={loading} className='userInfo__card'>
+          <Card loading={loading} className='userInfo__card' title='User'>
             <div className={` flex, justify-end`} onClick={() => navigate(-1)}>
               <div to='#' className='userInfo__back'>
                 <Button
@@ -65,8 +65,7 @@ const UserDetails = () => {
               }
             />
           </Card>
-          <UserInfoTabs user={singleData} />
-          {/* <ClientInfoTabs className='infoTab' /> */}
+          <UserInfoTabs user={singleData} orders={singleData?.orders} />
         </div>
       </div>
     </StyledContainer>

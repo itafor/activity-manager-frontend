@@ -6,10 +6,11 @@ import InsuranceTable from '../Insurance/InsuranceTable'
 import { deleteInsurance, getAllInsurances } from '../../redux/InsuranceSlice'
 import { getAllCategories } from '../../redux/categorySlice'
 import { getAllCompanies } from '../../redux/companySlice'
+import CompanyRatings from './CompanyRatings'
 
 const { TabPane } = Tabs
 
-const CompanyTabs = ({ insurances }) => {
+const CompanyTabs = ({ insurances, ratings }) => {
   const { categories } = useSelector((state) => state)
   const { companies } = useSelector((state) => state)
   const dispatch = useDispatch()
@@ -55,13 +56,9 @@ const CompanyTabs = ({ insurances }) => {
             companies={companies.data}
           />
         </TabPane>
-        {/* <TabPane tab='Bookings' key='2'>
-          <BookingTable
-            parent={'client'}
-            loading={false}
-            data={singleData?.client_orders}
-          />
-        </TabPane> */}
+        <TabPane tab='Ratings' key='2'>
+          <CompanyRatings ratings={ratings} />
+        </TabPane>
       </Tabs>
     </div>
   )

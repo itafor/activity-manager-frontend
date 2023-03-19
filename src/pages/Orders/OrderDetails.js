@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { BsPhone, BsArrowLeft, BsEnvelope } from 'react-icons/bs'
 import styled from 'styled-components'
-
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 import moment from 'moment'
 
 import { NumericFormat } from 'react-number-format'
@@ -69,8 +70,8 @@ const OrderDetails = () => {
 
                   <div className='flex align-middle items-center gap-4 flex-wrap insuranceprice'>
                     <Link to={`/user/details/${singleData?.user?.id}/${singleData?.user?.email}`}>
-                      <strong style={{ cursor: 'none' }}>User:</strong>{' '}
-                      {singleData?.user?.first_name || ''} {singleData?.user?.last_name || ''}
+                      <b style={{ cursor: 'none' }}>User:</b> {singleData?.user?.first_name || ''}{' '}
+                      {singleData?.user?.last_name || ''}
                     </Link>
                   </div>
 
