@@ -209,8 +209,8 @@ function App() {
             <Route path='course/create' element={<CreateCourse />} />
             <Route path='/course/details/:id/:title_slug' element={<CourseDetail />} />
             {/* LUSRY RouteS */}
-            <Route path='categories' element={<Categories />} />
-            <Route path='companies' element={<Companies />} />
+            <Route path='/categories' element={<Categories />} />
+            <Route path='/companies' element={<Companies />} />
             <Route path='/company/details/:id/:slug' element={<CompanyDetails />} />
             <Route path='insurances' element={<Insurances />} />
             <Route path='/insurance/details/:id/:slug' element={<InsuranceDetail />} />
