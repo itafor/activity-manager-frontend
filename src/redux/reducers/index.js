@@ -26,6 +26,7 @@ import users from '../userSlice'
 import orders from '../orderSlice'
 import payments from '../paymentSlice'
 import contacts from '../supportSlice'
+import notifications from '../notificationSlice'
 
 const rootReducer = combineReducers({
   auth,
@@ -55,6 +56,7 @@ const rootReducer = combineReducers({
   orders,
   payments,
   contacts,
+  notifications,
 })
 
 export default rootReducer

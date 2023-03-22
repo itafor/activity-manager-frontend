@@ -60,6 +60,7 @@ import OrderDetails from './pages/Orders/OrderDetails'
 import ListPayments from './pages/Payments/ListPayments'
 import PaymentDetails from './pages/Payments/PaymentDetails'
 import ListContacts from './pages/ContactSupport/ListContacts'
+import Notifications from './pages/Notification/Notifications'
 // import Settings from "./pages/Settings";
 
 const Login = lazy(() => import('./pages/Auth/Login'))
@@ -226,6 +227,7 @@ function App() {
             <Route path='payments' element={<ListPayments />} />
             <Route path='/payment/details/:id/:ref' element={<PaymentDetails />} />
             <Route path='contacts' element={<ListContacts />} />
+            <Route path='notifications' element={<Notifications />} />
           </Route>
 
           {/* Catch all routes -> push to not found page */}
